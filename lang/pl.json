@@ -1,0 +1,16 @@
+{
+    "auth.failed": "Błąd autoryzacji.",
+    "validation.min.string": "Pole musi mieć minimum :min znaków.",
+    "Profile Information": "Informacje o profilu",
+    "Update your account's profile information and email address.": "Aktualizuj swoje dane profilowe i adres e-mail.",
+    "Name": "Nazwa",
+    "Save": "Zapisz",
+    "Update Password": "Zaktualizuj hasło",
+    "Ensure your account is using a long, random password to stay secure.": "Upewnij się, że Twoje konto używa długiego, losowego hasła, aby zachować bezpieczeństwo.",
+    "Current Password": "Aktualne hasło",
+    "New Password": "Nowe hasło",
+    "Confirm Password": "Potwierdź hasło",
+    "Delete Account": "Usuń konto",
+    "Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.":
+    "Po usunięciu konta wszystkie jego zasoby i dane zostaną trwale usunięte. Przed usunięciem konta, proszę pobrać wszelkie dane lub informacje, które chcesz zachować."
+}
