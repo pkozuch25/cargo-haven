@@ -13,11 +13,14 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <script src="{{ asset('js/app.js') }}" defer></script>
+        <link href="{{ mix('scss/app.scss') }}" rel="stylesheet">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
     </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
+    <body class="font-sans antialiased dark:bg-gray-900" style="color: rgb(243 244 246);">
+        <div class="min-vh-100">
             @include('layouts.navigation')
-            <main>
+            <main class="container py-4">
                 {{ $slot }}
             </main>
         </div>

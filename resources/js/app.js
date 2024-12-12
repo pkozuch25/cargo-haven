@@ -2,6 +2,8 @@ import './bootstrap';
 
 import Alpine from 'alpinejs';
 
-window.Alpine = Alpine;
+const feather = require('feather-icons');
+feather.replace();
 
+window.Alpine = Alpine;
 Alpine.start();

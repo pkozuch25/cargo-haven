@@ -9,8 +9,16 @@
     "Ensure your account is using a long, random password to stay secure.": "Upewnij się, że Twoje konto używa długiego, losowego hasła, aby zachować bezpieczeństwo.",
     "Current Password": "Aktualne hasło",
     "New Password": "Nowe hasło",
+    "Password": "Hasło",
     "Confirm Password": "Potwierdź hasło",
     "Delete Account": "Usuń konto",
     "Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.":
-    "Po usunięciu konta wszystkie jego zasoby i dane zostaną trwale usunięte. Przed usunięciem konta, proszę pobrać wszelkie dane lub informacje, które chcesz zachować."
+    "Po usunięciu konta wszystkie jego zasoby i dane zostaną trwale usunięte. Przed usunięciem konta, proszę pobrać wszelkie dane lub informacje, które chcesz zachować.",
+    "Cancel": "Anuluj",
+    "Are you sure you want to delete your account?": "Czy na pewno chcesz usunąć konto?",
+    "Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.":
+    "Po usunięciu konta wszystkie jego zasoby i dane zostaną trwale usunięte. Proszę wpisać swoje hasło, aby potwierdzić, że chcesz trwale usunąć konto.",
+    "Profile": "Profil",
+    "Log Out": "Wyloguj",
+    "Deposits": "Depozyty"
 }

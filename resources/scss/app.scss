@@ -1,0 +1,13 @@
+@import "~bootstrap/scss/bootstrap";
+
+body {
+    color: rgb(243 244 246 / var(--tw-text-opacity))
+}
+
+* {
+    text-decoration: none !important;
+}
+
+.primary-color {
+    background-color: $green
+}
