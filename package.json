@@ -24,6 +24,8 @@
     },
     "dependencies": {
         "bootstrap": "^5.3.3",
-        "feather-icons": "^4.29.2"
+        "feather-icons": "^4.29.2",
+        "jquery": "^3.7.1",
+        "sweetalert2": "^11.14.5"
     }
 }

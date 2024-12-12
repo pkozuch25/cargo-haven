@@ -1,3 +1,3 @@
 <div>
-    <button class="btn btn-primary">asdfa</button>
+    <button wire:click="test" class="btn btn-primary">test</button>
 </div>

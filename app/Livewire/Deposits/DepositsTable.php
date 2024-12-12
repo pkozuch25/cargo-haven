@@ -2,9 +2,9 @@
 
 namespace App\Livewire\Deposits;
 
-use Livewire\Component;
+use App\Livewire\MainComponent;
 
-class DepositsTable extends Component
+class DepositsTable extends MainComponent
 {
     public function render()
     {

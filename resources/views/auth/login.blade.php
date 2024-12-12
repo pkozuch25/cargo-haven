@@ -47,8 +47,8 @@
         </form>
     </div>
     @if (Route::has('register'))
-        <a style="margin-top: 12px" class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('register') }}">
+        <x-hover-underline-link-text style="margin-top: 12px" route="{{ route('register') }}">
             {{ __('Nie masz konta? Zarejestruj się') }}
-        </a>
+        </x-hover-underline-link-text>
     @endif
 </x-guest-layout>

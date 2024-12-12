@@ -20,5 +20,10 @@
     "Po usunięciu konta wszystkie jego zasoby i dane zostaną trwale usunięte. Proszę wpisać swoje hasło, aby potwierdzić, że chcesz trwale usunąć konto.",
     "Profile": "Profil",
     "Log Out": "Wyloguj",
-    "Deposits": "Depozyty"
+    "Deposits": "Depozyty",
+    "Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.":
+    "Nie pamiętasz hasła? Podaj swój adres e-mail, a system wyśle link do resetowania hasła, który pozwoli Ci wybrać nowe.",
+    "Email Password Reset Link": "Wyślij link",
+    "Back to login screen": "Wróć do logowania",
+    "validation.required": "Pole jest wymagane."
 }
