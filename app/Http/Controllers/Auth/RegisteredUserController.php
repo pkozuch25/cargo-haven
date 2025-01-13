@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Services\AuthService;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -35,15 +36,17 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+        (new AuthService)->createNewRegistrationTicket($request->email, $request->name);
 
-        event(new Registered($user));
+        // $user = User::create([
+        //     'name' => $request->name,
+        //     'email' => $request->email,
+        //     'password' => Hash::make($request->password), // tworzenie użytkownika ze statusem "nieaktywny", żeby 2 razy hasła nie wprowadzał
+        // ]);
 
-        Auth::login($user);
+        // event(new Registered($user));
+
+        // Auth::login($user); // todo przenieść zakomentowany kod do funkcji admina zatwierdzającej nowego użytkownika
 
         return redirect(route('dashboard', absolute: false));
     }

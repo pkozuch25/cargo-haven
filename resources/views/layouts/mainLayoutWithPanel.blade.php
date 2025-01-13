@@ -16,7 +16,7 @@
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons@latest/iconfont/tabler-icons.min.css">
   <script src="https://cdn.jsdelivr.net/npm/@tabler/icons@1.74.0/icons-react/dist/index.umd.min.js"></script>
-  @vite(['resources/css/app.css'])
+  {{-- @vite(['resources/css/app.css']) --}}
   <link href="{{ mix('css/app.css') }}" rel="stylesheet">
   {{-- Include core + vendor Styles --}}
   @livewireStyles()
