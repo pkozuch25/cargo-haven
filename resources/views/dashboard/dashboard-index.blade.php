@@ -1,4 +1,4 @@
-@extends('layouts.mainLayoutWithPanel')
+@extends('layouts.mainLayout')
 
 @section('title', __('Dashboard'))
 
@@ -9,7 +9,9 @@
             <x-page-title>
                 <i data-feather="box"></i>{{ __('Dashboard') }}
             </x-page-title>
-            @livewire('dashboard.dashboard-main')
+            <x-panel>
+                @livewire('dashboard.dashboard-main')
+            </x-panel>
       </div>
   </div>
 

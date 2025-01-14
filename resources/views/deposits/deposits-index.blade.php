@@ -1,4 +1,4 @@
-@extends('layouts.mainLayoutWithPanel')
+@extends('layouts.mainLayout')
 
 @section('title', __('Deposits'))
 
@@ -9,7 +9,9 @@
             <x-page-title>
                 <i data-feather="box"></i>{{ __('Deposits') }}
             </x-page-title>
-            @livewire('deposits.deposits-table')
+            <x-panel>
+                @livewire('deposits.deposits-table')
+            </x-panel>
       </div>
   </div>
 

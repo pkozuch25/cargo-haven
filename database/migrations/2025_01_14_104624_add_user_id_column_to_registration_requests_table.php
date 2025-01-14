@@ -11,10 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('registration_requests', function (Blueprint $table) {
-            $table->bigIncrements('rr_id');
-            $table->tinyInteger('rr_status')->comment('0 = Pending, 1 = Approved, 2 = Rejected')->default(0);
-            $table->timestamps();
+        Schema::table('registration_requests', function (Blueprint $table) {
+            $table->unsignedBigInteger('rr_user_id')->nullable()->comment('ID of user created with the request')->after('rr_id');
         });
     }
 
@@ -23,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('register_request');
+        Schema::table('registration_requests', function (Blueprint $table) {
+            //
+        });
     }
 };

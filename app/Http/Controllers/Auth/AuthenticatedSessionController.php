@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Enums\UserStatusEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Http\RedirectResponse;
@@ -14,9 +15,15 @@ class AuthenticatedSessionController extends Controller
     /**
      * Display the login view.
      */
-    public function create(): View
+    public function create(Request $request): View
     {
-        return view('auth.login');
+        $displayMessage = 0;
+        if (session('displayMessage')) {
+            $displayMessage = 1;
+            session()->forget('displayMessage');
+        }
+
+        return view('auth.login', compact('displayMessage'));
     }
 
     /**
@@ -25,6 +32,21 @@ class AuthenticatedSessionController extends Controller
     public function store(LoginRequest $request): RedirectResponse
     {
         $request->authenticate();
+
+        $user = Auth::user();
+
+        if ($user->status != UserStatusEnum::ACTIVE) {
+            Auth::logout();
+
+            return redirect(route('login', absolute: false))
+                ->withErrors(
+                    [
+                        'email' => $user->status == UserStatusEnum::INACTIVE ?
+                            __('This account is not yet active.') :
+                            __('This account was not accepted by the administrator.')
+                    ]
+                );
+        }
 
         $request->session()->regenerate();
 

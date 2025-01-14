@@ -1,6 +1,6 @@
-<!DOCTYPE html>
+<!DOCTYPE html >
 
-<html data-textdirection="{{ env('MIX_CONTENT_DIRECTION') === 'rtl' ? 'rtl' : 'ltr' }}">
+<html data-textdirection="{{ env('MIX_CONTENT_DIRECTION') === 'rtl' ? 'rtl' : 'ltr' }}" class="dark">
 
 
 <head>
@@ -12,6 +12,7 @@
 
   <title>@yield('title') - Cargo Haven</title>
   <script src="https://kit.fontawesome.com/4212350c3d.js" crossorigin="anonymous"></script>
+
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600" rel="stylesheet">
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons@latest/iconfont/tabler-icons.min.css">
@@ -26,12 +27,18 @@
 <body class="font-sans antialiased dark:bg-gray-900" style="color: rgb(243 244 246);">
     <div class="min-vh-100">
         @include('layouts.navigation')
-        @yield('content')
+        <div class="py-12">
+            <div class="max-w-8xl mx-auto sm:px-6 lg:px-10 space-y-6">
+                @yield('content')
+            </div>
+        </div>
     </div>
 
     <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" defer></script>
+
     <script src="{{ mix('js/app.js') }}"></script>
+    @stack('javascript')
     @livewireScripts
 </body>
 

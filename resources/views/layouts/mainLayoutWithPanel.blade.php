@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html data-textdirection="{{ env('MIX_CONTENT_DIRECTION') === 'rtl' ? 'rtl' : 'ltr' }}">
+<html data-textdirection="{{ env('MIX_CONTENT_DIRECTION') === 'rtl' ? 'rtl' : 'ltr' }}" class="dark">
 
 
 <head>
@@ -27,7 +27,7 @@
     <div class="min-vh-100">
         @include('layouts.navigation')
         <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-10 space-y-6">
                 <div class="p-4 sm:p-8 dark:bg-gray-800 shadow sm:rounded-lg">
                     @yield('content')
                 </div>
@@ -37,7 +37,9 @@
 
     <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" defer></script>
+
     <script src="{{ mix('js/app.js') }}"></script>
+    @stack('javascript')
     @livewireScripts
 </body>
 

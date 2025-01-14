@@ -26,5 +26,15 @@
     "Email Password Reset Link": "Wyślij link",
     "Back to login screen": "Wróć do logowania",
     "These credentials do not match our records.": "Podano błędne dane.",
-    "validation.required": "Pole jest wymagane."
+    "validation.required": "Pole jest wymagane.",
+    "Inactive": "Nieaktywny",
+    "Active": "Aktywny",
+    "Rejected": "Odrzucony",
+    "Pending": "Oczekujący",
+    "Approved": "Zatwierdzony",
+    "The email has already been taken.": "Podany adres e-mail jest już zajęty.",
+    "Registration request was successfully submitted to administrator, you will be notified via email with the decision.": "Prośba rejestracji została pomyślnie wysłana do administratora, zostaniesz powiadomiony e-mailem o decyzji.",
+    "This account is not yet active.": "To konto nie jest jeszcze aktywne.",
+    "This account was not accepted by the administrator.": "To konto nie zostało zaakceptowane przez administratora."
+
 }

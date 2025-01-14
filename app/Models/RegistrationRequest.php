@@ -16,4 +16,8 @@ class RegistrationRequest extends Model
         'rr_status' => RegistrationRequestStatusEnum::class,
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'hd_userid', 'id');
+    }
 }

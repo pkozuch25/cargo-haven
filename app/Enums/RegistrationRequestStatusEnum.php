@@ -11,9 +11,9 @@ enum RegistrationRequestStatusEnum: int
     public function name(): string
     {
         return match ($this) {
-            $this::PENDING => 'Pending',
-            $this::APPROVED => 'Approved',
-            $this::REJECTED => 'Rejected'
+            $this::PENDING => __('Pending'),
+            $this::APPROVED => __('Approved'),
+            $this::REJECTED => __('Rejected')
         };
     }
 }
