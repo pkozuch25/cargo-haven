@@ -2,6 +2,7 @@
     <script>
         $(function() {
 
+            // SweetAlert2
             window.addEventListener('sweetAlert', event => {
 
                 let type = event.detail[0].type
@@ -144,9 +145,13 @@
                 });
             });
 
+            // Closing modals custom function
             window.addEventListener('closeModal', event => {
-                $('.modal').modal('hide');
+                $(function () {
+                    $('.modal').hide();
+                });
             });
+
         })
     </script>
 </div>

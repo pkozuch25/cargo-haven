@@ -1,0 +1,1 @@
+<button type="button" class="btn btn-secondary modal-close" data-dismiss="modal" wire:click.self='closeModal(true)'>{{ ($slot != '') ? $slot :  __('Zamknij') }}</button>
