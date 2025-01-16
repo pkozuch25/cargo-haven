@@ -11,7 +11,8 @@ class TableComponent extends MainComponent
 
     public $perPage = 10, $archive,  $searchTerm, $sortColumn = 'created_at', $sortDirection = 'desc', $columnSelectOptions = [], $columnDisplay = [], $showTableSettings = false;
 
-    public function backRefresh($page){
+    public function backRefresh($page)
+    {
         $this->gotoPage($page, 'page');
     }
 
@@ -87,7 +88,7 @@ class TableComponent extends MainComponent
                         foreach ($value as $relationName => $relation) {
                             foreach ($relation as $field => $fieldValue) {
                                 if ($fieldValue != '') {
-                                    $query->whereRelation($relationName, function($q) use ($field, $fieldValue) {
+                                    $query->whereRelation($relationName, function ($q) use ($field, $fieldValue) {
                                         $q->whereIn($field, $fieldValue);
                                     });
                                 }

@@ -14,5 +14,5 @@ function getAuthenticatedUserModel() : User
 
 function can($abilities, $arguments = [])
 {
-    return app(Gate::class)->forUser(getAuthenticatedUserModel())->check($abilities, $arguments); 
+    return app(Gate::class)->forUser(getAuthenticatedUserModel())->check($abilities, $arguments);
 }

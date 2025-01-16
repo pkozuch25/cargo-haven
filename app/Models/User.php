@@ -11,7 +11,7 @@ use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property string $name
@@ -91,5 +91,10 @@ class User extends Authenticatable
             'password' => 'hashed',
             'status' => UserStatusEnum::class
         ];
+    }
+
+    public function isAdmin()
+    {
+        return $this->hasRole('admin');
     }
 }
