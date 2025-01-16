@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-class DepositsController extends Controller
+class PermissionsController extends Controller
 {
 
     public function index()
     {
-        if (!can('view_deposits')) {
+        if (!can('view_permissions')) {
             return redirect()->route('dashboard');
         }
 

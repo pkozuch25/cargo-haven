@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DepositsController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PermissionsController;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -16,6 +17,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/deposits', [DepositsController::class, 'index'])->name('deposits.index');
+    Route::get('/permissions', [PermissionsController::class, 'index'])->name('permissions.index');
 });
 
 require __DIR__.'/auth.php';

@@ -9,7 +9,7 @@
         </p>
     </header>
 
-    <x-button class="btn-primary" title="{{ __('Delete Account') }}" modal="delete-user-modal" wire:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')">{{ __('Delete Account') }}</x-button-xs-icon>
+    <x-button class="btn-danger" title="{{ __('Delete Account') }}" modal="delete-user-modal" wire:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')">{{ __('Delete Account') }}</x-button-xs-icon>
 
     @livewire('profile.delete-user-modal')
     
