@@ -8,7 +8,7 @@ use App\Http\Controllers\PermissionsController;
 use App\Http\Controllers\RegistrationRequestController;
 
 Route::get('/', function () {
-    return view('auth.login');
+    return redirect('login');
 });
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
