@@ -3,7 +3,7 @@
     <div class="flex justify-between items-center mb-2">
         @include('livewire.partial.table-perpage')
     </div>
-
+    
     {{-- Table --}}
     <div class="overflow-x-auto">
         <table class="min-w-full table-auto">
@@ -11,19 +11,19 @@
                 {{-- Table Headers --}}
                 <tr class="dark:bg-gray-900">
                     <th wire:click="sort('email')" 
-                        class="cursor-pointer px-4 py-2 text-left {{ $sortColumn == 'email' ? ($sortDirection == 'desc' ? 'dark:bg-gray-700' : 'dark:bg-gray-600') : '' }}">
+                        class="cursor-pointer px-4 py-2 text-left {{ $sortColumn == 'email' ? ($sortDirection == 'desc' ? 'dark:bg-gray-700 sorting sorting_desc' : 'dark:bg-gray-600 sorting sorting_asc') : 'sorting' }}">
                         {{ __('Email') }}
                     </th>
                     <th wire:click="sort('name')" 
-                        class="cursor-pointer px-4 py-2 text-left {{ $sortColumn == 'name' ? ($sortDirection == 'desc' ? 'dark:bg-gray-700' : 'dark:bg-gray-600') : '' }}">
+                        class="cursor-pointer px-4 py-2 text-left {{ $sortColumn == 'name' ? ($sortDirection == 'desc' ? 'dark:bg-gray-700 sorting sorting_desc' : 'dark:bg-gray-600 sorting sorting_asc') : 'sorting' }}">
                         {{ __('Name') }}
                     </th>
                     <th wire:click="sort('created_at')" 
-                        class="cursor-pointer px-4 py-2 text-left {{ $sortColumn == 'created_at' ? ($sortDirection == 'desc' ? 'dark:bg-gray-700' : 'dark:bg-gray-600') : '' }}">
+                        class="cursor-pointer px-4 py-2 text-left {{ $sortColumn == 'created_at' ? ($sortDirection == 'desc' ? 'dark:bg-gray-700 sorting sorting_desc' : 'dark:bg-gray-600 sorting sorting_asc') : 'sorting' }}">
                         {{ __('Date of request') }}
                     </th>
                     <th wire:click="sort('rr_status')" 
-                        class="cursor-pointer px-4 py-2 text-left {{ $sortColumn == 'rr_status' ? ($sortDirection == 'desc' ? 'dark:bg-gray-700' : 'dark:bg-gray-600') : '' }}">
+                        class="cursor-pointer px-4 py-2 text-left {{ $sortColumn == 'rr_status' ? ($sortDirection == 'desc' ? 'dark:bg-gray-700 sorting sorting_desc' : 'dark:bg-gray-600 sorting sorting_asc') : 'sorting' }}">
                         {{ __('Status') }}
                     </th>
                 </tr>

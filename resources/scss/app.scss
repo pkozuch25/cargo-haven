@@ -43,6 +43,10 @@ body {
     animation: spin 1s linear infinite;
 }
 
+th {
+    position: relative !important;
+}
+
 .table-loader-bg {
     background-color: #1f2937;
     opacity: 0.7;
@@ -55,4 +59,40 @@ body {
     height: 100%;
     z-index: 9998;
     position: absolute;
+}
+
+table thead .sorting {
+    cursor: pointer;
+}
+
+table thead .sorting::before {
+    right: 14px;
+    content: "\f077";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    font-size: 0.9rem;
+    position: absolute;
+    bottom: 0.9em;
+    display: block;
+    opacity: 0.3;
+}
+
+table thead .sorting::after {
+    content: "\f078";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    right: 14px;
+    font-size: 0.9rem;
+    position: absolute;
+    bottom: 0.1em;
+    display: block;
+    opacity: 0.3;
+}
+
+table thead .sorting_asc::before {
+    opacity: 1;
+}
+
+table thead .sorting_desc::after {
+    opacity: 1;
 }
