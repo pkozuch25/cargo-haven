@@ -1,6 +1,6 @@
 <div class="col-md-3 col-sm-5 col-lg-2 col-8 d-flex align-items-center">
     <label class="float-start me-1">{{ __('Show') }}</label>
-        <select wire:model.live='perPage' class="form-select float-start">
+        <select wire:model.live='perPage' class="form-select">
             <option value="10">10</option>
             <option value="25">25</option>
             <option value="50">50</option>

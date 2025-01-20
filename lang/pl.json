@@ -37,5 +37,13 @@
     "This account is not yet active.": "To konto nie jest jeszcze aktywne.",
     "This account was not accepted by the administrator.": "To konto nie zostało zaakceptowane przez administratora.",
     "Registration requests": "Zgłoszenia rejestracji",
-    "Permissions": "Uprawnienia"
+    "Permissions": "Uprawnienia",
+    "No results": "Brak wyników",
+    "Showing": "Wyświetla",
+    "to": "do",
+    "of": "z",
+    "entries": "wpisów",
+    "Show": "Pokaż",
+    "Search...": "Szukaj...",
+    "Date of request": "Data zgłoszenia"
 }
