@@ -7,7 +7,7 @@
   <div class="row">
       <div class="col-12">
             <x-page-title>
-                <i data-feather="box"></i>{{ __('Registration requests') }}
+                <i data-feather="file-plus"></i>{{ __('Registration requests') }}
             </x-page-title>
             <x-panel>
                 @livewire('registration-requests.registration-requests-table')

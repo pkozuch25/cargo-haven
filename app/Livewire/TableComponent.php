@@ -9,7 +9,7 @@ class TableComponent extends MainComponent
 {
     use WithPagination;
 
-    public $perPage = 10, $archive,  $searchTerm, $sortColumn = 'created_at', $sortDirection = 'desc', $columnSelectOptions = [], $columnDisplay = [], $showTableSettings = false;
+    public $perPage = 10, $archive,  $searchTerm = [], $sortColumn = 'created_at', $sortDirection = 'desc', $columnSelectOptions = [], $columnDisplay = [], $showTableSettings = false;
 
     public function backRefresh($page)
     {
