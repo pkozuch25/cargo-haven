@@ -107,3 +107,45 @@ table thead .sorting_desc::after {
     margin-right: 5px;
     margin-left: 5px;
   }
+
+ .select2-selection {
+    background-color: #4b5563 !important;
+    color: white !important;
+ }
+
+ .select2-selection__choice {
+    background-color: #1f2937 !important;
+    color: white !important;
+ }
+
+.select2-results__option {
+    background-color: #4b5563 !important;
+    color: white !important;
+}
+
+.select2-results__option--highlighted {
+    background-color: #1f2937 !important;
+}
+
+.select2-selection__choice__remove:hover {
+    color: white !important;
+}
+
+.select2-container--default .select2-selection--multiple {
+    border: 0 !important;
+}
+
+.select2-container--default.select2-container--focus .select2-selection--multiple {
+    border: 1px solid white !important;
+}
+
+select{
+    background-color: #4b5563 !important;
+    color: #4b5563 !important;
+    overflow: hidden;
+}
+
+.select2-selection--multiple {
+    width: fit-content !important;
+    min-width: 100% !important;
+}

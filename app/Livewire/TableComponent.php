@@ -19,12 +19,14 @@ class TableComponent extends MainComponent
     public function updating()
     {
         $this->resetPage();
+        $this->dispatch('refreshSelect2');
     }
 
     public function sort($column)
     {
         $this->sortColumn = $column;
         $this->sortDirection = $this->sortDirection == 'desc' ? 'asc' : 'desc';
+        $this->dispatch('refreshSelect2');
     }
 
     protected function tableRefresh($query)

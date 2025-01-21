@@ -1,67 +1,58 @@
 <div class="space-y-4">
-    {{-- Table Settings --}}
     <div class="flex justify-between items-center mb-2">
         @include('livewire.partial.table-perpage')
     </div>
-    {{-- Table --}}
     <div style="position: relative">
         @include('livewire.partial.loader')
         <table style="width: 100%">
-            <thead class="bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300">
-                {{-- Table Headers --}}
-                <tr class="dark:bg-gray-700 border-b dark:border-gray-700">
-                    <th wire:click="sort('email')"
-                        class="cursor-pointer px-4 py-2 text-left {{ $sortColumn == 'email' ? ($sortDirection == 'desc' ? 'sorting sorting_desc' : 'sorting sorting_asc') : 'sorting' }}">
+            <x-thead-table>
+                <x-table-row>
+                    <x-th-table wire:click="sort('email')" class="{{ $sortColumn == 'email' ? ($sortDirection == 'desc' ? 'sorting sorting_desc' : 'sorting sorting_asc') : 'sorting' }}">
                         {{ __('Email') }}
-                    </th>
-                    <th wire:click="sort('name')"
-                        class="cursor-pointer px-4 py-2 text-left {{ $sortColumn == 'name' ? ($sortDirection == 'desc' ? 'sorting sorting_desc' : 'sorting sorting_asc') : 'sorting' }}">
+                    </x-th-table>
+                    <x-th-table wire:click="sort('name')"
+                        class="{{ $sortColumn == 'name' ? ($sortDirection == 'desc' ? 'sorting sorting_desc' : 'sorting sorting_asc') : 'sorting' }}">
                         {{ __('Name') }}
-                    </th>
-                    <th wire:click="sort('created_at')"
-                        class="cursor-pointer px-4 py-2 text-left {{ $sortColumn == 'created_at' ? ($sortDirection == 'desc' ? 'sorting sorting_desc' : 'sorting sorting_asc') : 'sorting' }}">
+                    </x-th-table>
+                    <x-th-table wire:click="sort('created_at')"
+                        class="{{ $sortColumn == 'created_at' ? ($sortDirection == 'desc' ? 'sorting sorting_desc' : 'sorting sorting_asc') : 'sorting' }}">
                         {{ __('Date of request') }}
-                    </th>
-                    <th wire:click="sort('rr_status')"
-                        class="cursor-pointer px-4 py-2 text-left {{ $sortColumn == 'rr_status' ? ($sortDirection == 'desc' ? 'sorting sorting_desc' : 'sorting sorting_asc') : 'sorting' }}">
+                    </x-th-table>
+                    <x-th-table wire:click="sort('rr_status')"
+                        class="{{ $sortColumn == 'rr_status' ? ($sortDirection == 'desc' ? 'sorting sorting_desc' : 'sorting sorting_asc') : 'sorting' }}">
                         {{ __('Status') }}
-                    </th>
-                </tr>
-                {{-- Search Inputs --}}
-                <tr class="dark:bg-gray-700">
-                    <th class="px-4 py-2">
-                        <x-search-text-input wire:model.live.debounce.500ms="searchTerm.text.email" class="block mt-1 w-full" />
-                    </th>
-                    <th class="px-4 py-2">
-                        <x-search-text-input wire:model.live.debounce.500ms="searchTerm.text.name" class="block mt-1 w-full" />
-
-                    </th>
-                    <th class="px-4 py-2">
-                        <x-search-text-input wire:model.live.debounce.500ms="searchTerm.text.created_at" class="block mt-1 w-full" />
-                    </th>
-                    <th class="px-4 py-2">
-                        <select multiple
-                                class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:ring-lime-500 focus:border-lime-500 focus:ring-2 dark:focus:border-lime-500 dark:focus:ring-lime-500 rounded-md shadow-sm !important"
-                                wire:model.live.debounce.500ms="searchTerm.selectMultiple.rr_status">
+                    </x-th-table>
+                </x-table-row>
+                <x-table-row>
+                    <x-th-table-search>
+                        <x-search-text-input wire:model.live.debounce.500ms="searchTerm.text.email"/>
+                    </x-th-table-search>
+                    <x-th-table-search>
+                        <x-search-text-input wire:model.live.debounce.500ms="searchTerm.text.name"/>
+                    </x-th-table-search>
+                    <x-th-table-search>
+                        <x-search-text-input wire:model.live.debounce.500ms="searchTerm.text.created_at"/>
+                    </x-th-table-search>
+                    <x-th-table-search>
+                        <select style="height: 30px;" id="rr-status-select" multiple>
                             @foreach (\App\Enums\RegistrationRequestStatusEnum::cases() as $status)
                                 <option value="{{ $status }}">{{ $status->name() }}</option>
                             @endforeach
                         </select>
-                    </th>
-                </tr>
-            </thead>
-            {{-- Table Body --}}
+                    </x-th-table-search>
+                </x-table-row>
+            </x-thead-table>
             <tbody>
-                @forelse($this->queryRefresh() as $request)
+                @forelse($data as $request)
                     <tr>
-                        <td class="px-4 py-2 border-t dark:bg-gray-800 border-gray-300 dark:border-gray-700" style="text-align: center">{{ $request->email }}</td>
-                        <td class="px-4 py-2 border-t dark:bg-gray-800 border-gray-300 dark:border-gray-700" style="text-align: center">{{ $request->name }}</td>
-                        <td class="px-4 py-2 border-t dark:bg-gray-800 border-gray-300 dark:border-gray-700" style="text-align: center">{{ $request->created_at }}</td>
-                        <td class="px-4 py-2 border-t dark:bg-gray-800 border-gray-300 dark:border-gray-700" style="text-align: center">
-                            <span class="px-2 py-1 rounded text-sm bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-300">
+                        <x-td-table>{{ $request->email }}</x-td-table>
+                        <x-td-table class="text-center">{{ $request->name }}</x-td-table>
+                        <x-td-table class="text-center">{{ $request->created_at }}</x-td-table>
+                        <x-td-table class="text-center">
+                            <span class="px-2 py-1 rounded text-sm {{ $request->rr_status->color() }} dark:text-gray-300">
                                 {{ $request->rr_status->name() }}
                             </span>
-                        </td>
+                        </x-td-table>
                     </tr>
                 @empty
                     <tr>
@@ -71,7 +62,25 @@
             </tbody>
         </table>
     </div>
-
-    {{-- Pagination --}}
     @include('livewire.partial.table-pagination')
+
+    @push('javascript')
+        <script>
+            window.addEventListener('refreshSelect2', function(event) {
+                $(function() {
+                    initSelect2();
+                })
+            })
+
+            initSelect2();
+
+            function initSelect2() {
+                $('#rr-status-select').select2();
+                $('#rr-status-select').on('change', function (e) {
+                    var data = $('#rr-status-select').select2("val");
+                    @this.set('selectedStatus', data);
+                });
+            };
+        </script>
+    @endpush
 </div>

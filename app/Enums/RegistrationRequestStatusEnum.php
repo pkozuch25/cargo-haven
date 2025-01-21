@@ -16,4 +16,13 @@ enum RegistrationRequestStatusEnum: int
             $this::REJECTED => __('Rejected')
         };
     }
+
+    public function color(): string
+    {
+        return match ($this) {
+            $this::PENDING => 'bg-secondary',
+            $this::APPROVED => 'bg-success',
+            $this::REJECTED => 'bg-danger'
+        };
+    }
 }
