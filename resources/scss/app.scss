@@ -131,6 +131,10 @@ table thead .sorting_desc::after {
     color: white !important;
 }
 
+.select2-container--default {
+    width: 100% !important;
+}
+
 .select2-container--default .select2-selection--multiple {
     border: 0 !important;
 }
@@ -141,7 +145,6 @@ table thead .sorting_desc::after {
 
 select{
     background-color: #4b5563 !important;
-    color: #4b5563 !important;
     overflow: hidden;
 }
 

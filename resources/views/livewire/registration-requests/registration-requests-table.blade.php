@@ -49,7 +49,7 @@
                         <x-td-table class="text-center">{{ $request->name }}</x-td-table>
                         <x-td-table class="text-center">{{ $request->created_at }}</x-td-table>
                         <x-td-table class="text-center">
-                            <span class="px-2 py-1 rounded text-sm {{ $request->rr_status->color() }} dark:text-gray-300">
+                            <span wire:click="$dispatch('openChangeStatusModal', {rr: {{ $request }}})" data-bs-toggle="modal" data-bs-target="#change-request-status-modal" class="px-2 py-1 rounded text-sm cursor-pointer {{ $request->rr_status->color() }} dark:text-gray-300">
                                 {{ $request->rr_status->name() }}
                             </span>
                         </x-td-table>

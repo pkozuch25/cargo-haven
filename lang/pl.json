@@ -45,5 +45,7 @@
     "entries": "wpisów",
     "Show": "Pokaż",
     "Search...": "Szukaj...",
-    "Date of request": "Data zgłoszenia"
+    "Date of request": "Data zgłoszenia",
+    "Change request status": "Zmień status zgłoszenia",
+    "Select": "Wybierz"
 }

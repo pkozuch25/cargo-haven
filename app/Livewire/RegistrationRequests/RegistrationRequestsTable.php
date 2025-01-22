@@ -2,26 +2,24 @@
 
 namespace App\Livewire\RegistrationRequests;
 
-use App\Enums\RegistrationRequestStatusEnum;
-use App\Interfaces\TableComponentInterface;
+use Livewire\Attributes\On;
 use App\Livewire\TableComponent;
-use App\Models\RegistrationRequest;
 use Livewire\Attributes\Computed;
+use App\Models\RegistrationRequest;
+use App\Interfaces\TableComponentInterface;
+use App\Enums\RegistrationRequestStatusEnum;
 
 class RegistrationRequestsTable extends TableComponent implements TableComponentInterface
 {
     public $sortColumn = 'created_at', $selectedStatus = [];
 
-    public function mount()
-    {
-        // dd(Auth::user()->hasRole('operator'));
-    }
-
+    
     public function updated()
     {
         $this->dispatch('refreshSelect2');
     }
 
+    #[On('refreshRRTable')]
     #[Computed]
     public function queryRefresh()
     {
