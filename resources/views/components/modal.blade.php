@@ -1,5 +1,5 @@
-<div class="modal modal-cargo fade" id="{{ $id }}" role="dialog" wire:ignore.self wire:click.self='closeModal(true)'>
-    <div class="modal-dialog modal-{{ $size }}" role="document">
+<div class="modal modal-cargo fade" id="{{ $id }}" role="dialog" aria-hidden="true" wire:ignore.self wire:click.self='closeModal(true)'>
+    <div class="modal-dialog modal-{{ $size }}">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title"><i class="{{ $icon }}" style="margin-right: 8px; font-size: 14px"></i>{{ $title }}</h4>

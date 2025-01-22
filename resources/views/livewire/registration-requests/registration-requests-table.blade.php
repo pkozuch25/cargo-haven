@@ -62,6 +62,7 @@
             </tbody>
         </table>
     </div>
+    @livewire('registration-requests.change-request-status-modal')
     @include('livewire.partial.table-pagination')
 
     @push('javascript')

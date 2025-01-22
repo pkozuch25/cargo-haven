@@ -6,7 +6,7 @@ use Livewire\Attributes\On;
 use App\Livewire\ModalComponent;
 use App\Models\RegistrationRequest;
 
-class ChangeStatusModal extends ModalComponent
+class ChangeRequestStatusModal extends ModalComponent
 {
     public $requestStatus, $rr;
     protected $rules = ['requestStatus' => 'required'];
@@ -29,6 +29,6 @@ class ChangeStatusModal extends ModalComponent
 
     public function render()
     {
-        return view('livewire.registration-requests.change-status-modal');
+        return view('livewire.registration-requests.change-request-status-modal');
     }
 }

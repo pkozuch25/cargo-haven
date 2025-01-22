@@ -147,9 +147,7 @@
 
             // Closing modals custom function
             window.addEventListener('closeModal', event => {
-                $(function () {
-                    $('.modal').hide();
-                });
+                $('.modal').modal('hide');
             });
 
         })

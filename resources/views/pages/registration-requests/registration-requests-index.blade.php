@@ -13,7 +13,6 @@
                 @livewire('registration-requests.registration-requests-table')
             </x-panel>
       </div>
-      @livewire('registration-requests.change-status-modal')
   </div>
 
 @stop

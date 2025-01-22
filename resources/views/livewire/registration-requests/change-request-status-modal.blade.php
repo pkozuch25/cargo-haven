@@ -1,5 +1,5 @@
 <div>
-    <x-modal id="change-request-status-modal" size="md" title="{{ __('Change request status') }}" icon="fas fa-tasks">
+    <x-modal id="change-request-status-modal" size="sm" title="{{ __('Change request status') }}" icon="fas fa-tasks">
         <x-slot name="modalBody">
 
             <div class="mt-6">
@@ -12,13 +12,13 @@
                 <x-input-error :messages="$errors->get('requestStatus')" class="mt-2" />
             </div>
         </x-slot>
-        
+
         <x-slot name="modalFooter">
-            
+
             <x-button class="btn-success" wire:click='saveStatus()'>
                 {{ __('Save') }}
             </x-button>
         </x-slot>
-        
+
     </x-modal>
 </div>
