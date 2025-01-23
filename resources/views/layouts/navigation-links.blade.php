@@ -17,6 +17,15 @@
     </x-nav-link-wrapper>
 @endif
 
+{{-- DISPOSITIONS --}}
+@if(can('view_dispositions'))
+    <x-nav-link-wrapper>
+        <x-nav-link :href="route('dispositions.index')" :active="request()->routeIs('dispositions.index')">
+            {{ __('Dispositions') }}
+        </x-nav-link>
+    </x-nav-link-wrapper>
+@endif
+
 {{-- PERMISSIONS --}}
 @if(can('manage_permissions'))
     <x-nav-link-wrapper>

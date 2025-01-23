@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DepositsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PermissionsController;
+use App\Http\Controllers\DispositionsController;
 use App\Http\Controllers\RegistrationRequestController;
 
 Route::get('/', function () {
@@ -18,6 +19,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/deposits', [DepositsController::class, 'index'])->name('deposits.index');
+    Route::get('/dispositions', [DispositionsController::class, 'index'])->name('dispositions.index');
     Route::get('/permissions', [PermissionsController::class, 'index'])->name('permissions.index');
     Route::get('/registration-requests', [RegistrationRequestController::class, 'index'])->name('registration-requests.index');
 });
