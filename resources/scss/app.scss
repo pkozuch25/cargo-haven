@@ -133,6 +133,7 @@ table thead .sorting_desc::after {
 
 .select2-container--default {
     width: 100% !important;
+    max-width: 285px !important;
 }
 
 .select2-container--default .select2-selection--multiple {

@@ -11,13 +11,13 @@ use App\Enums\RegistrationRequestStatusEnum;
 
 class RegistrationRequestsTable extends TableComponent implements TableComponentInterface
 {
-    public $sortColumn = 'created_at', $selectedStatus = [];
+    public $sortColumn = 'created_at', $selectedStatus = [RegistrationRequestStatusEnum::PENDING->value];
 
-    
-    public function updated()
-    {
-        $this->dispatch('refreshSelect2');
-    }
+
+    // public function updated()
+    // {
+    //     $this->refreshSelect2();
+    // }
 
     #[On('refreshRRTable')]
     #[Computed]

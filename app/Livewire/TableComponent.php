@@ -16,17 +16,22 @@ class TableComponent extends MainComponent
         $this->gotoPage($page, 'page');
     }
 
+    public function refreshSelect2()
+    {
+        $this->dispatch('refreshSelect2', ['await' => false]);
+    }
+
     public function updating()
     {
         $this->resetPage();
-        $this->dispatch('refreshSelect2');
+        $this->refreshSelect2();
     }
 
     public function sort($column)
     {
         $this->sortColumn = $column;
         $this->sortDirection = $this->sortDirection == 'desc' ? 'asc' : 'desc';
-        $this->dispatch('refreshSelect2');
+        $this->refreshSelect2();
     }
 
     protected function tableRefresh($query)

@@ -36,7 +36,7 @@
                     <x-th-table-search>
                         <select style="height: 30px;" id="rr-status-select" multiple>
                             @foreach (\App\Enums\RegistrationRequestStatusEnum::cases() as $status)
-                                <option value="{{ $status }}">{{ $status->name() }}</option>
+                                <option value="{{ $status }}" @if(array_key_exists($status->value, $selectedStatus)) selected @endif>{{ $status->name() }}</option>
                             @endforeach
                         </select>
                     </x-th-table-search>
@@ -69,7 +69,11 @@
         <script>
             window.addEventListener('refreshSelect2', function(event) {
                 $(function() {
-                    initSelect2();
+                    if (event.detail[0].await == 1) {
+                        sleep(100).then(() => initSelect2());
+                    } else {
+                        initSelect2();
+                    }
                 })
             })
 
@@ -82,6 +86,10 @@
                     @this.set('selectedStatus', data);
                 });
             };
+
+            function sleep(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
         </script>
     @endpush
 </div>

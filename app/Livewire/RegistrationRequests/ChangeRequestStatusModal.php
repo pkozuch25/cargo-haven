@@ -23,8 +23,9 @@ class ChangeRequestStatusModal extends ModalComponent
 
         $this->rr->rr_status = $this->requestStatus;
         $this->rr->save();
-        $this->dispatch('refreshRRTable');
         $this->closeModal();
+        $this->dispatch('refreshRRTable');
+        $this->dispatch('refreshSelect2', ['await' => true]);
     }
 
     public function render()
