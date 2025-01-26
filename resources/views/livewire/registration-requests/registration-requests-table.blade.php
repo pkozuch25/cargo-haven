@@ -7,7 +7,8 @@
         <table style="width: 100%">
             <x-thead-table>
                 <x-table-row>
-                    <x-th-table wire:click="sort('email')" class="{{ $sortColumn == 'email' ? ($sortDirection == 'desc' ? 'sorting sorting_desc' : 'sorting sorting_asc') : 'sorting' }}">
+                    <x-th-table wire:click="sort('email')"
+                        class="{{ $sortColumn == 'email' ? ($sortDirection == 'desc' ? 'sorting sorting_desc' : 'sorting sorting_asc') : 'sorting' }}">
                         {{ __('Email') }}
                     </x-th-table>
                     <x-th-table wire:click="sort('name')"
@@ -49,7 +50,8 @@
                         <x-td-table class="text-center">{{ $request->name }}</x-td-table>
                         <x-td-table class="text-center">{{ $request->created_at }}</x-td-table>
                         <x-td-table class="text-center">
-                            <span wire:click="$dispatch('openChangeStatusModal', {rr: {{ $request }}})" data-bs-toggle="modal" data-bs-target="#change-request-status-modal" class="px-2 py-1 rounded text-sm cursor-pointer {{ $request->rr_status->color() }} dark:text-gray-300">
+                            <span wire:click="$dispatch('openChangeStatusModal', {rr: {{ $request }}})" data-bs-toggle="modal" data-bs-target="#change-request-status-modal"
+                                class="px-2 py-1 rounded text-sm cursor-pointer {{ $request->rr_status->color() }} dark:text-gray-300">
                                 {{ $request->rr_status->name() }}
                             </span>
                         </x-td-table>
