@@ -35,11 +35,13 @@
                         <x-search-text-input wire:model.live.debounce.500ms="searchTerm.text.created_at"/>
                     </x-th-table-search>
                     <x-th-table-search>
-                        <select style="height: 30px;" id="rr-status-select" multiple>
-                            @foreach (\App\Enums\RegistrationRequestStatusEnum::cases() as $status)
-                                <option value="{{ $status }}" @if(array_key_exists($status->value, $selectedStatus)) selected @endif>{{ $status->name() }}</option>
-                            @endforeach
-                        </select>
+                        <div wire:ignore>
+                            <select style="height: 30px;" id="rr-status-select" multiple>
+                                @foreach (\App\Enums\RegistrationRequestStatusEnum::cases() as $status)
+                                    <option value="{{ $status }}" @if(array_key_exists($status->value, $selectedStatus)) selected @endif>{{ $status->name() }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </x-th-table-search>
                 </x-table-row>
             </x-thead-table>
@@ -71,11 +73,7 @@
         <script>
             window.addEventListener('refreshSelect2', function(event) {
                 $(function() {
-                    if (event.detail[0].await == 1) {
-                        sleep(100).then(() => initSelect2());
-                    } else {
-                        initSelect2();
-                    }
+                    initSelect2();
                 })
             })
 
@@ -89,9 +87,6 @@
                 });
             };
 
-            function sleep(ms) {
-                return new Promise(resolve => setTimeout(resolve, ms));
-            }
         </script>
     @endpush
 </div>

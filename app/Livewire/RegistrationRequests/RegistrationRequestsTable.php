@@ -13,12 +13,6 @@ class RegistrationRequestsTable extends TableComponent implements TableComponent
 {
     public $sortColumn = 'created_at', $selectedStatus = [RegistrationRequestStatusEnum::PENDING->value];
 
-
-    // public function updated()
-    // {
-    //     $this->refreshSelect2();
-    // }
-
     #[On('refreshRRTable')]
     #[Computed]
     public function queryRefresh()
