@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('disposition_units', function (Blueprint $table) {
             $table->bigIncrements('disu_id');
             $table->unsignedBigInteger('disu_dis_id');
-            $table->foreign('disu_dis_id')->references('dispositions')->on('dis_id');
+            $table->foreign('disu_dis_id')->references('dis_id')->on('dispositions');
             $table->unsignedTinyInteger('disu_status')->nullable()->default(0);
             $table->string('disu_car_number', 20)->nullable();
             $table->string('disu_carriage_number', 20)->nullable();
