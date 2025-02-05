@@ -1,6 +1,21 @@
 <div>
     <script>
         $(function() {
+            // flatpickr
+
+            window.addEventListener('flatpickr', event => {
+                $(function () {
+                    flatpickr(".flatpickr", {
+                        "locale": "pl"
+                    });
+
+                    flatpickr(".flatpickr-range", {
+                        mode: "range",
+                        "locale": "pl"
+                    });
+                });
+
+            });
 
             // SweetAlert2
             window.addEventListener('sweetAlert', event => {

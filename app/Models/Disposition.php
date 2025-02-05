@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\DispositionStatusEnum;
+use App\Enums\OperationRelationEnum;
 use Illuminate\Database\Eloquent\Model;
 
 class Disposition extends Model
@@ -14,6 +15,8 @@ class Disposition extends Model
     protected $guarded = ['dis_id'];
     protected $casts = [
         'dis_status' => DispositionStatusEnum::class,
+        'dis_relation_from' => OperationRelationEnum::class,
+        'dis_relation_to' => OperationRelationEnum::class,
     ];
 
     public function createdBy()

@@ -4,6 +4,7 @@
 
 @section('content')
 
+<x-layout-component size=11>
   <div class="row">
       <div class="col-12">
             <x-page-title>
@@ -14,5 +15,5 @@
             </x-panel>
       </div>
   </div>
-
+</x-layout-component>
 @stop

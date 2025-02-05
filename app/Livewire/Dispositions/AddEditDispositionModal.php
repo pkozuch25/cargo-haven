@@ -2,9 +2,9 @@
 
 namespace App\Livewire\Dispositions;
 
-use App\Livewire\MainComponent;
+use App\Livewire\ModalComponent;
 
-class AddEditDispositionModal extends MainComponent
+class AddEditDispositionModal extends ModalComponent
 {
     public function mount()
     {

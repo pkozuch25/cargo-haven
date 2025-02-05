@@ -11,7 +11,13 @@ use App\Enums\RegistrationRequestStatusEnum;
 
 class RegistrationRequestsTable extends TableComponent implements TableComponentInterface
 {
-    public $sortColumn = 'created_at', $selectedStatus = [RegistrationRequestStatusEnum::PENDING->value];
+    public $sortColumn = 'created_at', $selectedStatus = [];
+
+    public function mount()
+    {
+        $this->searchTerm['selectMultiple']['rr_Status'] = [RegistrationRequestStatusEnum::PENDING->value];
+        $this->selectedStatus = [RegistrationRequestStatusEnum::PENDING->value];
+    }
 
     #[On('refreshRRTable')]
     #[Computed]
@@ -19,8 +25,7 @@ class RegistrationRequestsTable extends TableComponent implements TableComponent
     {
         $registrationRequests = RegistrationRequest::query()
             ->leftJoin('users', 'users.id', '=', 'registration_requests.rr_user_id')
-            ->select('registration_requests.*', 'users.name', 'users.email')
-            ->whereIn('rr_status', $this->selectedStatus == [] ? RegistrationRequestStatusEnum::cases() : $this->selectedStatus);
+            ->select('registration_requests.*', 'users.name', 'users.email');
 
         return $this->tableRefresh($registrationRequests);
     }

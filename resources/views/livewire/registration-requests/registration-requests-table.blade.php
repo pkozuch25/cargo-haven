@@ -83,7 +83,7 @@
                 $('#rr-status-select').select2();
                 $('#rr-status-select').on('change', function (e) {
                     var data = $('#rr-status-select').select2("val");
-                    @this.set('selectedStatus', data);
+                    @this.set('searchTerm.selectMultiple.rr_status', data);
                 });
             };
 

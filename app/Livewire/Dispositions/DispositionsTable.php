@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Dispositions;
 
+use App\Enums\DispositionStatusEnum;
 use App\Models\Disposition;
 use App\Livewire\TableComponent;
 use Livewire\Attributes\Computed;
@@ -9,15 +10,14 @@ use App\Interfaces\TableComponentInterface;
 
 class DispositionsTable extends TableComponent implements TableComponentInterface
 {
-    public function mount()
-    {
-
-    }
+    public $sortColumn = 'dis_suggested_date';
 
     #[Computed]
     public function queryRefresh()
     {
-        $query = Disposition::withCount('units');
+        $query = Disposition::query()
+            ->with('createdBy')
+            ->withCount('units');
 
         return $this->tableRefresh($query);
     }

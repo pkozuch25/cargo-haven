@@ -50,5 +50,18 @@
     "Select": "Wybierz",
     "Dispositions": "Dyspozycje",
     "Add new": "Dodaj nowy",
-    "Add": "Dodaj"
+    "Add": "Dodaj",
+    "Not confirmed": "Niepotwierdzone",
+    "Confirmed": "Potwierdzone",
+    "Processing": "Przetwarzanie",
+    "Finalized": "Sfinalizowane",
+    "Cancelled": "Anulowane",
+    "Number": "Numer",
+    "Relation from": "Relacja z",
+    "Relation to": "Relacja do",
+    "Suggested date": "Sugerowana data",
+    "Start date": "Data rozpoczęcia",
+    "Completion date": "Data zakończenia",
+    "Created By": "Utworzone przez"
+
 }

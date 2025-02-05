@@ -4,6 +4,7 @@
 
 @section('content')
 
+<x-layout-component size=11>
   <div class="row">
       <div class="col-12">
         <div style="display: flex; align-items: center; gap: 10px;">
@@ -18,5 +19,6 @@
       </div>
       @livewire('dispositions.add-edit-disposition-modal')
   </div>
+</x-layout-component>
 
 @stop

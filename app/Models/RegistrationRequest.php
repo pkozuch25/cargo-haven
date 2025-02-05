@@ -37,6 +37,6 @@ class RegistrationRequest extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'hd_userid', 'id');
+        return $this->belongsTo(User::class, 'rr_user_id', 'id');
     }
 }

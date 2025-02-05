@@ -20,6 +20,7 @@
   {{-- @vite(['resources/css/app.css']) --}}
   <link href="{{ mix('css/app.css') }}" rel="stylesheet">
   <link href="{{ mix('css/select2.min.css') }}" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <link rel="shortcut icon" href="{{ mix('png/project-logo.png') }}" type="image/png">
   {{-- Include core + vendor Styles --}}
   @livewireStyles()
@@ -30,9 +31,7 @@
     <div class="min-vh-100">
         @include('layouts.navigation')
         <div class="py-12">
-            <div class="max-w-8xl mx-auto sm:px-6 lg:px-10 space-y-6">
-                @yield('content')
-            </div>
+            @yield('content')
         </div>
     </div>
 
