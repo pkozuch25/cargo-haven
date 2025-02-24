@@ -21,6 +21,7 @@
   <link href="{{ mix('css/app.css') }}" rel="stylesheet">
   <link href="{{ mix('css/select2.min.css') }}" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/dark.css">
   <link rel="shortcut icon" href="{{ mix('png/project-logo.png') }}" type="image/png">
   {{-- Include core + vendor Styles --}}
   @livewireStyles()
