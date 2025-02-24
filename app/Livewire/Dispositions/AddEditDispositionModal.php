@@ -11,6 +11,11 @@ class AddEditDispositionModal extends ModalComponent
 
     }
 
+    public function openAddEditDispositionModal()
+    {
+        
+    }
+
     public function render()
     {
         return view('livewire.dispositions.add-edit-disposition-modal');

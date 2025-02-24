@@ -11,14 +11,14 @@
             <x-page-title>
                 <i data-feather="box"></i>{{ __('Dispositions') }}
             </x-page-title>
-            <x-button-add></x-button-add>
+            <x-button-add onclick="Livewire.dispatch('openAddEditDispositionModal')" modal="add-edit-disposition-modal"></x-button-add>
         </div>
             <x-panel>
                 @livewire('dispositions.dispositions-table')
             </x-panel>
       </div>
-      @livewire('dispositions.add-edit-disposition-modal')
-  </div>
+    </div>
 </x-layout-component>
+@livewire('dispositions.add-edit-disposition-modal')
 
 @stop
