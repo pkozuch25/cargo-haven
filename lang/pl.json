@@ -53,7 +53,7 @@
     "Add": "Dodaj",
     "Not confirmed": "Niepotwierdzone",
     "Confirmed": "Potwierdzone",
-    "Processing": "Przetwarzanie",
+    "Processing": "Przetwarzane",
     "Finalized": "Sfinalizowane",
     "Cancelled": "Anulowane",
     "Number": "Numer",
@@ -62,6 +62,10 @@
     "Suggested date": "Sugerowana data",
     "Start date": "Data rozpoczęcia",
     "Completion date": "Data zakończenia",
-    "Created By": "Utworzone przez"
+    "Created By": "Utworzone przez",
+    "Created": "Utworzył",
+    "Yard": "Plac",
+    "Truck": "Ciężarówka",
+    "Carriage": "Wagon"
 
 }

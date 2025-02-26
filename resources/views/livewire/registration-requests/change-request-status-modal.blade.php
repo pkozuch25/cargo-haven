@@ -1,14 +1,13 @@
 <div>
     <x-modal id="change-request-status-modal" size="sm" title="{{ __('Change request status') }}" icon="fas fa-tasks">
         <x-slot name="modalBody">
-
-            <div class="mt-6">
-                <select class="form-control" style="color: white !important" wire:model="requestStatus">
+            <div class="mt-4 mb-4">
+                <x-select wire:model="requestStatus">
                     <option value="null">{{ __("Select") }}</option>
                     @foreach (App\Enums\RegistrationRequestStatusEnum::cases() as $statusEnum)
                         <option value="{{ $statusEnum->value }}">{{ __($statusEnum->name()) }}</option>
                     @endforeach
-                </select>
+                </x-select>
                 <x-input-error :messages="$errors->get('requestStatus')" class="mt-2" />
             </div>
         </x-slot>

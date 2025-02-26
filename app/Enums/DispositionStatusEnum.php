@@ -26,8 +26,8 @@ enum DispositionStatusEnum: int
         return match ($this) {
             $this::NOT_CONFIRMED => 'bg-secondary',
             $this::CONFIRMED => 'bg-success',
-            $this::PROCESSING => 'bg-green',
-            $this::FINALIZED => 'bg-blue',
+            $this::PROCESSING => 'bg-teal-600',
+            $this::FINALIZED => 'bg-sky-600',
             $this::CANCELLED => 'bg-danger',
         };
     }

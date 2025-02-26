@@ -11,11 +11,11 @@
                         class="{{ $sortColumn == 'dis_number' ? ($sortDirection == 'desc' ? 'sorting sorting_desc' : 'sorting sorting_asc') : 'sorting' }}">
                         {{ __('Number') }}
                     </x-th-table>
-                    <x-th-table wire:click="sort('dis_relation_from')"
+                    <x-th-table width="8%" wire:click="sort('dis_relation_from')"
                         class="{{ $sortColumn == 'dis_relation_from' ? ($sortDirection == 'desc' ? 'sorting sorting_desc' : 'sorting sorting_asc') : 'sorting' }}">
                         {{ __('Relation from') }}
                     </x-th-table>
-                    <x-th-table wire:click="sort('dis_relation_to')"
+                    <x-th-table width="8%" wire:click="sort('dis_relation_to')"
                         class="{{ $sortColumn == 'dis_relation_to' ? ($sortDirection == 'desc' ? 'sorting sorting_desc' : 'sorting sorting_asc') : 'sorting' }}">
                         {{ __('Relation to') }}
                     </x-th-table>
@@ -35,7 +35,7 @@
                         {{ __('Status') }}
                     </x-th-table>
                     <x-th-table>
-                        {{ __('Created By') }}
+                        {{ __('Created') }}
                     </x-th-table>
                     <x-th-table>
                         {{ __('Yard') }}
@@ -46,10 +46,22 @@
                         <x-search-text-input wire:model.live.debounce.500ms="searchTerm.text.dis_number"/>
                     </x-th-table-search>
                     <x-th-table-search>
-                        <x-search-text-input wire:model.live.debounce.500ms="searchTerm.text.dis_relation_from"/>
+                        <div wire:ignore>
+                            <select style="height: 30px;" id="disposition-relation-from-select" multiple>
+                                @foreach (\App\Enums\OperationRelationEnum::cases() as $operation)
+                                    <option value="{{ $operation }}">{{ $operation->name() }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </x-th-table-search>
                     <x-th-table-search>
-                        <x-search-text-input wire:model.live.debounce.500ms="searchTerm.text.dis_relation_to"/>
+                        <div wire:ignore>
+                            <select style="height: 30px;" id="disposition-relation-to-select" multiple>
+                                @foreach (\App\Enums\OperationRelationEnum::cases() as $operation)
+                                    <option value="{{ $operation }}">{{ $operation->name() }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </x-th-table-search>
                     <x-th-table-search>
                         <x-search-text-input class="flatpickr-range" wire:model.live.debounce.500ms="searchTerm.text.dis_suggested_date"/>
@@ -70,19 +82,25 @@
                         </div>
                     </x-th-table-search>
                     <x-th-table-search>
+                        {{-- todo users select2 --}}
                     </x-th-table-search>
                     <x-th-table-search>
+                        {{-- todo yard select2 --}}
                     </x-th-table-search>
                 </x-table-row>
             </x-thead-table>
             <tbody>
                 @forelse($data as $disposition)
                     <tr>
-                        <x-td-table class="bg-opacity-25 {{ $disposition->status->color() }}">{{ $disposition->email }}</x-td-table>
-                        <x-td-table class="text-center bg-opacity-25 {{ $disposition->status->color() }}">{{ $disposition->name }}</x-td-table>
-                        <x-td-table class="text-center bg-opacity-25 {{ $disposition->status->color() }}">{{ $disposition->created_at }}</x-td-table>
-                        <x-td-table class="text-center bg-opacity-25 {{ $disposition->status->color() }}">{{ $disposition->dis_status }}</x-td-table>
-                        <x-td-table class="text-center bg-opacity-25 {{ $disposition->status->color() }}">{{ $disposition->createdBy->name }}</x-td-table>
+                        <x-td-table class="text-center">{{ $disposition->dis_number }}</x-td-table>
+                        <x-td-table class="text-center">{{ $disposition->dis_relation_from->name() }}</x-td-table>
+                        <x-td-table class="text-center">{{ $disposition->dis_relation_to->name() }}</x-td-table>
+                        <x-td-table class="text-center">{{ $disposition->dis_suggested_date }}</x-td-table>
+                        <x-td-table class="text-center">{{ $disposition->dis_start_date }}</x-td-table>
+                        <x-td-table class="text-center">{{ $disposition->dis_completion_date }}</x-td-table>
+                        <x-td-table class="text-center"><x-pill class="{{ $disposition->dis_status->color() }}">{{ $disposition->dis_status->name() }}</x-pill></x-td-table>
+                        <x-td-table class="text-center">{{ $disposition->createdBy->name }}</x-td-table>
+                        <x-td-table class="text-center">{{ $disposition->createdBy->name }}</x-td-table>
                     </tr>
                 @empty
                     <tr>
@@ -109,6 +127,18 @@
                 $('#disposition-status-select').on('change', function (e) {
                     var data = $('#disposition-status-select').select2("val");
                     @this.set('searchTerm.selectMultiple.dis_status', data);
+                });
+                
+                $('#disposition-relation-from-select').select2();
+                $('#disposition-relation-from-select').on('change', function (e) {
+                    var data = $('#disposition-relation-from-select').select2("val");
+                    @this.set('searchTerm.selectMultiple.dis_relation_from', data);
+                });
+
+                $('#disposition-relation-to-select').select2();
+                $('#disposition-relation-to-select').on('change', function (e) {
+                    var data = $('#disposition-relation-to-select').select2("val");
+                    @this.set('searchTerm.selectMultiple.dis_relation_to', data);
                 });
             };
         </script>

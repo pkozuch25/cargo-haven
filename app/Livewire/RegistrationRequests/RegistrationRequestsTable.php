@@ -11,7 +11,7 @@ use App\Enums\RegistrationRequestStatusEnum;
 
 class RegistrationRequestsTable extends TableComponent implements TableComponentInterface
 {
-    public $sortColumn = 'created_at', $selectedStatus = [];
+    public $sortColumn = 'created_at', $selectedStatus = [], $perPage = 25;
 
     public function mount()
     {
