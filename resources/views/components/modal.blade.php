@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-{{ $size }}">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title"><i class="{{ $icon }} mr-2" style="font-size: 14px"></i>{{ $title }}</h4>
+                <h4 class="modal-title"><i class="{{ $icon }} mr-2" style="font-size: 18px"></i>{{ $title }}</h4>
             </div>
 
             <div class="modal-body">
