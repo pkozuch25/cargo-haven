@@ -2,8 +2,12 @@
 
 namespace App\Enums;
 
+use App\Traits\ExcludeEnumCasesTrait;
+
 enum OperationRelationEnum: int
 {
+    use ExcludeEnumCasesTrait;
+    
     case CARRIAGE = 0;
     case YARD = 1;
     case TRUCK = 2;

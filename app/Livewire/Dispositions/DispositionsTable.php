@@ -7,11 +7,13 @@ use App\Models\Disposition;
 use App\Livewire\TableComponent;
 use Livewire\Attributes\Computed;
 use App\Interfaces\TableComponentInterface;
+use Livewire\Attributes\On;
 
 class DispositionsTable extends TableComponent implements TableComponentInterface
 {
     public $sortColumn = 'dis_suggested_date';
 
+    #[On('refreshDispositionTable')]
     #[Computed]
     public function queryRefresh()
     {

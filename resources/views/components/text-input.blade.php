@@ -1,5 +1,6 @@
-@props(['disabled' => false])
+@props(['disabled' => false, 'label' => ''])
 
+<x-input-label value="{{ $label }}" />
 <input 
     {{ $disabled ? 'disabled' : '' }} 
     {!! $attributes->merge([
