@@ -2,20 +2,23 @@
 
 namespace App\Livewire\Dispositions;
 
-use App\Enums\OperationRelationEnum;
-use Livewire\Attributes\On;
-use App\Livewire\ModalComponent;
 use App\Models\Disposition;
+use Livewire\Attributes\On;
+use Illuminate\Validation\Rule;
+use App\Livewire\ModalComponent;
+use App\Enums\OperationRelationEnum;
 
 class AddEditDispositionModal extends ModalComponent
 {
     public $disposition, $edit = false, $title, $relationFromFormAvailableRelations, $relationToFormAvailableRelations;
 
-    protected $rules = [
-        'disposition.dis_suggested_date' => ['required', 'dateTime'],
-        'disposition.dis_relation_from' => ['required', OperationRelationEnum::class], //todo prawidłowa walidacja
-        'disposition.dis_relation_to' => ['required', OperationRelationEnum::class],
-    ];
+    protected function rules() {
+        return [
+            'disposition.dis_relation_from' => ['required', Rule::enum(OperationRelationEnum::class)],
+            'disposition.dis_relation_to' => ['required', Rule::enum(OperationRelationEnum::class)],
+            'disposition.dis_suggested_date' => ['required', 'dateTime'],
+        ];
+    }
 
     public function mount()
     {
@@ -57,16 +60,17 @@ class AddEditDispositionModal extends ModalComponent
         $this->title = $this->edit ? __('Edit disposition') : __('Add disposition');
     }
 
-    public function save()
+    public function save() : void
     {
-        $this->validate();
-
-        if ($this->disposition->dis_relation_from == $this->disposition->dis_relation_to) {
+        if ($this->disposition->dis_relation_from && $this->disposition->dis_relation_to && $this->disposition->dis_relation_from == $this->disposition->dis_relation_to) {
             $this->sweetAlert('error', __('Relation from and relation to cannot be the same'), 2000);
             return;
         }
 
+        $this->validate();
+
         $this->disposition->save();
+
         if (!$this->edit) {
             $this->edit = true;
         } else {
