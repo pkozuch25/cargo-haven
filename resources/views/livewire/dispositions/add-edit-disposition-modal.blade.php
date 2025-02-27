@@ -8,18 +8,22 @@
             <div class="col-lg-2">
                 <x-form-select :label="__('Relation from')" wire:model.live='disposition.dis_relation_from'>
                     <option value="">{{ __("Select") }}</option>
-                    @foreach ($relationFromFormAvailableRelations as $relation)
-                        <option value="{{$relation}}">{{ $relation->name() }}</option>
-                    @endforeach
+                    @if($relationFromFormAvailableRelations)
+                        @foreach ($relationFromFormAvailableRelations as $relation)
+                            <option value="{{$relation}}">{{ $relation->name() }}</option>
+                        @endforeach
+                    @endif
                 </x-form-select>
                 <x-input-error :messages="$errors->get('disposition.dis_relation_from')" class="mt-2" />
             </div>
             <div class="col-lg-2">
                 <x-form-select :label="__('Relation to')" wire:model.live='disposition.dis_relation_to'>
                     <option value="">{{ __("Select") }}</option>
-                    @foreach ($relationToFormAvailableRelations as $relation)
-                        <option value="{{$relation}}">{{ $relation->name() }}</option>
-                    @endforeach
+                    @if($relationToFormAvailableRelations)
+                        @foreach ($relationToFormAvailableRelations as $relation)
+                            <option value="{{$relation}}">{{ $relation->name() }}</option>
+                        @endforeach
+                    @endif
                 </x-form-select>
                 <x-input-error :messages="$errors->get('disposition.dis_relation_to')" class="mt-2" />
             </div>
