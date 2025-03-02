@@ -97,4 +97,9 @@ class User extends Authenticatable
     {
         return $this->hasRole('admin');
     }
+
+    public function dispositions()
+    {
+        return $this->belongsToMany(Disposition::class, 'disposition_operators', 'disope_user_id', 'disope_dis_id');
+    }
 }

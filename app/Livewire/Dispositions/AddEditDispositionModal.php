@@ -17,6 +17,8 @@ class AddEditDispositionModal extends ModalComponent
             'disposition.dis_relation_from' => ['required', Rule::enum(OperationRelationEnum::class)],
             'disposition.dis_relation_to' => ['required', Rule::enum(OperationRelationEnum::class)],
             'disposition.dis_suggested_date' => ['required', 'dateTime'],
+            'disposition.dis_notes' => ['nullable', 'string'],
+            'disposition.dis_yard_id' => ['required', 'integer'],
         ];
     }
 
@@ -30,6 +32,7 @@ class AddEditDispositionModal extends ModalComponent
     {
         if ($value == '') {
             $this->relationToFormAvailableRelations = OperationRelationEnum::cases();
+            $this->relationFromFormAvailableRelations = OperationRelationEnum::cases();
             $this->reset('disposition.dis_relation_to');
             return;
         }
@@ -41,17 +44,18 @@ class AddEditDispositionModal extends ModalComponent
     {
         if ($value == '') {
             $this->relationFromFormAvailableRelations = OperationRelationEnum::cases();
+            $this->relationToFormAvailableRelations = OperationRelationEnum::cases();
             $this->reset('disposition.dis_relation_from');
             return;
         }
 
-        $this->relationFromFormAvailableRelations = $value == '' ? OperationRelationEnum::cases() : OperationRelationEnum::casesExcept(OperationRelationEnum::from($value));
+        $this->relationFromFormAvailableRelations = OperationRelationEnum::casesExcept(OperationRelationEnum::from($value));
     }
 
     #[On('openAddEditDispositionModal')]
     public function openAddEditDispositionModal(?Disposition $disposition = null)
     {
-        if ($disposition) {
+        if ($disposition->exists) {
             $this->disposition = $disposition;
             $this->edit = true;
         } else {
