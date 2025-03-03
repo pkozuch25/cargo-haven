@@ -92,24 +92,27 @@ class AddEditDispositionModal extends ModalComponent
             $this->sweetAlert('error', __('Relation from and relation to cannot be the same'), 2000);
             return;
         }
-    
+
         $this->validate();
-        
+
         try {
             DB::transaction(function () {
                 $this->disposition->dis_created_by_id = Auth::id();
                 $this->disposition->save();
                 $this->disposition->operators()->sync($this->dispositionOperators);
             });
-            
+
             if (!$this->edit) {
                 $this->edit = true;
+                $this->sweetAlert('success', __('Disposition added successfully'), 3000);
+                $this->title = __('Edit disposition');
             } else {
+                $this->sweetAlert('success', __('Edited'), 3000);
                 $this->dispatch('closeModal');
             }
-    
+
             $this->dispatch('refreshDispositionTable');
-            
+
         } catch (\Exception $e) {
             dd($e);
             $this->sweetAlert('error', __('Something went wrong'), 3000);

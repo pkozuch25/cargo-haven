@@ -25,4 +25,9 @@ class DispositionService
             return null;
         }
     }
+
+    public function createDispositionNumber()
+    {
+        //todo tworzy numer dyspozycji składający się z roku, miesiąca, placu składowego(skrótu) i 4 cyfrowego numeru porządkowego lp - np 2025/03/RZ/0001
+    }
 }

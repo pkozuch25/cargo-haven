@@ -74,5 +74,7 @@
     "Description / notes": "Opis / uwagi",
     "Operator is already assigned to disposition ": "Operator jest już przypisany do dyspozycji ",
     "Something went wrong": "Coś poszło nie tak",
-    "Operators": "Operatorzy"
+    "Operators": "Operatorzy",
+    "Disposition added successfully": "Dyspozycja została dodana pomyślnie",
+    "Edited": "Edytowano"
 }
