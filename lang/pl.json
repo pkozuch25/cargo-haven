@@ -71,5 +71,8 @@
     "Edit disposition": "Edytuj dyspozycję",
     "Relation from and relation to cannot be the same": "Relacja z i relacja do nie mogą być takie same",
     "Description": "Opis",
-    "Description / notes": "Opis / uwagi"
+    "Description / notes": "Opis / uwagi",
+    "Operator is already assigned to disposition ": "Operator jest już przypisany do dyspozycji ",
+    "Something went wrong": "Coś poszło nie tak",
+    "Operators": "Operatorzy"
 }

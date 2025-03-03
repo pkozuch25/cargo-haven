@@ -3,22 +3,27 @@
 namespace App\Livewire\Dispositions;
 
 use App\Models\Disposition;
+use Illuminate\Support\Arr;
 use Livewire\Attributes\On;
 use Illuminate\Validation\Rule;
 use App\Livewire\ModalComponent;
+use Illuminate\Support\Facades\DB;
 use App\Enums\OperationRelationEnum;
+use App\Services\DispositionService;
+use Illuminate\Support\Facades\Auth;
 
 class AddEditDispositionModal extends ModalComponent
 {
-    public $disposition, $edit = false, $title, $relationFromFormAvailableRelations, $relationToFormAvailableRelations;
+    public $disposition, $edit = false, $title, $relationFromFormAvailableRelations, $relationToFormAvailableRelations, $dispositionOperators;
 
     protected function rules() {
         return [
+            'disposition.dis_yard_id' => ['required', 'integer'],
             'disposition.dis_relation_from' => ['required', Rule::enum(OperationRelationEnum::class)],
             'disposition.dis_relation_to' => ['required', Rule::enum(OperationRelationEnum::class)],
-            'disposition.dis_suggested_date' => ['required', 'dateTime'],
             'disposition.dis_notes' => ['nullable', 'string'],
-            'disposition.dis_yard_id' => ['required', 'integer'],
+            'disposition.dis_suggested_date' => ['required', 'date'],
+            'dispositionOperators' => ['required', 'array'],
         ];
     }
 
@@ -26,6 +31,24 @@ class AddEditDispositionModal extends ModalComponent
     {
         $this->relationFromFormAvailableRelations = OperationRelationEnum::cases();
         $this->relationToFormAvailableRelations = OperationRelationEnum::cases();
+    }
+
+    #[On('openAddEditDispositionModal')]
+    public function openAddEditDispositionModal(?Disposition $disposition = null)
+    {
+        if ($disposition->exists) {
+            $this->disposition = $disposition;
+            $this->edit = true;
+        } else {
+            $this->disposition = new Disposition();
+        }
+
+        $this->disposition->loadMissing('operators');
+        $this->dispositionOperators = $this->disposition->operators()->pluck('id')->toArray();
+
+        $this->title = $this->edit ? __('Edit disposition') : __('Add disposition');
+        $this->dispatch('iniSelect2', ['operators' => $this->dispositionOperators]);
+        $this->dispatch('flatpickr');
     }
 
     public function updatedDispositionDisRelationFrom($value)
@@ -52,16 +75,15 @@ class AddEditDispositionModal extends ModalComponent
         $this->relationFromFormAvailableRelations = OperationRelationEnum::casesExcept(OperationRelationEnum::from($value));
     }
 
-    #[On('openAddEditDispositionModal')]
-    public function openAddEditDispositionModal(?Disposition $disposition = null)
+    public function checkIfOperatorIsAssignedToOtherDispositions(array $data, array $dataBefore)
     {
-        if ($disposition->exists) {
-            $this->disposition = $disposition;
-            $this->edit = true;
-        } else {
-            $this->disposition = new Disposition();
+        $dispositionsString = (new DispositionService())->checkIfOperatorBelongsToDisposition($data, $dataBefore);
+
+        if ($dispositionsString != null) {
+            $this->sweetAlert('warning', __('Operator is already assigned to disposition ') . $dispositionsString, 3000);
         }
-        $this->title = $this->edit ? __('Edit disposition') : __('Add disposition');
+
+        $this->dispositionOperators = $data;
     }
 
     public function save() : void
@@ -70,18 +92,29 @@ class AddEditDispositionModal extends ModalComponent
             $this->sweetAlert('error', __('Relation from and relation to cannot be the same'), 2000);
             return;
         }
-
+    
         $this->validate();
-
-        $this->disposition->save();
-
-        if (!$this->edit) {
-            $this->edit = true;
-        } else {
-            $this->dispatch('closeModal');
+        
+        try {
+            DB::transaction(function () {
+                $this->disposition->dis_created_by_id = Auth::id();
+                $this->disposition->save();
+                $this->disposition->operators()->sync($this->dispositionOperators);
+            });
+            
+            if (!$this->edit) {
+                $this->edit = true;
+            } else {
+                $this->dispatch('closeModal');
+            }
+    
+            $this->dispatch('refreshDispositionTable');
+            
+        } catch (\Exception $e) {
+            dd($e);
+            $this->sweetAlert('error', __('Something went wrong'), 3000);
+            return;
         }
-
-        $this->dispatch('refreshDispositionTable');
     }
 
     public function render()

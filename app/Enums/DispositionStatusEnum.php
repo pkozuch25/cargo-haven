@@ -31,4 +31,12 @@ enum DispositionStatusEnum: int
             $this::CANCELLED => 'bg-danger',
         };
     }
+
+    public static function active(): array
+    {
+        return [
+            self::CONFIRMED,
+            self::PROCESSING
+        ];
+    }
 }

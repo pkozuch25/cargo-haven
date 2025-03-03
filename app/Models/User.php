@@ -102,4 +102,10 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Disposition::class, 'disposition_operators', 'disope_user_id', 'disope_dis_id');
     }
+
+    public function scopeOperator($query)
+    {
+        return $query->role('Operator');
+    }
+
 }

@@ -47,7 +47,7 @@
             </x-thead-table>
             <tbody>
                 @forelse($data as $request)
-                    <tr>
+                    <x-tr-hover>
                         <x-td-table>{{ $request->email }}</x-td-table>
                         <x-td-table class="text-center">{{ $request->name }}</x-td-table>
                         <x-td-table class="text-center">{{ $request->created_at }}</x-td-table>
@@ -57,11 +57,11 @@
                                 {{ $request->rr_status->name() }}
                             </x-pill>
                         </x-td-table>
-                    </tr>
+                    </x-tr-hover>
                 @empty
-                    <tr>
+                    <x-tr-hover>
                         <td colspan="4" class="px-4 py-2 text-center text-gray-500 dark:text-gray-400">{{ __('No results') }}</td>
-                    </tr>
+                    </x-tr-hover>
                 @endforelse
             </tbody>
         </table>

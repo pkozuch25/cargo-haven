@@ -91,7 +91,7 @@
             </x-thead-table>
             <tbody>
                 @forelse($data as $disposition)
-                    <tr>
+                    <x-tr-hover>
                         <x-td-table class="text-center">{{ $disposition->dis_number }}</x-td-table>
                         <x-td-table class="text-center">{{ $disposition->dis_relation_from->name() }}</x-td-table>
                         <x-td-table class="text-center">{{ $disposition->dis_relation_to->name() }}</x-td-table>
@@ -101,7 +101,7 @@
                         <x-td-table class="text-center"><x-pill class="{{ $disposition->dis_status->color() }}">{{ $disposition->dis_status->name() }}</x-pill></x-td-table>
                         <x-td-table class="text-center">{{ $disposition->createdBy->name }}</x-td-table>
                         <x-td-table class="text-center">{{ $disposition->createdBy->name }}</x-td-table>
-                    </tr>
+                    </x-tr-hover>
                 @empty
                     <tr>
                         <td colspan="9" class="px-4 py-2 text-center text-gray-500 dark:text-gray-400">{{ __('No results') }}</td>

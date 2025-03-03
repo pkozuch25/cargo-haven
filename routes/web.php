@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\RegisteredUserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DepositsController;
@@ -22,6 +23,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/dispositions', [DispositionsController::class, 'index'])->name('dispositions.index');
     Route::get('/permissions', [PermissionsController::class, 'index'])->name('permissions.index');
     Route::get('/registration-requests', [RegistrationRequestController::class, 'index'])->name('registration-requests.index');
+
+    // SELECT2
+
+    Route::get('/get-operators-to-select2', [RegisteredUserController::class, 'getOperatorsToSelect2'])->name('get-operators-to-select2');
 });
 
 require __DIR__.'/auth.php';

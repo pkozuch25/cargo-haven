@@ -37,4 +37,19 @@ class RegisteredUserController extends Controller
 
         return redirect(route('login', absolute: false));
     }
+
+    public function getOperatorsToSelect2(Request $request) 
+    {
+        $request->validate(
+            [
+                'search' => ['string', 'max:255', 'nullable'],
+            ]
+        );
+
+        return User::operator()
+            ->where('name', 'like', "%$request->search%")
+            ->orderBy('name', 'asc')
+            ->get(['id', 'name as text'])
+            ->toArray();
+    }
 }
