@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'previous' => '&laquo; Poprzedni',
+    'previous' => '&laquo;' . __('Poprzedni'), //do stestowania
     'next' => 'Następny &raquo;',
 
 ];

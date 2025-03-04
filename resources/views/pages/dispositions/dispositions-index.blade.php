@@ -9,7 +9,7 @@
       <div class="col-12">
         <div style="display: flex; align-items: center; gap: 10px;">
             <x-page-title>
-                <i data-feather="box"></i>{{ __('Dispositions') }}
+                <i data-feather="file-text"></i>{{ __('Dispositions') }}
             </x-page-title>
             <x-button-add onclick="Livewire.dispatch('openAddEditDispositionModal')" modal="add-edit-disposition-modal"></x-button-add>
         </div>

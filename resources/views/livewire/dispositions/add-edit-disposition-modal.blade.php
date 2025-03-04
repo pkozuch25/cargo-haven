@@ -1,4 +1,4 @@
-<x-modal id="add-edit-disposition-modal" size="fullscreen" title="{{ $title }}" icon="fa fa-file-text-o">
+<x-modal id="add-edit-disposition-modal" size="fullscreen" title="{{ $title }}" icon="ti ti-file-text">
     <x-slot name="modalBody">
         @if ($disposition)
             <div class="row">
@@ -29,12 +29,12 @@
                     <x-input-error :messages="$errors->get('disposition.dis_relation_to')" class="mt-2" />
                 </div>
                 <div class="col-lg-2">
-                    <x-textarea style="max-height: 150px" :label="__('Description / notes')" name="descTextArea" rows="2" wire:model='disposition.dis_notes'>
-                    </x-textarea>
-                </div>
-                <div class="col-lg-2">
                     <x-text-input-full :label="__('Suggested date')" class="flatpickr" wire:model='disposition.dis_suggested_date' placeholder="{{ __('Suggested date') }}" />
                     <x-input-error :messages="$errors->get('disposition.dis_suggested_date')" class="mt-2" />
+                </div>
+                <div class="col-lg-2">
+                    <x-textarea style="max-height: 150px" :label="__('Description / notes')" name="descTextArea" rows="2" wire:model='disposition.dis_notes'>
+                    </x-textarea>
                 </div>
                 <div class="col-lg-2">
                     <x-input-label >{{ __('Operators') }}</x-input-label>
