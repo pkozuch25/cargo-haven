@@ -29,8 +29,7 @@ class AddEditDispositionModal extends ModalComponent
 
     public function mount()
     {
-        $this->relationFromFormAvailableRelations = OperationRelationEnum::cases();
-        $this->relationToFormAvailableRelations = OperationRelationEnum::cases();
+        $this->loadRelations();
     }
 
     #[On('openAddEditDispositionModal')]
@@ -49,6 +48,7 @@ class AddEditDispositionModal extends ModalComponent
         $this->title = $this->edit ? __('Edit disposition') : __('Add disposition');
         $this->dispatch('iniSelect2', ['operators' => $this->dispositionOperators]);
         $this->dispatch('flatpickr');
+        $this->loadRelations();
     }
 
     public function updatedDispositionDisRelationFrom($value)
@@ -114,10 +114,15 @@ class AddEditDispositionModal extends ModalComponent
             $this->dispatch('refreshDispositionTable');
 
         } catch (\Exception $e) {
-            dd($e);
             $this->sweetAlert('error', __('Something went wrong'), 3000);
             return;
         }
+    }
+
+    private function loadRelations()
+    {
+        $this->relationFromFormAvailableRelations = OperationRelationEnum::cases();
+        $this->relationToFormAvailableRelations = OperationRelationEnum::cases();
     }
 
     public function render()

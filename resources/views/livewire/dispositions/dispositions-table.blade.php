@@ -109,7 +109,9 @@
                             <x-td-table class="text-center">{{ $disposition->createdBy->name }}</x-td-table>
                             <x-td-table class="text-center">placeholder</x-td-table>
                             <x-td-table class="float-right">
-                                <x-button icon="fa fa-edit" class="btn-primary px-[6px] py-[3px]" modal="add-edit-disposition-modal" wire:click="dispatch('openAddEditDispositionModal', {disposition: {{ $disposition->dis_id }} })"/>
+                                @can('edit_dispositions')
+                                    <x-button icon="fa fa-edit" class="btn-primary px-[6px] py-[3px]" modal="add-edit-disposition-modal" wire:click="dispatch('openAddEditDispositionModal', {disposition: {{ $disposition->dis_id }} })"/>
+                                @endcan
                             </x-td-table>
                         </x-tr-hover>
                     @empty
@@ -139,7 +141,7 @@
                     var data = $('#disposition-status-select').select2("val");
                     @this.set('searchTerm.selectMultiple.dis_status', data);
                 });
-                
+
                 $('#disposition-relation-from-select').select2();
                 $('#disposition-relation-from-select').on('change', function (e) {
                     var data = $('#disposition-relation-from-select').select2("val");

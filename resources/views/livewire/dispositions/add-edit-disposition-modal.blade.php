@@ -49,19 +49,20 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-sm-1">
+                    <x-button class="btn-success" wire:click='save'>
+                        {{ __('Save') }}
+                    </x-button>
+                </div>
+            </div>
+            @if ($edit && $disposition != null)
+                <hr class="my-4"/>
+                @livewire('dispositions.disposition-units.disposition-units-form-table', ['disposition' => $disposition->dis_id])
+            @endif
         @endif
-        {{--
-        plac
-        relacja z
-        relacja do
-        uwagi
-        sugerowana data
-        --}}
     </x-slot>
     <x-slot name="modalFooter">
-        <x-button class="btn-success" wire:click='save'>
-            {{ __('Save') }}
-        </x-button>
     </x-slot>
     @push('javascript')
         <script>
@@ -72,7 +73,7 @@
 
             window.addEventListener('iniSelect2', event => {
                 console.log('aaa');
-                
+
                 $(function() {
                     $('select[name="dis_operators"]').val(event.detail[0].operators);
                     iniSelect2();

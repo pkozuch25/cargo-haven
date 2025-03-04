@@ -11,7 +11,9 @@
             <x-page-title>
                 <i data-feather="file-text"></i>{{ __('Dispositions') }}
             </x-page-title>
-            <x-button-add onclick="Livewire.dispatch('openAddEditDispositionModal')" modal="add-edit-disposition-modal"></x-button-add>
+            @can('add_dispositions')
+                <x-button-add onclick="Livewire.dispatch('openAddEditDispositionModal')" modal="add-edit-disposition-modal"></x-button-add>
+            @endcan
         </div>
             <x-panel>
                 @livewire('dispositions.dispositions-table')
