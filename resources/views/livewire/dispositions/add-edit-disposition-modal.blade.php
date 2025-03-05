@@ -17,17 +17,18 @@
                     </x-form-select>
                     <x-input-error :messages="$errors->get('disposition.dis_relation_from')" class="mt-2" />
                 </div>
-                <div class="col-lg-2">
-                    <x-form-select :label="__('Relation to')" wire:model.live='disposition.dis_relation_to'>
-                        <option value="">{{ __("Select") }}</option>
-                        @if($relationToFormAvailableRelations)
-                            @foreach ($relationToFormAvailableRelations as $relation)
-                                <option value="{{ $relation }}">{{ $relation->name() }}</option>
-                            @endforeach
-                        @endif
-                    </x-form-select>
-                    <x-input-error :messages="$errors->get('disposition.dis_relation_to')" class="mt-2" />
-                </div>
+                @if($disposition->dis_relation_from)
+                    <div class="col-lg-2">
+                        <x-form-select :label="__('Relation to')" wire:model='disposition.dis_relation_to'>
+                            @if($relationToFormAvailableRelations)
+                                @foreach ($relationToFormAvailableRelations as $relation)
+                                    <option value="{{ $relation }}">{{ $relation->name() }}</option>
+                                @endforeach
+                            @endif
+                        </x-form-select>
+                        <x-input-error :messages="$errors->get('disposition.dis_relation_to')" class="mt-2" />
+                    </div>
+                @endif
                 <div class="col-lg-2">
                     <x-text-input-full :label="__('Suggested date')" class="flatpickr" wire:model='disposition.dis_suggested_date' placeholder="{{ __('Suggested date') }}" />
                     <x-input-error :messages="$errors->get('disposition.dis_suggested_date')" class="mt-2" />
