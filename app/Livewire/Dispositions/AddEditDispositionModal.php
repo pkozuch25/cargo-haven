@@ -16,7 +16,8 @@ class AddEditDispositionModal extends ModalComponent
 {
     public $disposition, $edit = false, $title, $relationFromFormAvailableRelations, $relationToFormAvailableRelations, $dispositionOperators;
 
-    protected function rules() {
+    protected function rules()
+    {
         return [
             'disposition.dis_yard_id' => ['required', 'integer'],
             'disposition.dis_relation_from' => ['required', Rule::enum(OperationRelationEnum::class)],
@@ -60,7 +61,11 @@ class AddEditDispositionModal extends ModalComponent
             return;
         }
 
-        $this->relationToFormAvailableRelations = OperationRelationEnum::casesExcept(OperationRelationEnum::from($value));
+        if (OperationRelationEnum::from($value) != OperationRelationEnum::YARD) {
+            $this->relationToFormAvailableRelations = [OperationRelationEnum::YARD];
+        } else {
+            $this->relationToFormAvailableRelations = OperationRelationEnum::casesExcept(OperationRelationEnum::from($value));
+        }
     }
 
     public function updatedDispositionDisRelationTo($value)
@@ -72,7 +77,11 @@ class AddEditDispositionModal extends ModalComponent
             return;
         }
 
-        $this->relationFromFormAvailableRelations = OperationRelationEnum::casesExcept(OperationRelationEnum::from($value));
+        if (OperationRelationEnum::from($value) != OperationRelationEnum::YARD) {
+            $this->relationFromFormAvailableRelations = [OperationRelationEnum::YARD];
+        } else {
+            $this->relationFromFormAvailableRelations = OperationRelationEnum::casesExcept(OperationRelationEnum::from($value));
+        }
     }
 
     public function checkIfOperatorIsAssignedToOtherDispositions(array $data, array $dataBefore)
@@ -80,20 +89,28 @@ class AddEditDispositionModal extends ModalComponent
         $dispositionsString = (new DispositionService())->checkIfOperatorBelongsToDisposition($data, $dataBefore);
 
         if ($dispositionsString != null) {
-            $this->sweetAlert('warning', __('Operator is already assigned to disposition ') . $dispositionsString, 3000);
+            $this->sweetAlert('warning', __('Operator is already assigned to disposition ') . $dispositionsString);
         }
 
         $this->dispositionOperators = $data;
     }
 
-    public function save() : void
+    public function save(): void
     {
+        $this->validate();
+
         if ($this->disposition->dis_relation_from && $this->disposition->dis_relation_to && $this->disposition->dis_relation_from == $this->disposition->dis_relation_to) {
-            $this->sweetAlert('error', __('Relation from and relation to cannot be the same'), 2000);
+            $this->sweetAlert('error', __('Relation from and relation to cannot be the same'));
             return;
         }
-
-        $this->validate();
+        
+        if (
+            $this->disposition->dis_relation_from && $this->disposition->dis_relation_to &&
+            $this->disposition->dis_relation_from != OperationRelationEnum::YARD->value && $this->disposition->dis_relation_to != OperationRelationEnum::YARD->value
+        ) {
+            $this->sweetAlert('error', __('One of the relations must be a yard relation')); // do poprawy
+            return;
+        }
 
         try {
             DB::transaction(function () {
@@ -104,17 +121,16 @@ class AddEditDispositionModal extends ModalComponent
 
             if (!$this->edit) {
                 $this->edit = true;
-                $this->sweetAlert('success', __('Disposition added successfully'), 3000);
+                $this->sweetAlert('success', __('Disposition added successfully'));
                 $this->title = __('Edit disposition');
             } else {
-                $this->sweetAlert('success', __('Edited'), 3000);
+                $this->sweetAlert('success', __('Edited'));
                 $this->dispatch('closeModal');
             }
 
             $this->dispatch('refreshDispositionTable');
-
         } catch (\Exception $e) {
-            $this->sweetAlert('error', __('Something went wrong'), 3000);
+            $this->sweetAlert('error', __('Something went wrong'));
             return;
         }
     }

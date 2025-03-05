@@ -1,5 +1,20 @@
 @import "~bootstrap/scss/bootstrap";
 
+.pagination {
+    --bs-pagination-bg: #202938;
+    --bs-pagination-hover-bg: #4a565e;
+    --bs-pagination-disabled-bg: #202938;
+    --bs-pagination-disabled-color: #d1d5db;
+    --bs-pagination-active-border-color: #374151;
+    --bs-pagination-border-color: #374151;
+    --bs-pagination-disabled-border-color: #374151;
+    --bs-pagination-color: #d1d5db;
+    --bs-pagination-hover-color: #d1d5db;
+    --bs-pagination-focus-color: #d1d5db;
+    --bs-pagination-focus-bg: #4a565e;
+    --bs-pagination-hover-border-color: #374151;
+}
+
 body {
     color: rgb(243 244 246 / var(--tw-text-opacity))
 }

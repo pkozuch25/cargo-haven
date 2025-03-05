@@ -7,7 +7,7 @@ use Livewire\Component;
 class MainComponent extends Component
 {
 
-    public function sweetAlert(string $type, string $text, int $time)
+    public function sweetAlert(string $type, string $text, int $time = 3000)
     {
         $this->dispatch('sweetAlert', ['type' => $type, 'text' => $text, 'time' => $time]);
     }

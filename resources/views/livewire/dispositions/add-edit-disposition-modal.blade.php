@@ -49,11 +49,17 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row mt-3">
                 <div class="col-sm-1">
                     <x-button class="btn-success" wire:click='save'>
                         {{ __('Save') }}
                     </x-button>
+                </div>
+                <div class="col-sm-1">
+                    {{-- <x-button class="btn-success" wire:click='save'>
+                        {{ __('Save') }}
+                    </x-button> --}}
+                    {{-- Przycisk do zmiany statusu todo --}}
                 </div>
             </div>
             @if ($edit && $disposition != null)

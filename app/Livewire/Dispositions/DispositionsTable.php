@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Dispositions;
 
-use App\Enums\DispositionStatusEnum;
 use App\Models\Disposition;
 use App\Livewire\TableComponent;
 use Livewire\Attributes\Computed;

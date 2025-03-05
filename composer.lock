@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "08f83ad951c0ddf9bf52a8e38732bfad",
+    "content-hash": "45abc108047ac36248eeefa4a4ba75f8",
     "packages": [
         {
             "name": "brick/math",
@@ -3505,6 +3505,54 @@
                 }
             ],
             "time": "2024-11-08T18:45:41+00:00"
+        },
+        {
+            "name": "stormpat/container-validator",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/stormpat/Container-validator.git",
+                "reference": "81cdf8c5d324516add080155e7ccbf37a59bdddf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/stormpat/Container-validator/zipball/81cdf8c5d324516add080155e7ccbf37a59bdddf",
+                "reference": "81cdf8c5d324516add080155e7ccbf37a59bdddf",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Validator": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Patrik Storm",
+                    "email": "storm.patrik@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Cargo container code validator",
+            "homepage": "https://github.com/stormpat/Container-validator",
+            "keywords": [
+                "cargo",
+                "container",
+                "validator"
+            ],
+            "support": {
+                "issues": "https://github.com/stormpat/Container-validator/issues",
+                "source": "https://github.com/stormpat/Container-validator/tree/master"
+            },
+            "time": "2014-09-26T06:26:16+00:00"
         },
         {
             "name": "symfony/clock",
@@ -8868,7 +8916,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "stormpat/container-validator": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

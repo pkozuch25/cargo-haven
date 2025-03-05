@@ -10,7 +10,8 @@
         "laravel/tinker": "^2.9",
         "livewire/livewire": "^3.5",
         "nuwave/lighthouse": "^6.47",
-        "spatie/laravel-permission": "^6.10"
+        "spatie/laravel-permission": "^6.10",
+        "stormpat/container-validator": "dev-master"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.14",
