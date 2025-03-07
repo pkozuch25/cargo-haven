@@ -30,7 +30,7 @@ class AddEditDispositionModal extends ModalComponent
 
     public function mount()
     {
-        $this->loadRelations();
+        $this->loadRelationsFromForm();
     }
 
     #[On('openAddEditDispositionModal')]
@@ -39,7 +39,7 @@ class AddEditDispositionModal extends ModalComponent
         if ($disposition->exists) {
             $this->disposition = $disposition;
             $this->edit = true;
-            $this->updatedDispositionDisRelationFrom($this->disposition->dis_relation_from->value);
+            $this->loadRelationsToForm();
         } else {
             $this->disposition = new Disposition();
         }
@@ -50,7 +50,7 @@ class AddEditDispositionModal extends ModalComponent
         $this->title = $this->edit ? __('Edit disposition') : __('Add disposition');
         $this->dispatch('iniSelect2', ['operators' => $this->dispositionOperators]);
         $this->dispatch('flatpickr');
-        $this->loadRelations();
+        $this->loadRelationsFromForm();
     }
 
     public function updatedDispositionDisRelationFrom($value)
@@ -70,7 +70,6 @@ class AddEditDispositionModal extends ModalComponent
 
         $this->disposition->dis_relation_to = OperationRelationEnum::CARRIAGE;
         $this->relationToFormAvailableRelations = OperationRelationEnum::casesExcept($selectedEnum);
-
     }
 
 
@@ -89,18 +88,18 @@ class AddEditDispositionModal extends ModalComponent
     {
         $this->validate();
 
-        if (
-            $this->disposition->dis_relation_from && $this->disposition->dis_relation_to &&
-            $this->disposition->dis_relation_from->value == $this->disposition->dis_relation_to->value
-        ) {
+        if ($this->checkIfFromAndToRelationsAreTheSame()) {
             $this->sweetAlert('error', __('Relation from and relation to cannot be the same'));
             return;
         }
-        if (
-            $this->disposition->dis_relation_from && $this->disposition->dis_relation_to &&
-            $this->disposition->dis_relation_from != OperationRelationEnum::YARD && $this->disposition->dis_relation_to != OperationRelationEnum::YARD
-        ) {
+
+        if ($this->checkIfHasExactlyOneYardRelation()) {
             $this->sweetAlert('error', __('One of the relations must be a yard relation'));
+            return;
+        }
+
+        if ($this->dispositionHasUnits()) {
+            $this->sweetAlert('error', __('Disposition has units, cannot be edited'));
             return;
         }
 
@@ -117,7 +116,9 @@ class AddEditDispositionModal extends ModalComponent
                 $this->title = __('Edit disposition');
             } else {
                 $this->sweetAlert('success', __('Edited'));
-                $this->dispatch('closeModal');
+                if (!$this->dispositionHasUnits()) {
+                    $this->closeModal(true);
+                }
             }
 
             $this->dispatch('refreshDispositionTable');
@@ -127,9 +128,39 @@ class AddEditDispositionModal extends ModalComponent
         }
     }
 
-    private function loadRelations()
+    public function dispositionHasUnits(): bool
+    {
+        return (new DispositionService())->checkIfDispositionHasAnyUnits($this->disposition);
+    }
+
+    private function loadRelationsFromForm()
     {
         $this->relationFromFormAvailableRelations = OperationRelationEnum::cases();
+    }
+
+    private function loadRelationsToForm() : void
+    {
+        if ($this->disposition->dis_relation_from != OperationRelationEnum::YARD) {
+            $this->disposition->dis_relation_to = OperationRelationEnum::YARD;
+            $this->relationToFormAvailableRelations = [OperationRelationEnum::YARD];
+            return;
+        }
+        $this->relationToFormAvailableRelations = OperationRelationEnum::casesExcept($this->disposition->dis_relation_from);
+    }
+
+    private function checkIfFromAndToRelationsAreTheSame(): bool
+    {
+        return $this->disposition->dis_relation_from &&
+            $this->disposition->dis_relation_to &&
+            $this->disposition->dis_relation_from->value == $this->disposition->dis_relation_to->value;
+    }
+
+    private function checkIfHasExactlyOneYardRelation(): bool
+    {
+        return $this->disposition->dis_relation_from &&
+            $this->disposition->dis_relation_to &&
+            $this->disposition->dis_relation_from != OperationRelationEnum::YARD
+            && $this->disposition->dis_relation_to != OperationRelationEnum::YARD;
     }
 
     public function render()

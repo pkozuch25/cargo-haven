@@ -7,12 +7,13 @@ use App\Models\Disposition;
 use App\Models\DispositionUnit;
 use App\Livewire\TableComponent;
 use App\Enums\OperationRelationEnum;
+use App\Services\DispositionService;
 use App\Interfaces\TableComponentInterface;
 
 class DispositionUnitsFormTable extends TableComponent implements TableComponentInterface
 {
     public $disposition, $dispositionUnit;
- 
+
     protected function rules() {
         return [
             'dispositionUnit.disu_container_number' => [
@@ -30,6 +31,20 @@ class DispositionUnitsFormTable extends TableComponent implements TableComponent
                 'required_if:disposition.dis_relation_from,'.OperationRelationEnum::TRUCK->value,
                 'required_if:disposition.dis_relation_to,'.OperationRelationEnum::TRUCK->value,
             ],
+            'dispositionUnit.disu_driver' => [
+                'nullable',
+                'string',
+                'required_if:disposition.dis_relation_from,'.OperationRelationEnum::TRUCK->value,
+                'required_if:disposition.dis_relation_to,'.OperationRelationEnum::TRUCK->value,
+            ],
+            'dispositionUnit.disu_container_net_weight' => ['required', 'integer', 'min:1'],
+            'dispositionUnit.disu_container_tare_weight' => [
+                'nullable',
+                'min:1',
+                'integer',
+                'required_if:disposition.dis_relation_from,'.OperationRelationEnum::TRUCK->value,
+                'required_if:disposition.dis_relation_to,'.OperationRelationEnum::TRUCK->value
+            ],
         ];
     }
 
@@ -41,17 +56,20 @@ class DispositionUnitsFormTable extends TableComponent implements TableComponent
 
     public function queryRefresh()
     {
-        
+
     }
 
     public function addDispositionUnit()
     {
         $this->validate();
 
+        if ($this->checkIfIsInCarriageRelation()) {
+            (new DispositionService)->calcGrossWeight($this->dispositionUnit);
+        }
         // $this->checkIfExistsInDeposits() - sprawdź czy już istnieje w depozytach - todo
 
         $this->dispositionUnit = new DispositionUnit();
-        
+
     }
 
     public function checkIfIsInTruckRelation()

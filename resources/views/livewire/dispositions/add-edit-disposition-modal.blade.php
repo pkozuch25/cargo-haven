@@ -3,11 +3,11 @@
         @if ($disposition)
             <div class="row">
                 <div class="col-lg-2">
-                    <x-text-input-full :label="__('Yard')" wire:model='disposition.dis_yard_id' placeholder="{{ __('Yard') }}"></x-text-input-full>
+                    <x-input-full :label="__('Yard')" wire:model='disposition.dis_yard_id' placeholder="{{ __('Yard') }}"></x-input-full>
                     <x-input-error :messages="$errors->get('disposition.dis_yard_id')" class="mt-2" />
                 </div>
                 <div class="col-lg-2">
-                    <x-form-select :label="__('Relation from')" wire:model.live='disposition.dis_relation_from'>
+                    <x-form-select :disabled="$this->dispositionHasUnits()" :label="__('Relation from')" wire:model.live='disposition.dis_relation_from'>
                         <option value="">{{ __("Select") }}</option>
                         @if($relationFromFormAvailableRelations)
                             @foreach ($relationFromFormAvailableRelations as $relation)
@@ -19,7 +19,7 @@
                 </div>
                 @if($disposition->dis_relation_from)
                     <div class="col-lg-2">
-                        <x-form-select :label="__('Relation to')" wire:model='disposition.dis_relation_to'>
+                        <x-form-select :disabled="$this->dispositionHasUnits()" :label="__('Relation to')" wire:model='disposition.dis_relation_to'>
                             @if($relationToFormAvailableRelations)
                                 @foreach ($relationToFormAvailableRelations as $relation)
                                     <option value="{{ $relation }}">{{ $relation->name() }}</option>
@@ -30,7 +30,7 @@
                     </div>
                 @endif
                 <div class="col-lg-2">
-                    <x-text-input-full :label="__('Suggested date')" class="flatpickr" wire:model='disposition.dis_suggested_date' placeholder="{{ __('Suggested date') }}" />
+                    <x-input-full :label="__('Suggested date')" class="flatpickr" wire:model='disposition.dis_suggested_date' placeholder="{{ __('Suggested date') }}" />
                     <x-input-error :messages="$errors->get('disposition.dis_suggested_date')" class="mt-2" />
                 </div>
                 <div class="col-lg-2">

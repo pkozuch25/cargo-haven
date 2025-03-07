@@ -84,7 +84,15 @@
     "Container number": "Numer kontenera",
     "Notes": "Uwagi",
     "The car number plate field is required when using truck transport.": "Numer rejestracyjny ciężarówki jest wymagany podczas transportu ciężarówką.",
-    "Car number plate": "Numer rejestracyjny ciężarówki",
+    "Car number plate": "Rejestracja ciężarówki",
     "This field is required.": "Pole jest wymagane.",
-    "One of the relations must be a yard relation": "Jedna z relacji musi być relacją placu."
+    "One of the relations must be a yard relation": "Jedna z relacji musi być relacją placu.",
+    "Net weight": "Waga netto",
+    "Gross weight": "Waga brutto",
+    "Tare weight": "Waga tary",
+    "Driver": "Kierowca",
+    "Field must be at least :min.": "Pole musi mieć co najmniej :min.",
+    "Field must be at least :min kilobytes.": "Pole musi mieć co najmniej :min kilobajtów.",
+    "Field must be at least :min characters.": "Pole musi mieć co najmniej :min znaków.",
+    "Disposition has units, cannot be edited": "Operacja dyspozycyjna zawiera już jednostki przeładunkowe, nie można jej edytować"
 }
