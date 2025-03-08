@@ -3,7 +3,6 @@
 namespace App\Livewire\Dispositions;
 
 use App\Models\Disposition;
-use Illuminate\Support\Arr;
 use Livewire\Attributes\On;
 use Illuminate\Validation\Rule;
 use App\Livewire\ModalComponent;
@@ -98,8 +97,8 @@ class AddEditDispositionModal extends ModalComponent
             return;
         }
 
-        if ($this->dispositionHasUnits()) {
-            $this->sweetAlert('error', __('Disposition has units, cannot be edited'));
+        if ($this->dispositionHasUnits() && $this->checkIfNonEditableFieldsAreDirty()) {
+            $this->sweetAlert('error', __('Disposition has units, some fields cannot be edited'));
             return;
         }
 
@@ -161,6 +160,11 @@ class AddEditDispositionModal extends ModalComponent
             $this->disposition->dis_relation_to &&
             $this->disposition->dis_relation_from != OperationRelationEnum::YARD
             && $this->disposition->dis_relation_to != OperationRelationEnum::YARD;
+    }
+
+    private function checkIfNonEditableFieldsAreDirty(): bool
+    {
+        return $this->disposition->isDirty(['dis_relation_from', 'dis_relation_to', 'dis_yard_id']);
     }
 
     public function render()

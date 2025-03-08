@@ -3,7 +3,7 @@
         @if ($disposition)
             <div class="row">
                 <div class="col-lg-2">
-                    <x-input-full :label="__('Yard')" wire:model='disposition.dis_yard_id' placeholder="{{ __('Yard') }}"></x-input-full>
+                    <x-input-full :disabled="$this->dispositionHasUnits()" :label="__('Yard')" wire:model='disposition.dis_yard_id' placeholder="{{ __('Yard') }}"></x-input-full>
                     <x-input-error :messages="$errors->get('disposition.dis_yard_id')" class="mt-2" />
                 </div>
                 <div class="col-lg-2">

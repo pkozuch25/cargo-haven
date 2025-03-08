@@ -34,6 +34,12 @@
                     html: text,
                     showConfirmButton: false,
                     timer: time,
+                    focusConfirm: false,
+                    returnFocus: false,
+                        didOpen: (popup) => {
+                        popup.querySelector('input')?.blur();
+                        popup.focus();
+                    },
                     customClass: {
                     confirmButton: 'btn btn-primary',
                     },
@@ -60,6 +66,12 @@
                     title: title,
                     html: text,
                     timer: time,
+                    focusConfirm: false,
+                    returnFocus: false,
+                        didOpen: (popup) => {
+                        popup.querySelector('input')?.blur();
+                        popup.focus();
+                    },
                     customClass: {
                     confirmButton: 'btn btn-primary',
                     },
@@ -90,6 +102,13 @@
                     reverseButtons: true,
                     allowEnterKey:true,
                     allowEscKey:true,
+                    focusConfirm: false,
+                    returnFocus: false,
+                    confirmButtonColor: '#198754',
+                        didOpen: (popup) => {
+                        popup.querySelector('input')?.blur();
+                        popup.focus();
+                    },
                     confirmButtonText: "{{ __('Yes') }}",
                     cancelButtonText: "{{ __('Cancel') }}",
 
@@ -119,6 +138,12 @@
                     reverseButtons: true,
                     allowEnterKey:true,
                     allowEscKey:true,
+                    focusConfirm: false,
+                    returnFocus: false,
+                        didOpen: (popup) => {
+                        popup.querySelector('input')?.blur();
+                        popup.focus();
+                    },
                     confirmButtonText: "{{ __('Yes') }}",
                     cancelButtonText: "{{ __('No') }}",
 
@@ -148,6 +173,12 @@
                     reverseButtons: true,
                     allowEnterKey:true,
                     allowEscKey:true,
+                    focusConfirm: false,
+                    returnFocus: false,
+                        didOpen: (popup) => {
+                        popup.querySelector('input')?.blur();
+                        popup.focus();
+                    },
                     confirmButtonText: "{{ __('Yes') }}",
                     cancelButtonText: "{{ __('No') }}",
 

@@ -43,4 +43,10 @@ class DispositionService
         $dispositionUnit->disu_container_gross_weight = $dispositionUnit->disu_container_net_weight + $dispositionUnit->disu_container_tare_weight;
         return $dispositionUnit;
     }
+
+    public function checkIfUnitExistsInDisposition($containerNumber) : Disposition | null
+    {
+        $dispositionWithContainerNumber = DispositionUnit::with('disposition')->where('disu_container_number', $containerNumber)->first();
+        return $dispositionWithContainerNumber ? $dispositionWithContainerNumber->disposition : null;
+    }
 }

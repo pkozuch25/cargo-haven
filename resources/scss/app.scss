@@ -101,7 +101,7 @@ table thead .sorting {
 }
 
 table thead .sorting::before {
-    right: 14px;
+    right: 8px;
     content: "\f077";
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
@@ -116,7 +116,7 @@ table thead .sorting::after {
     content: "\f078";
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
-    right: 14px;
+    right: 8px;
     font-size: 0.9rem;
     position: absolute;
     bottom: 0.1em;
@@ -143,7 +143,7 @@ table thead .sorting_desc::after {
     background-color: #202938 !important;
     color: white !important;
 }
-    
+
 .select2-selection__choice {
     background-color: #4b5563 !important;
     color: white !important;

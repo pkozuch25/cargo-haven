@@ -94,5 +94,15 @@
     "Field must be at least :min.": "Pole musi mieć co najmniej :min.",
     "Field must be at least :min kilobytes.": "Pole musi mieć co najmniej :min kilobajtów.",
     "Field must be at least :min characters.": "Pole musi mieć co najmniej :min znaków.",
-    "Disposition has units, cannot be edited": "Operacja dyspozycyjna zawiera już jednostki przeładunkowe, nie można jej edytować"
+    "Disposition has units, some fields cannot be edited": "Operacja dyspozycyjna zawiera już jednostki przeładunkowe, nie można edytować niektórych pól",
+    "Carriage number": "Numer wagonu",
+    "An error occurred while saving the data": "Wystąpił błąd podczas zapisywania danych",
+    "The container cannot be deleted because it was already processed": "Kontener nie może zostać usunięty, ponieważ został już przetworzony w systemie",
+    "The container has been successfully deleted": "Kontener został pomyślnie usunięty",
+    "An error occurred while deleting the container": "Wystąpił błąd podczas usuwania kontenera",
+    "The container already exists in the current disposition": "Kontener już istnieje w bieżącej dyspozycji",
+    "Are you sure you want to delete this container?": "Czy na pewno chcesz usunąć ten kontener?",
+    "This action cannot be undone": "Tej akcji nie da się cofnąć",
+    "Yes": "Tak",
+    "No": "Nie"
 }

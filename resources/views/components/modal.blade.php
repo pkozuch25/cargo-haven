@@ -1,4 +1,4 @@
-<div class="modal modal-cargo fade" id="{{ $id }}" role="dialog" wire:ignore.self wire:click.self='closeModal(true)'>
+<div class="modal modal-cargo fade" id="{{ $id }}" role="dialog" wire:ignore.self wire:click.self='closeModal(true)' data-bs-focus="false">
     <div class="modal-dialog modal-{{ $size }}">
         <div class="modal-content">
             <div class="modal-header">
