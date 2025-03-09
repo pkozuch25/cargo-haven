@@ -17,36 +17,27 @@ class MainComponent extends Component
         $this->dispatch('sweetAlertCenter', ['type' => $type, 'text' => $text, 'time' => $time]);
     }
 
-    public function sweetAlertConfirm(string $type, string $title, string $text, string $method, ?int $id)
+    public function sweetAlertConfirm(string $type, string $title, string $text, string $method, string $methodParameterName, ?int $id)
     {
         $this->dispatch('sweetAlertConfirm', [
             'type' => $type,
             'title' => $title,
             'text' => $text,
             'method' => $method,
+            'methodParameterName' => $methodParameterName,
             'id' => $id
         ]);
     }
 
-    public function sweetAlertConfirmWithNoButton(string $type, string $title, string $text, string $method, ?int $id)
+    public function sweetAlertConfirmWithNoButton(string $type, string $title, string $text, string $method, string $methodParameterName, ?int $id)
     {
         $this->dispatch('sweetAlertConfirmWithNoButton', [
             'type' => $type,
             'title' => $title,
             'text' => $text,
             'method' => $method,
+            'methodParameterName' => $methodParameterName,
             'id' => $id
-        ]);
-    }
-
-    public function sweetAlertConfirmWithNoButtonAction(string $type, string $title, string $text, array $yesMethod, array $noMethod)
-    {
-        $this->dispatch('sweetAlertConfirmWithNoButtonAction', [
-            'type' => $type,
-            'title' => $title,
-            'text' => $text,
-            'yes' => $yesMethod,
-            'no' => $noMethod
         ]);
     }
 

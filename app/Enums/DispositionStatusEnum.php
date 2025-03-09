@@ -32,6 +32,15 @@ enum DispositionStatusEnum: int
         };
     }
 
+    public function changeStatusButtonText(): string
+    {
+        return match ($this) {
+            $this::NOT_CONFIRMED => __('Confirm'),
+            $this::CONFIRMED => __('Start processing')
+        };
+    }
+
+
     public static function active(): array
     {
         return [

@@ -27,9 +27,28 @@ class DispositionService
         }
     }
 
-    public function createDispositionNumber()
+    public function createDispositionNumber(Disposition $disposition) : Disposition
     {
-        //todo tworzy numer dyspozycji składający się z roku, miesiąca, placu składowego(skrótu) i 4 cyfrowego numeru porządkowego lp - np 2025/03/RZ/0001
+        $year = now()->year;
+        $month = str_pad(now()->month, 2, '0', STR_PAD_LEFT);
+
+        $disposition->loadMissing('storageYard');
+
+        $yardShortName = strtoupper($disposition->storageYard?->sy_name_short);
+
+        $lastDisposition = Disposition::where('dis_yard_id', $disposition->dis_yard_id)
+            ->whereYear('created_at', $year)
+            ->whereMonth('created_at', $month)
+            ->latest('dis_month_number')
+            ->first();
+
+        $nextNumber = $lastDisposition ? $lastDisposition->dis_month_number + 1 : 1;
+        $disposition->dis_month_number = $nextNumber;
+
+        $formattedNumber = str_pad($nextNumber, 4, '0', STR_PAD_LEFT);
+        $disposition->dis_number = "{$year}/{$month}/{$yardShortName}/{$formattedNumber}";
+
+        return $disposition;
     }
 
     public function checkIfDispositionHasAnyUnits(Disposition $disposition) : bool

@@ -89,6 +89,7 @@
                 let title = event.detail[0].title;
                 let text = event.detail[0].text;
                 let method = event.detail[0].method;
+                let methodParameterName = event.detail[0].methodParameterName;
                 let id = event.detail[0].id;
 
                 Swal.fire({
@@ -101,7 +102,6 @@
                     buttonsStyling: true,
                     reverseButtons: true,
                     allowEnterKey:true,
-                    allowEscKey:true,
                     focusConfirm: false,
                     returnFocus: false,
                     confirmButtonColor: '#198754',
@@ -114,7 +114,7 @@
 
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        window.livewire.emit(method, id);
+                        Livewire.dispatch(method, {[methodParameterName]: id});
                     }
                 });
 
@@ -125,6 +125,7 @@
                 let title = event.detail[0].title;
                 let text = event.detail[0].text;
                 let method = event.detail[0].method;
+                let methodParameterName = event.detail[0].methodParameterName;
                 let id = event.detail[0].id;
 
                 Swal.fire({
@@ -137,9 +138,9 @@
                     buttonsStyling: true,
                     reverseButtons: true,
                     allowEnterKey:true,
-                    allowEscKey:true,
                     focusConfirm: false,
                     returnFocus: false,
+                    confirmButtonColor: '#198754',
                         didOpen: (popup) => {
                         popup.querySelector('input')?.blur();
                         popup.focus();
@@ -149,44 +150,7 @@
 
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        window.livewire.emit(method, id);
-                    }
-                });
-            });
-
-            window.addEventListener('sweetAlertConfirmWithNoButtonAction', event => {
-
-                let type = event.detail[0].type;
-                let title = event.detail[0].title;
-                let text = event.detail[0].text;
-                let yes = event.detail[0].yes;
-                let no = event.detail[0].no;
-
-                Swal.fire({
-                    icon: type,
-                    title: title,
-                    html: text,
-                    background: '#1f2937',
-                    color: '#ffffff',
-                    showCancelButton: true,
-                    buttonsStyling: true,
-                    reverseButtons: true,
-                    allowEnterKey:true,
-                    allowEscKey:true,
-                    focusConfirm: false,
-                    returnFocus: false,
-                        didOpen: (popup) => {
-                        popup.querySelector('input')?.blur();
-                        popup.focus();
-                    },
-                    confirmButtonText: "{{ __('Yes') }}",
-                    cancelButtonText: "{{ __('No') }}",
-
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.livewire.emit(yes[0], yes[1]);
-                    } else {
-                        window.livewire.emit(no[0], no[1]);
+                        Livewire.dispatch(method, {[methodParameterName]: id});
                     }
                 });
             });

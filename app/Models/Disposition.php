@@ -34,4 +34,9 @@ class Disposition extends Model
         return $this->belongsToMany(User::class, 'disposition_operators', 'disope_dis_id', 'disope_user_id');
     }
 
+    public function storageYard()
+    {
+        return $this->belongsTo(StorageYard::class, 'dis_yard_id', 'sy_id');
+    }
+
 }

@@ -28,6 +28,9 @@ class RoleSeeder extends Seeder
 
         Permission::create(['name' => 'manage_permissions']);
 
+        Permission::create(['name' => 'view_storage_yards']);
+        Permission::create(['name' => 'edit_storage_yards']);
+
         $roleAdmin->givePermissionTo('view_deposits');
         $roleAdmin->givePermissionTo('delete_deposits');
         $roleAdmin->givePermissionTo('edit_deposits');
@@ -35,7 +38,10 @@ class RoleSeeder extends Seeder
         $roleAdmin->givePermissionTo('edit_dispositions');
         $roleAdmin->givePermissionTo('add_dispositions');
         $roleAdmin->givePermissionTo('view_dispositions');
-        
+
+        $roleAdmin->givePermissionTo('view_storage_yards');
+        $roleAdmin->givePermissionTo('edit_storage_yards');
+
         $roleAdmin->givePermissionTo('manage_permissions');
 
         $roleOperator->givePermissionTo('view_deposits');

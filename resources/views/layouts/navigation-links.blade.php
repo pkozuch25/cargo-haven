@@ -8,6 +8,15 @@
     </x-nav-link>
 </x-nav-link-wrapper>
 
+{{-- DISPOSITIONS --}}
+@if(can('view_dispositions'))
+    <x-nav-link-wrapper>
+        <x-nav-link :href="route('dispositions.index')" :active="request()->routeIs('dispositions.index')">
+            {{ __('Dispositions') }}
+        </x-nav-link>
+    </x-nav-link-wrapper>
+@endif
+
 {{-- DEPOSITS --}}
 @if(can('view_deposits'))
     <x-nav-link-wrapper>
@@ -17,11 +26,20 @@
     </x-nav-link-wrapper>
 @endif
 
-{{-- DISPOSITIONS --}}
-@if(can('view_dispositions'))
+{{-- STORAGE YARDS --}}
+@if(can('view_storage_yards'))
     <x-nav-link-wrapper>
-        <x-nav-link :href="route('dispositions.index')" :active="request()->routeIs('dispositions.index')">
-            {{ __('Dispositions') }}
+        <x-nav-link :href="route('storage-yards.index')" :active="request()->routeIs('storage-yards.index')">
+            {{ __('Storage yards') }}
+        </x-nav-link>
+    </x-nav-link-wrapper>
+@endif
+
+{{-- DEPOSITS --}}
+@if(can('view_deposits'))
+    <x-nav-link-wrapper>
+        <x-nav-link :href="route('deposits.index')" :active="request()->routeIs('deposits.index')">
+            {{ __('Deposits') }}
         </x-nav-link>
     </x-nav-link-wrapper>
 @endif

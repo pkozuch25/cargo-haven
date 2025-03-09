@@ -103,9 +103,15 @@ class User extends Authenticatable
         return $this->belongsToMany(Disposition::class, 'disposition_operators', 'disope_user_id', 'disope_dis_id');
     }
 
+    public function storageYards()
+    {
+        return $this->belongsToMany(StorageYard::class, 'storage_yard_users_relation', 'user_id', 'sy_id');
+    }
+
     public function scopeOperator($query)
     {
         return $query->role('Operator');
     }
+
 
 }

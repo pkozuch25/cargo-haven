@@ -54,8 +54,7 @@
                         <x-td-table class="text-center">{{ $dispositionUnit->disu_notes }}</x-td-table>
                         <x-td-table class="float-right">
                             @can('edit_dispositions')
-                                <x-button icon="fa fa-edit" class="btn-primary px-[6px] py-[3px]" modal="add-edit-disposition-modal" wire:click="dispatch('openAddEditDispositionModal', {dispositionUnit: {{ $dispositionUnit->disu_id }} })"/>
-                                @if(!$dispositionUnit->disu_cardunit_id)
+                                @if($this->checkIfUnitCanBeDeleted($dispositionUnit))
                                     <x-button icon="ti ti-trash" class="btn-danger px-[6px] py-[3px]" wire:click="deleteDispositionUnitConfirm({{ $dispositionUnit->disu_id }})"/>
                                 @endif
                             @endcan

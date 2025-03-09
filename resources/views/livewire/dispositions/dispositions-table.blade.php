@@ -38,8 +38,11 @@
                         <x-th-table>
                             {{ __('Created') }}
                         </x-th-table>
-                        <x-th-table>
+                        <x-th-table width="10%">
                             {{ __('Yard') }}
+                        </x-th-table>
+                        <x-th-table>
+                            {{ __('Units') }}
                         </x-th-table>
                         <x-th-table>
                             {{ __('Actions') }}
@@ -86,13 +89,26 @@
                             </div>
                         </x-th-table-search>
                         <x-th-table-search>
-                            {{-- todo users select2 --}}
+                            <div wire:ignore>
+                                <select style="height: 30px;" id="disposition-users-select" multiple>
+                                    @foreach ($allUsers as $user)
+                                        <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </x-th-table-search>
                         <x-th-table-search>
-                            {{-- todo yard select2 --}}
+                            <div wire:ignore>
+                                <select style="height: 30px;" id="disposition-yard-select" multiple>
+                                    @foreach ($allYards as $yard)
+                                        <option value="{{ $yard->sy_id }}">{{ $yard->sy_name_short }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </x-th-table-search>
                         <x-th-table-search>
-                            {{-- todo yard select2 --}}
+                        </x-th-table-search>
+                        <x-th-table-search>
                         </x-th-table-search>
                     </x-table-row>
                 </x-thead-table>
@@ -107,7 +123,8 @@
                             <x-td-table class="text-center">{{ $disposition->dis_completion_date }}</x-td-table>
                             <x-td-table class="text-center"><x-pill class="{{ $disposition->dis_status->color() }}">{{ $disposition->dis_status->name() }}</x-pill></x-td-table>
                             <x-td-table class="text-center">{{ $disposition->createdBy->name }}</x-td-table>
-                            <x-td-table class="text-center">placeholder</x-td-table>
+                            <x-td-table class="text-center">{{ $disposition->storageYard?->sy_name }}</x-td-table>
+                            <x-td-table class="text-center">{{ $disposition->units_count}}</x-td-table>
                             <x-td-table class="float-right">
                                 @can('edit_dispositions')
                                     <x-button icon="fa fa-edit" class="btn-primary px-[6px] py-[3px]" modal="add-edit-disposition-modal" wire:click="dispatch('openAddEditDispositionModal', {disposition: {{ $disposition->dis_id }} })"/>
@@ -116,7 +133,7 @@
                         </x-tr-hover>
                     @empty
                         <tr>
-                            <td colspan="9" class="text-center text-gray-500 dark:text-gray-400">{{ __('No results') }}</td>
+                            <td colspan="12" class="text-center text-gray-500 dark:text-gray-400">{{ __('No results') }}</td>
                         </tr>
                     @endforelse
                 </tbody>
@@ -140,6 +157,18 @@
                 $('#disposition-status-select').on('change', function (e) {
                     var data = $('#disposition-status-select').select2("val");
                     @this.set('searchTerm.selectMultiple.dis_status', data);
+                });
+
+                $('#disposition-yard-select').select2();
+                $('#disposition-yard-select').on('change', function (e) {
+                    var data = $('#disposition-yard-select').select2("val");
+                    @this.set('searchTerm.selectMultiple.dis_yard_id', data);
+                });
+
+                $('#disposition-users-select').select2();
+                $('#disposition-users-select').on('change', function (e) {
+                    var data = $('#disposition-users-select').select2("val");
+                    @this.set('searchTerm.selectMultiple.dis_created_by_id', data);
                 });
 
                 $('#disposition-relation-from-select').select2();

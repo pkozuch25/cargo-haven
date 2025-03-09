@@ -7,6 +7,7 @@ use App\Models\Disposition;
 use Livewire\Attributes\On;
 use App\Models\DispositionUnit;
 use App\Livewire\TableComponent;
+use App\Enums\DispositionStatusEnum;
 use App\Enums\OperationRelationEnum;
 use App\Services\DispositionService;
 use App\Interfaces\TableComponentInterface;
@@ -69,6 +70,11 @@ class DispositionUnitsFormTable extends TableComponent implements TableComponent
 
     public function addDispositionUnit(): void
     {
+        if ($this->checkIfDispositionWasCancelledOrFinalized()) {
+            $this->sweetAlert('error', __('Cannot add new unit to cancelled disposition'));
+            return;
+        }
+
         $this->validate();
 
         if ($this->checkIfIsInCarriageRelation()) {
@@ -81,24 +87,30 @@ class DispositionUnitsFormTable extends TableComponent implements TableComponent
         }
 
         try {
+            if (!$this->dispositionHasUnits()) {
+                $this->disposition->dis_start_date = now();
+                $this->disposition->save();
+            }
             $this->disposition->units()->save($this->dispositionUnit);
         } catch (\Exception $e) {
-            $this->dispatch('error', ['message' => __('An error occurred while saving the data')]);
+            $this->sweetAlert('error', __('Something went wrong'));
             return;
         }
 
-        $this->queryRefresh();
 
+        $this->queryRefresh();
+        $this->dispatch('openAddEditDispositionModal', $this->disposition->dis_id);
         $this->dispositionUnit = new DispositionUnit();
     }
 
-    public function deleteDispositionUnitConfirm(DispositionUnit $dispositionUnit): void
+    public function deleteDispositionUnitConfirm(DispositionUnit $dispositionUnit) : void
     {
         $this->sweetAlertConfirm(
             'warning',
             __('Are you sure you want to delete this container?'),
             __('This action cannot be undone'),
             'deleteDispositionUnit',
+            'dispositionUnit',
             $dispositionUnit->disu_id
         );
     }
@@ -114,6 +126,7 @@ class DispositionUnitsFormTable extends TableComponent implements TableComponent
         if ($dispositionUnit->delete()) {
             $this->sweetAlert('success', __('The container has been successfully deleted'));
             $this->queryRefresh();
+            $this->dispatch('openAddEditDispositionModal', $this->disposition->dis_id);
             return;
         }
 
@@ -136,9 +149,26 @@ class DispositionUnitsFormTable extends TableComponent implements TableComponent
         return false;
     }
 
-    public function dispositionHasUnits(): bool
+    public function dispositionHasUnits() : bool
     {
         return (new DispositionService())->checkIfDispositionHasAnyUnits($this->disposition);
+    }
+
+    public function checkIfDispositionWasCancelledOrFinalized() : bool
+    {
+        if ($this->disposition->dis_status == DispositionStatusEnum::CANCELLED || $this->disposition->dis_status == DispositionStatusEnum::FINALIZED) {
+            return true;
+        }
+        return false;
+    }
+
+    public function checkIfUnitCanBeDeleted(DispositionUnit $dispositionUnit) : bool
+    {
+        if (!$dispositionUnit->disu_cardunit_id && !$this->checkIfDispositionWasCancelledOrFinalized()) {
+            return true;
+        }
+
+        return false;
     }
 
     private function checkIfExistsInOtherDisposition(): bool

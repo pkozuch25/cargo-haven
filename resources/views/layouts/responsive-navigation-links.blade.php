@@ -5,6 +5,13 @@
     {{ __('Dashboard') }}
 </x-responsive-nav-link>
 
+{{-- DISPOSITIONS --}}
+@if(can('view_dispositions'))
+    <x-responsive-nav-link :href="route('dispositions.index')" :active="request()->routeIs('dispositions.index')">
+        {{ __('Dispositions') }}
+    </x-responsive-nav-link>
+@endif
+
 {{-- DEPOSITS --}}
 @if(can('view_deposits'))
     <x-responsive-nav-link :href="route('deposits.index')" :active="request()->routeIs('deposits.index')">
@@ -12,10 +19,10 @@
     </x-responsive-nav-link>
 @endif
 
-{{-- DISPOSITIONS --}}
-@if(can('view_dispositions'))
-    <x-responsive-nav-link :href="route('dispositions.index')" :active="request()->routeIs('dispositions.index')">
-        {{ __('Dispositions') }}
+{{-- STORAGE YARDS --}}
+@if(can('view_storage_yards'))
+    <x-responsive-nav-link :href="route('storage-yards.index')" :active="request()->routeIs('storage-yards.index')">
+        {{ __('Storage yards') }}
     </x-responsive-nav-link>
 @endif
 
