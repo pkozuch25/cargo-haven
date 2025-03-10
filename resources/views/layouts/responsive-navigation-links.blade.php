@@ -1,10 +1,5 @@
 <!-- Navigation Links -->
 
-{{-- DASHBOARD --}}
-<x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-    {{ __('Dashboard') }}
-</x-responsive-nav-link>
-
 {{-- DISPOSITIONS --}}
 @if(can('view_dispositions'))
     <x-responsive-nav-link :href="route('dispositions.index')" :active="request()->routeIs('dispositions.index')">
@@ -23,13 +18,6 @@
 @if(can('view_storage_yards'))
     <x-responsive-nav-link :href="route('storage-yards.index')" :active="request()->routeIs('storage-yards.index')">
         {{ __('Storage yards') }}
-    </x-responsive-nav-link>
-@endif
-
-{{-- PERMISSIONS --}}
-@if(can('manage_permissions'))
-    <x-responsive-nav-link :href="route('permissions.index')" :active="request()->routeIs('permissions.index')">
-        {{ __('Permissions') }}
     </x-responsive-nav-link>
 @endif
 
