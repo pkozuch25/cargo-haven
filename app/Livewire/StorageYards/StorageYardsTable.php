@@ -17,7 +17,6 @@ class StorageYardsTable extends TableComponent implements TableComponentInterfac
     public function queryRefresh()
     {
         $query = StorageYard::query();
-
         return $this->tableRefresh($query);
     }
 

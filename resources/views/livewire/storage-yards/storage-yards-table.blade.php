@@ -70,7 +70,7 @@
                             <x-td-table class="text-center">{{ $yard->sy_height }}</x-td-table>
                             <x-td-table class="float-right">
                                 @can('edit_storage_yards')
-                                    <x-button icon="fa fa-edit" class="btn-primary px-[6px] py-[3px]" modal="add-edit-yard-modal" wire:click="dispatch('openAddEditYardModal', {yard: {{ $yard->sy_id }} })"/>
+                                    <x-button icon="fa fa-edit" class="btn-primary px-[6px] py-[3px]" modal="add-edit-storage-yard-modal" wire:click="dispatch('openAddEditYardModal', {yard: {{ $yard->sy_id }} })"/>
                                 @endcan
                             </x-td-table>
                         </x-tr-hover>

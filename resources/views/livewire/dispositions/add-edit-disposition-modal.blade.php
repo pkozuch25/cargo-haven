@@ -55,6 +55,7 @@
                             @endif
                         </select>
                     </div>
+                    <x-input-error :messages="$errors->get('dispositionOperators')" class="mt-2" />
                 </div>
             </div>
             <div class="row mt-3">

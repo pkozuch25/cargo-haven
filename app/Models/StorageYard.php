@@ -21,4 +21,9 @@ class StorageYard extends Model
     {
         return $this->belongsTo(Disposition::class, 'sy_id', 'dis_yard_id');
     }
+
+    public function storageCells()
+    {
+        return $this->hasMany(StorageCell::class, 'sc_yard_id', 'sy_id');
+    }
 }
