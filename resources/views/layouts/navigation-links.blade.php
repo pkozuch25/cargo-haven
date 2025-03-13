@@ -10,6 +10,15 @@
     </x-nav-link-wrapper>
 @endif
 
+{{-- OPERATIONS --}}
+@if(can('view_operations'))
+    <x-nav-link-wrapper>
+        <x-nav-link :href="route('operations.index')" :active="request()->routeIs('operations.index')">
+            {{ __('Operations') }}
+        </x-nav-link>
+    </x-nav-link-wrapper>
+@endif
+
 {{-- DEPOSITS --}}
 @if(can('view_deposits'))
     <x-nav-link-wrapper>

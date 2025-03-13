@@ -136,5 +136,14 @@
     "Storage cell": "Komórka składowa",
     "Display archived deposits": "Pokaż zarchiwizowane depozyty",
     "Generate disposition": "Wygeneruj dyspozycję",
-    "You cannot create disposition from yard to yard": "Nie można utworzyć dyspozycji z placu na plac"
+    "You cannot create disposition from yard to yard": "Nie można utworzyć dyspozycji z placu na plac",
+    "Field must not have more than :max items.": "Pole nie może mieć więcej niż :max elementów.",
+    "Field must not have less than :min items.": "Pole nie może mieć mniej niż :min elementów.",
+    "Field must not be greater than :max kilobytes.": "Pole nie może być większe niż :max kilobajtów.",
+    "Field must not be greater than :max.": "Pole nie może być większe niż :max.",
+    "Field must not be greater than :max characters.": "Pole nie może być większe niż :max znaków.",
+    "This container is not in deposits": "Ten kontener nie znajduje się w depozytach",
+    "This container already exists in deposits": "Ten kontener już istnieje w depozytach",
+    "Operations": "Operacje"
+
 }

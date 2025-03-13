@@ -10,6 +10,7 @@
                 </x-select>
                 <x-input-error :messages="$errors->get('requestStatus')" class="mt-2" />
             </div>
+            {{-- todo - przypisanie uzytkownika do placów składowych podczas zmiany statusu przez admina --}}
         </x-slot>
 
         <x-slot name="modalFooter">

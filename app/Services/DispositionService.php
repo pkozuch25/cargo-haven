@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Enums\DispositionStatusEnum;
+use App\Models\Deposit;
 use App\Models\Disposition;
 use App\Models\DispositionUnit;
 
@@ -67,5 +68,11 @@ class DispositionService
     {
         $dispositionWithContainerNumber = DispositionUnit::with('disposition')->where('disu_container_number', $containerNumber)->first();
         return $dispositionWithContainerNumber ? $dispositionWithContainerNumber->disposition : null;
+    }
+
+    public function checkIfUnitExistsInDeposits($containerNumber) : bool
+    {
+        $depositWithContainerNumber = Deposit::where('dep_number', $containerNumber)->first();
+        return $depositWithContainerNumber ? true : false;
     }
 }

@@ -7,6 +7,13 @@
     </x-responsive-nav-link>
 @endif
 
+{{-- OPERATIONS --}}
+@if(can('view_operations'))
+    <x-responsive-nav-link :href="route('operations.index')" :active="request()->routeIs('operations.index')">
+        {{ __('Operations') }}
+    </x-responsive-nav-link>
+@endif
+
 {{-- DEPOSITS --}}
 @if(can('view_deposits'))
     <x-responsive-nav-link :href="route('deposits.index')" :active="request()->routeIs('deposits.index')">

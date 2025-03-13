@@ -80,7 +80,10 @@ class DispositionUnitsFormTable extends TableComponent implements TableComponent
         if ($this->checkIfIsInCarriageRelation()) {
             $this->dispositionUnit = (new DispositionService)->calcGrossWeight($this->dispositionUnit);
         }
-        // $this->checkIfExistsInDeposits() - sprawdź czy już istnieje w depozytach - todo
+
+        if (!$this->checkIfShouldAndIfExistsInDeposits()) {
+            return;
+        }
 
         if ($this->checkIfExistsInOtherDisposition()) {
             return;
@@ -133,7 +136,7 @@ class DispositionUnitsFormTable extends TableComponent implements TableComponent
         $this->sweetAlert('error', __('An error occurred while deleting the container'));
     }
 
-    public function checkIfIsInTruckRelation()
+    public function checkIfIsInTruckRelation() : bool
     {
         if ($this->disposition->dis_relation_from == OperationRelationEnum::TRUCK || $this->disposition->dis_relation_to == OperationRelationEnum::TRUCK) {
             return true;
@@ -141,7 +144,7 @@ class DispositionUnitsFormTable extends TableComponent implements TableComponent
         return false;
     }
 
-    public function checkIfIsInCarriageRelation()
+    public function checkIfIsInCarriageRelation() : bool
     {
         if ($this->disposition->dis_relation_from == OperationRelationEnum::CARRIAGE || $this->disposition->dis_relation_to == OperationRelationEnum::CARRIAGE) {
             return true;
@@ -171,7 +174,7 @@ class DispositionUnitsFormTable extends TableComponent implements TableComponent
         return false;
     }
 
-    private function checkIfExistsInOtherDisposition(): bool
+    private function checkIfExistsInOtherDisposition() : bool
     {
         $dispositionWithContainerNumber = (new DispositionService())->checkIfUnitExistsInDisposition($this->dispositionUnit->disu_container_number);
 
@@ -190,6 +193,23 @@ class DispositionUnitsFormTable extends TableComponent implements TableComponent
         }
 
         return false;
+    }
+
+    private function checkIfShouldAndIfExistsInDeposits() : bool
+    {
+        $dispositionWithContainerNumber = (new DispositionService())->checkIfUnitExistsInDeposits($this->dispositionUnit->disu_container_number);
+
+        if ($this->disposition->dis_relation_from == OperationRelationEnum::YARD && !$dispositionWithContainerNumber) {
+            $this->sweetAlert('error', __("This container is not in deposits"));
+            return false;
+        }
+
+        if ($this->disposition->dis_relation_to == OperationRelationEnum::YARD && $dispositionWithContainerNumber) {
+            $this->sweetAlert('error', __("This container already exists in deposits"));
+            return false;
+        }
+
+        return true;
     }
 
     public function render()
