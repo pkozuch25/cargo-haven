@@ -9,7 +9,7 @@
 
 {{-- OPERATIONS --}}
 @if(can('view_operations'))
-    <x-responsive-nav-link :href="route('operations.index')" :active="request()->routeIs('operations.index')">
+    <x-responsive-nav-link :href="route('operations.index')" :active="request()->routeIs('operations.index')" :badge="getOperationsBadgeCount()">
         {{ __('Operations') }}
     </x-responsive-nav-link>
 @endif

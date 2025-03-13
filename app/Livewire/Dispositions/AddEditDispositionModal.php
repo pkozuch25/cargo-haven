@@ -29,11 +29,6 @@ class AddEditDispositionModal extends ModalComponent
         ];
     }
 
-    public function mount()
-    {
-        $this->loadRelationsFromForm();
-    }
-
     public function updateTitle()
     {
         if ($this->edit) {
@@ -64,6 +59,7 @@ class AddEditDispositionModal extends ModalComponent
 
         $this->loadRelationsFromForm();
         $this->loadStorageYards();
+        $this->disposition->syncOriginal();
     }
 
     public function updatedDispositionDisRelationFrom($value)

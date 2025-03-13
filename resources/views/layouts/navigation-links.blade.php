@@ -1,5 +1,10 @@
-
 <!-- Navigation Links -->
+
+@php
+function getOperationsBadgeCount() {
+    return \App\Models\DispositionUnit::forOperator(getAuthenticatedUserModel()->id)->count();
+}
+@endphp
 
 {{-- DISPOSITIONS --}}
 @if(can('view_dispositions'))
@@ -13,7 +18,7 @@
 {{-- OPERATIONS --}}
 @if(can('view_operations'))
     <x-nav-link-wrapper>
-        <x-nav-link :href="route('operations.index')" :active="request()->routeIs('operations.index')">
+        <x-nav-link :href="route('operations.index')" :active="request()->routeIs('operations.index')" :badge="getOperationsBadgeCount()">
             {{ __('Operations') }}
         </x-nav-link>
     </x-nav-link-wrapper>
