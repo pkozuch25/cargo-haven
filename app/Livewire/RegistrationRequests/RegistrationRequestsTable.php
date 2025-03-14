@@ -15,8 +15,8 @@ class RegistrationRequestsTable extends TableComponent implements TableComponent
 
     public function mount()
     {
-        $this->searchTerm['selectMultiple']['rr_Status'] = [RegistrationRequestStatusEnum::PENDING->value];
-        $this->selectedStatus = [RegistrationRequestStatusEnum::PENDING->value];
+        // $this->searchTerm['selectMultiple']['rr_Status'] = [RegistrationRequestStatusEnum::PENDING->value];
+        // $this->selectedStatus = [RegistrationRequestStatusEnum::PENDING->value];
     }
 
     #[On('refreshRRTable')]
