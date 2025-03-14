@@ -15,7 +15,7 @@ class RegistrationRequestsTable extends TableComponent implements TableComponent
 
     public function mount()
     {
-        $this->searchTerm['selectMultiple']['rr_Status'] = [RegistrationRequestStatusEnum::PENDING->value];
+        $this->searchTerm['selectMultiple']['rr_status'] = [RegistrationRequestStatusEnum::PENDING->value];
         $this->selectedStatus = [RegistrationRequestStatusEnum::PENDING->value];
     }
 
@@ -28,11 +28,6 @@ class RegistrationRequestsTable extends TableComponent implements TableComponent
             ->select('registration_requests.*', 'users.name', 'users.email');
         
         return $this->tableRefresh($registrationRequests);
-    }
-
-    public function test()
-    {
-        dd($this->searchTerm);
     }
 
     public function render()
