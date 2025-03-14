@@ -30,6 +30,11 @@ class RegistrationRequestsTable extends TableComponent implements TableComponent
         return $this->tableRefresh($registrationRequests);
     }
 
+    public function test()
+    {
+        dd($this->searchTerm);
+    }
+
     public function render()
     {
         return view('livewire.registration-requests.registration-requests-table', ['data' => $this->queryRefresh()]);

@@ -66,6 +66,7 @@
                     @endforelse
                 </tbody>
             </table>
+            <x-button wire:click='test'>aaaa</x-button>
         </div>
     </div>
     @livewire('registration-requests.change-request-status-modal')
