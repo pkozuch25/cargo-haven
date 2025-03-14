@@ -23,6 +23,7 @@ class RegistrationRequestsTable extends TableComponent implements TableComponent
     #[Computed]
     public function queryRefresh()
     {
+        dd(RegistrationRequest::all());
         $registrationRequests = RegistrationRequest::query()
             ->leftJoin('users', 'users.id', '=', 'registration_requests.rr_user_id')
             ->select('registration_requests.*', 'users.name', 'users.email');
