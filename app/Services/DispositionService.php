@@ -72,7 +72,7 @@ class DispositionService
 
     public function checkIfUnitExistsInDeposits($containerNumber) : bool
     {
-        $depositWithContainerNumber = Deposit::where('dep_number', $containerNumber)->first();
+        $depositWithContainerNumber = Deposit::available()->where('dep_number', $containerNumber)->first();
         return $depositWithContainerNumber ? true : false;
     }
 }

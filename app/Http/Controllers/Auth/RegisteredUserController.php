@@ -48,6 +48,7 @@ class RegisteredUserController extends Controller
 
         return User::operator()
             ->where('name', 'like', "%$request->search%")
+            ->active()
             ->orderBy('name', 'asc')
             ->get(['id', 'name as text'])
             ->toArray();

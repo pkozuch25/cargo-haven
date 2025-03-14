@@ -123,7 +123,7 @@
                             <x-td-table class="text-center">{{ $disposition->dis_completion_date }}</x-td-table>
                             <x-td-table class="text-center"><x-pill class="{{ $disposition->dis_status->color() }}">{{ $disposition->dis_status->name() }}</x-pill></x-td-table>
                             <x-td-table class="text-center">{{ $disposition->createdBy->name }}</x-td-table>
-                            <x-td-table class="text-center">{{ $disposition->storageYard?->sy_name }}</x-td-table>
+                            <x-td-table class="text-center">{{ $disposition->storageYard?->sy_name_short }}<br> {{ $disposition->storageYard?->sy_name }}</x-td-table>
                             <x-td-table class="text-center">{{ $disposition->units_count}}</x-td-table>
                             <x-td-table class="float-right">
                                 @can('edit_dispositions')

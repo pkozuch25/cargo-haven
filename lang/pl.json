@@ -144,6 +144,16 @@
     "Field must not be greater than :max characters.": "Pole nie może być większe niż :max znaków.",
     "This container is not in deposits": "Ten kontener nie znajduje się w depozytach",
     "This container already exists in deposits": "Ten kontener już istnieje w depozytach",
-    "Operations": "Operacje"
+    "Operations": "Operacje",
+    "The password field confirmation does not match.": "Pole potwierdzenia hasła nie jest zgodne.",
+    "New Registration Request": "Nowe żądanie rejestracji",
+    "A new user has registered and requires approval:": "Nowy użytkownik się zarejestrował i wymaga zatwierdzenia:",
+    "Name:": "Nazwa:",
+    "Email:": "E-mail:",
+    "Registration date:": "Data rejestracji:",
+    "Please log in to the admin panel to review this request.": "Zaloguj się do panelu administracyjnego, aby przejrzeć to żądanie.",
+    "Review Registration Requests": "Przejrzyj żądania rejestracji",
+    "New Registration Request - Cargo Haven": "Nowe żądanie rejestracji - Cargo Haven"
+
 
 }

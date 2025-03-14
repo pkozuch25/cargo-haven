@@ -2,11 +2,13 @@
 
 namespace App\Services;
 
-use App\Enums\UserStatusEnum;
 use App\Models\User;
+use App\Enums\UserStatusEnum;
 use App\Models\RegistrationRequest;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Auth\Events\Registered;
+use App\Mail\NewRegistrationRequestNotification;
 
 class AuthService
 {
@@ -27,6 +29,16 @@ class AuthService
 
         event(new Registered($user));
 
-        // todo email do grupy adminów o nowym zgłoszeniu rejestracji
+        $this->notifyAdminsAboutNewRegistration($user);
+    }
+
+    private function notifyAdminsAboutNewRegistration(User $newUser): void
+    {
+        $adminUsers = User::admin()->get();
+        $adminEmails = $adminUsers->pluck('email')->toArray();
+        
+        foreach ($adminEmails as $email) {
+            Mail::to($email)->send(new NewRegistrationRequestNotification($newUser));
+        }
     }
 }

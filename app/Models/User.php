@@ -113,5 +113,13 @@ class User extends Authenticatable
         return $query->role('Operator');
     }
 
+    public function scopeAdmin($query)
+    {
+        return $query->role('Admin');
+    }
 
+    public function scopeActive($query)
+    {
+        return $query->where('status', UserStatusEnum::ACTIVE);
+    }
 }
