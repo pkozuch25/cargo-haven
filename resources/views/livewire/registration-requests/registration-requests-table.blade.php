@@ -39,7 +39,7 @@
                             <div wire:ignore>
                                 <select style="height: 30px;" id="rr-status-select" multiple>
                                     @foreach (\App\Enums\RegistrationRequestStatusEnum::cases() as $status)
-                                        <option value="{{ $status }}" @if(array_key_exists($status->value, $selectedStatus)) selected @endif>{{ $status->name() }}</option>
+                                        <option value="{{ $status->value }}" @if(array_key_exists($status->value, $selectedStatus)) selected @endif>{{ $status->name() }}</option>
                                     @endforeach
                                 </select>
                             </div>
