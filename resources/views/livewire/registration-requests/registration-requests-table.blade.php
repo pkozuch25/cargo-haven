@@ -65,11 +65,11 @@
                         </x-tr-hover>
                     @endforelse
                 </tbody>
-                <x-button wire:click='test'>aaaa</x-button>
             </table>
         </div>
     </div>
     @livewire('registration-requests.change-request-status-modal')
+    <x-button icon="fa fa-edit" wire:click="test">aaaa</x-button>
     @include('livewire.partial.table-pagination')
 
     @push('javascript')
