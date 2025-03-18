@@ -10,7 +10,7 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\RegistrationRequestController;
 
 Route::get('/', function () {
-    return redirect('login');
+    return redirect('deposits');
 });
 
 Route::middleware('auth')->group(function () {

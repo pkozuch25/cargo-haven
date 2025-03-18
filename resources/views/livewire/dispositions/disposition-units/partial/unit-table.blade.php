@@ -33,6 +33,12 @@
                         {{ __('Notes') }}
                     </x-th-table>
                     <x-th-table>
+                        {{ __('Transshipment card') }}
+                    </x-th-table>
+                    <x-th-table>
+                        {{ __('Status') }}
+                    </x-th-table>
+                    <x-th-table>
                         {{ __('Actions') }}
                     </x-th-table>
                 </x-table-row>
@@ -52,6 +58,14 @@
                             <x-td-table class="text-center">{{ $dispositionUnit->disu_carriage_number }}</x-td-table>
                         @endif
                         <x-td-table class="text-center">{{ $dispositionUnit->disu_notes }}</x-td-table>
+                        <x-td-table class="text-center">placeholder na link do karty</x-td-table>
+                        <x-td-table class="text-center">
+                            @if($dispositionUnit->disu_cardunit_id)
+                                <x-pill class="bg-success">{{ __("Completed") }}</x-pill> 
+                            @else
+                                <x-pill class="bg-secondary">{{ __("Processing") }}</x-pill>
+                            @endif
+                        </x-td-table>
                         <x-td-table class="float-right">
                             @can('edit_dispositions')
                                 @if($this->checkIfUnitCanBeDeleted($dispositionUnit))
