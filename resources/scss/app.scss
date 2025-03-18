@@ -98,30 +98,30 @@ th {
 
 table thead .sorting {
     cursor: pointer;
+    position: relative;
+}
+
+table thead .sorting::before,
+table thead .sorting::after {
+    content: "";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    right: 8px;
+    font-size: 0.9rem;
+    position: absolute;
+    opacity: 0.3;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 table thead .sorting::before {
-    right: 8px;
     content: "\f077";
-    font-family: "Font Awesome 5 Free";
-    font-weight: 900;
-    font-size: 0.9rem;
-    position: absolute;
-    bottom: 0.9em;
-    display: block;
-    opacity: 0.3;
+    margin-top: -0.5em;
 }
 
 table thead .sorting::after {
     content: "\f078";
-    font-family: "Font Awesome 5 Free";
-    font-weight: 900;
-    right: 8px;
-    font-size: 0.9rem;
-    position: absolute;
-    bottom: 0.1em;
-    display: block;
-    opacity: 0.3;
+    margin-top: 0.5em;
 }
 
 table thead .sorting_asc::before {
