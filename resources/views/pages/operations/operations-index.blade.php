@@ -13,4 +13,5 @@
         </div>
     </div>
 </x-layout-component>
+@livewire('operations.perform-operation-modal')
 @stop

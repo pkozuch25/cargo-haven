@@ -20,8 +20,6 @@
                         </x-th-table>
                         <x-th-table width="12%">
                             {{ __('Disposition') }}
-                            <hr>
-                            {{ __("Suggested date") }}
                         </x-th-table>
                         <x-th-table>
                             {{ __('Notes') }}
@@ -37,10 +35,10 @@
                             <x-td-table class="text-center">{{ $operation->disu_container_number }}</x-td-table>
                             <x-td-table class="text-center">{{ $operation->disposition?->dis_relation_from->name() }}</x-td-table>
                             <x-td-table class="text-center">{{ $operation->disposition?->dis_relation_to->name() }}</x-td-table>
-                            <x-td-table class="text-center"><a href="/">{{ $operation->disposition?->dis_number }}</a></x-td-table> {{-- todo przekierowanie do otwartego modala z dyspozycją --}}
+                            <x-td-table class="text-center"><a style="color: #8aa9c3" href="/dispositions?disp={{ $operation->disposition?->dis_id }}">{{ $operation->disposition?->dis_number }}</a></x-td-table>
                             <x-td-table class="text-center">{{ $operation->disu_notes }}</x-td-table>
                             <x-td-table class="float-right">
-                                {{-- todo przycisk do wykonania operacji --}}
+                                <x-button icon="ti ti-plus" title="{{ __('Perform operation') }}" class="btn-success px-[6px] py-[3px]" modal="perform-operation-modal" wire:click="dispatch('performOperationModal', {operation: {{ $operation->disu_id }} })"/>
                             </x-td-table>
                         </x-tr-hover>
                     @empty

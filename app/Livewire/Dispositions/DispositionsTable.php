@@ -31,6 +31,12 @@ class DispositionsTable extends TableComponent implements TableComponentInterfac
         return $this->tableRefresh($query);
     }
 
+    #[On('setDisNumberInDispositionsTable')]
+    public function setDispositionNumber(string $dispositionNumber) : void
+    {
+        $this->searchTerm['text']['dis_number'] = $dispositionNumber;
+    }
+
     public function render()
     {
         return view('livewire.dispositions.dispositions-table', ['data' => $this->queryRefresh()]);

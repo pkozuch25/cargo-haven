@@ -49,6 +49,7 @@
     "Change request status": "Zmień status zgłoszenia",
     "Select": "Wybierz",
     "Dispositions": "Dyspozycje",
+    "Disposition": "Dyspozycja",
     "Add new": "Dodaj nowy",
     "Add": "Dodaj",
     "Not confirmed": "Niepotwierdzone",
@@ -155,7 +156,9 @@
     "Review Registration Requests": "Przejrzyj żądania rejestracji",
     "New Registration Request - Cargo Haven": "Nowe żądanie rejestracji - Cargo Haven",
     "Transshipment card": "Karta przeładunkowa",
-    "Completed": "Ukończone"
+    "Completed": "Ukończone",
+    "Perform operation - ": "Wykonaj operację - ",
+    "Perform operation": "Wykonaj operację"
 
 
 }

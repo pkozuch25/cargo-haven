@@ -93,6 +93,10 @@
                 operatorsOnChange();
             })
 
+            window.addEventListener('openDispositionModalBlade', function() {
+                $('#add-edit-disposition-modal').modal('show');
+            })
+
             window.addEventListener('iniSelect2', event => {
                 $(function() {
                     $('select[name="dis_operators"]').val(event.detail[0].operators);

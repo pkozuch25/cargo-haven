@@ -2,20 +2,24 @@
 
 namespace App\Livewire\Dispositions;
 
-use App\Enums\DispositionStatusEnum;
 use App\Models\Disposition;
+use App\Models\StorageYard;
 use Livewire\Attributes\On;
+use Livewire\Attributes\Url;
 use Illuminate\Validation\Rule;
 use App\Livewire\ModalComponent;
 use Illuminate\Support\Facades\DB;
+use App\Enums\DispositionStatusEnum;
 use App\Enums\OperationRelationEnum;
-use App\Models\StorageYard;
 use App\Services\DispositionService;
 use Illuminate\Support\Facades\Auth;
 
 class AddEditDispositionModal extends ModalComponent
 {
     public $disposition, $edit = false, $title, $relationFromFormAvailableRelations, $relationToFormAvailableRelations, $dispositionOperators, $storageYards;
+
+    #[Url(nullable: true, keep: false)]
+    public $disp;
 
     protected function rules()
     {
@@ -28,13 +32,14 @@ class AddEditDispositionModal extends ModalComponent
             'dispositionOperators' => ['required', 'array'],
         ];
     }
-
-    public function updateTitle()
+    
+    public function mount() 
     {
-        if ($this->edit) {
-            $this->title = __('Edit disposition') . ' ' . $this->disposition->dis_number;
-        } else {
-            $this->title = __('Add disposition');
+        if ($this->disp != null) {
+            $this->disposition = Disposition::where('dis_id', $this->disp)->first();
+            $this->openAddEditDispositionModal($this->disposition);
+            $this->dispatch('openDispositionModalBlade');
+            $this->dispatch('setDisNumberInDispositionsTable', $this->disposition->dis_number);
         }
     }
 
@@ -90,6 +95,15 @@ class AddEditDispositionModal extends ModalComponent
         }
 
         $this->dispositionOperators = $data;
+    }
+
+    public function updateTitle()
+    {
+        if ($this->edit) {
+            $this->title = __('Edit disposition') . ' ' . $this->disposition->dis_number;
+        } else {
+            $this->title = __('Add disposition');
+        }
     }
 
     public function save(): void
