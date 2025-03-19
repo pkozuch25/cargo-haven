@@ -124,7 +124,7 @@ class DepositsTable extends TableComponent implements TableComponentInterface
             return true;
         }
 
-        if ($deposit->storageCell->sc_yard_id == Deposit::find($this->dispositionCreationArray[0])->storageCell->sc_yard_id) {
+        if ($deposit->storageCell->sc_yard_id == Deposit::find($this->dispositionCreationArray[array_key_first($this->dispositionCreationArray)])->storageCell->sc_yard_id) {
             return true;
         }
 
