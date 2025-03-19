@@ -1,13 +1,13 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>{{__('New Registration Request')}}</title>
-</head>
-<body>
-    <h1>{{__('New Registration Request')}}</h1>
+@extends('emails.layouts.main')
+
+@section('title', __('Account Status Update'))
+
+@section('header', __('Account Status Update'))
+
+@section('content')
+    <p>{{__('New Registration Request')}},</p>
     
-    <p>{{__('A new user has registered and requires approval:')}}</p>
+    <p>{{ __("A new user has registered and requires approval:") }}</p>
     
     <ul>
         <li><strong>{{__('Name:')}}</strong> {{ $newUser->name }}</li>
@@ -20,5 +20,4 @@
     <p>
         <a href="{{ url('/registration-requests') }}">{{__('Review Registration Requests')}}</a>
     </p>
-</body>
-</html>
+@endsection

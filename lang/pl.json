@@ -160,7 +160,10 @@
     "Perform operation - ": "Wykonaj operację - ",
     "Perform operation": "Wykonaj operację",
     "Generate disposition from this deposit": "Wygeneruj dyspozycję z tego depozytu",
-    "Don't generate disposition from this deposit": "Nie generuj dyspozycji z tego depozytu"
+    "Don't generate disposition from this deposit": "Nie generuj dyspozycji z tego depozytu",
+    "Your account status has been changed - Cargo Haven": "Zaktualizowano status Twojego konta - Cargo Haven",
+    "Account status change": "Zmiana statusu konta",
+    "Your account status has been updated to ": "Status Twojego konta został zaktualizowany do "
 
 
 }

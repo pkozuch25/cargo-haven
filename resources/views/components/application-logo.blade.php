@@ -1,1 +1,1 @@
-<img src="{{ mix('png/project-logo.png')}}" alt="" {{ $attributes }}>
+<img src="{{ mix('png/project-logo.png')}}" alt="Cargo Haven logo" {{ $attributes }}>

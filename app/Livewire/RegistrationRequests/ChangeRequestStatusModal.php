@@ -2,11 +2,15 @@
 
 namespace App\Livewire\RegistrationRequests;
 
-use App\Enums\RegistrationRequestStatusEnum;
-use App\Enums\UserStatusEnum;
+use App\Models\User;
 use Livewire\Attributes\On;
+use App\Enums\UserStatusEnum;
 use App\Livewire\ModalComponent;
 use App\Models\RegistrationRequest;
+use Illuminate\Support\Facades\Mail;
+use App\Enums\RegistrationRequestStatusEnum;
+use App\Mail\NewRegistrationRequestNotification;
+use App\Mail\UserChangedStatusNotification;
 
 class ChangeRequestStatusModal extends ModalComponent
 {
@@ -33,6 +37,8 @@ class ChangeRequestStatusModal extends ModalComponent
         $this->closeModal();
         $this->dispatch('refreshRRTable');
         $this->dispatch('refreshSelect2', ['await' => true]);
+
+        $this->notifyUserOfStatusChange($user);
     }
 
     private function determineUserStatus($status) : UserStatusEnum
@@ -44,7 +50,12 @@ class ChangeRequestStatusModal extends ModalComponent
         } else {
             return UserStatusEnum::INACTIVE;
         }
+    }
 
+    
+    private function notifyUserOfStatusChange(User $user): void
+    {
+        Mail::to($user->email)->send(new UserChangedStatusNotification($this->rr));
     }
 
     public function render()
