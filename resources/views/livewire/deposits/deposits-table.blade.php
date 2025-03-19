@@ -104,9 +104,9 @@
                             <x-td-table class="float-right">
                                 @if(can('add_dispositions') && !$deposit->dep_departure_disu_id && !$deposit->dep_departure_date && $this->checkIfDepositIsFromTheSameYard($deposit->dep_id))
                                     @if(!in_array($deposit->dep_id, $dispositionCreationArray))
-                                        <x-button icon="ti ti-plus" class="btn-primary px-[6px] py-[3px]" wire:click="addDepositToDispositionCreationArray({{ $deposit->dep_id }})"/>
+                                        <x-button icon="ti ti-plus" class="btn-primary px-[6px] py-[3px]" title="{{ __('Generate disposition from this deposit') }}" wire:click="addDepositToDispositionCreationArray({{ $deposit->dep_id }})"/>
                                     @else
-                                        <x-button icon="ti ti-minus" class="btn-primary px-[6px] py-[3px]" wire:click="removeDepositFromDispositionCreationArray({{ $deposit->dep_id }})"/>
+                                        <x-button icon="ti ti-minus" class="btn-primary px-[6px] py-[3px]" title="{{ __('Don\'t generate disposition from this deposit') }}" wire:click="removeDepositFromDispositionCreationArray({{ $deposit->dep_id }})"/>
                                     @endif
                                 @endif
                             </x-td-table>

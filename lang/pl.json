@@ -158,7 +158,9 @@
     "Transshipment card": "Karta przeładunkowa",
     "Completed": "Ukończone",
     "Perform operation - ": "Wykonaj operację - ",
-    "Perform operation": "Wykonaj operację"
+    "Perform operation": "Wykonaj operację",
+    "Generate disposition from this deposit": "Wygeneruj dyspozycję z tego depozytu",
+    "Don't generate disposition from this deposit": "Nie generuj dyspozycji z tego depozytu"
 
 
 }

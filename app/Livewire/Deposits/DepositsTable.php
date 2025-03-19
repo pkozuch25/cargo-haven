@@ -109,7 +109,7 @@ class DepositsTable extends TableComponent implements TableComponentInterface
 
         }
 
-        return redirect()->route('dispositions.index'); // todo włączenie modala na query stringu w mountcie + wrzucenie numeru kontenera do wyszukiwarki w tabeli dyspozycji
+        return redirect()->route('dispositions.index', ['disp' => $disposition->dis_id]);
     }
 
     public function checkIfDepositIsFromTheSameYard($depositId) : bool
