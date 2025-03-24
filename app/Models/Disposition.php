@@ -4,10 +4,12 @@ namespace App\Models;
 
 use App\Enums\DispositionStatusEnum;
 use App\Enums\OperationRelationEnum;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Disposition extends Model
 {
+    use HasFactory;
 
     public $table = 'dispositions';
     public $primaryKey = 'dis_id';

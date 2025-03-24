@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class StorageYard extends Model
 {
+    use HasFactory;
 
     public $table = 'storage_yards';
     public $primaryKey = 'sy_id';
