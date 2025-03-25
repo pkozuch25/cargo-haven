@@ -6,6 +6,7 @@ use App\Http\Controllers\DepositsController;
 use App\Http\Controllers\OperationsController;
 use App\Http\Controllers\DispositionsController;
 use App\Http\Controllers\StorageYardsController;
+use App\Http\Controllers\TransshipmentCardsController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\RegistrationRequestController;
 
@@ -21,6 +22,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/operations', [OperationsController::class, 'index'])->name('operations.index');
     Route::get('/deposits', [DepositsController::class, 'index'])->name('deposits.index');
     Route::get('/storage-yards', [StorageYardsController::class, 'index'])->name('storage-yards.index');
+    Route::get('/transshipment-cards', [TransshipmentCardsController::class, 'index'])->name('transshipment-cards.index');
     Route::get('/registration-requests', [RegistrationRequestController::class, 'index'])->name('registration-requests.index');
 
     // SELECT2

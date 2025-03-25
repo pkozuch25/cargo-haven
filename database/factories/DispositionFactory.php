@@ -19,11 +19,19 @@ class DispositionFactory extends Factory
             'dis_month_number' => $this->faker->numberBetween(1, 1000),
             'dis_number' => 'DIS-' . $this->faker->unique()->randomNumber(6),
             'dis_yard_id' => StorageYard::factory(),
-            'dis_relation_from' => function () {
-                return $this->faker->randomElement(OperationRelationEnum::cases())->value;
-            },
-            'dis_relation_to' => function () {
-                return $this->faker->randomElement(OperationRelationEnum::cases())->value;
+            'dis_relation_from' => $this->faker->randomElement([
+                OperationRelationEnum::YARD->value,
+                OperationRelationEnum::CARRIAGE->value,
+                OperationRelationEnum::TRUCK->value
+            ]),
+            'dis_relation_to' => function (array $attributes) {
+                if ($attributes['dis_relation_from'] == OperationRelationEnum::YARD->value) {
+                    return $this->faker->randomElement([
+                        OperationRelationEnum::CARRIAGE->value,
+                        OperationRelationEnum::TRUCK->value
+                    ]);
+                }
+                return OperationRelationEnum::YARD->value;
             },
             'dis_notes' => $this->faker->paragraph(),
             'dis_suggested_date' => $this->faker->dateTimeBetween('now', '+30 days'),

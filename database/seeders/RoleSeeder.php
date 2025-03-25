@@ -18,10 +18,6 @@ class RoleSeeder extends Seeder
         $roleOperator = Role::create(['name' => 'operator']);
         $roleForwarder = Role::create(['name' => 'forwarder']);
 
-        Permission::create(['name' => 'view_deposits']);
-        Permission::create(['name' => 'delete_deposits']);
-        Permission::create(['name' => 'edit_deposits']);
-
         Permission::create(['name' => 'edit_dispositions']);
         Permission::create(['name' => 'add_dispositions']);
         Permission::create(['name' => 'view_dispositions']);
@@ -30,10 +26,8 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'edit_storage_yards']);
 
         Permission::create(['name' => 'view_operations']);
-        
-        $roleAdmin->givePermissionTo('view_deposits');
-        $roleAdmin->givePermissionTo('delete_deposits');
-        $roleAdmin->givePermissionTo('edit_deposits');
+
+        Permission::create(['name' => 'view_transshipment_cards']);
 
         $roleAdmin->givePermissionTo('edit_dispositions');
         $roleAdmin->givePermissionTo('add_dispositions');
@@ -44,14 +38,15 @@ class RoleSeeder extends Seeder
 
         $roleAdmin->givePermissionTo('view_operations');
 
-        $roleOperator->givePermissionTo('view_deposits');
-        $roleOperator->givePermissionTo('view_operations');
+        $roleAdmin->givePermissionTo('view_transshipment_cards');
 
-        $roleForwarder->givePermissionTo('view_deposits');
+        $roleOperator->givePermissionTo('view_operations');
 
         $roleForwarder->givePermissionTo('edit_dispositions');
         $roleForwarder->givePermissionTo('add_dispositions');
         $roleForwarder->givePermissionTo('view_dispositions');
+        
+        $roleForwarder->givePermissionTo('view_transshipment_cards');
 
         $adminUser = User::where('email', 'admin@admin.com')->first();
         $adminUser->assignRole('admin');

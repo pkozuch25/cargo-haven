@@ -25,10 +25,17 @@ function getOperationsBadgeCount() {
 @endif
 
 {{-- DEPOSITS --}}
-@if(can('view_deposits'))
     <x-nav-link-wrapper>
         <x-nav-link :href="route('deposits.index')" :active="request()->routeIs('deposits.index')">
             {{ __('Deposits') }}
+        </x-nav-link>
+    </x-nav-link-wrapper>
+
+{{-- TRANSSSHIPMENT CARDS --}}
+@if(can('view_transshipment_cards'))
+    <x-nav-link-wrapper>
+        <x-nav-link :href="route('transshipment-cards.index')" :active="request()->routeIs('transshipment-cards.index')">
+            {{ __('Transshipment cards') }}
         </x-nav-link>
     </x-nav-link-wrapper>
 @endif

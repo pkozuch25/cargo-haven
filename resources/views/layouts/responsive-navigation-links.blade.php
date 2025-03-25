@@ -15,9 +15,14 @@
 @endif
 
 {{-- DEPOSITS --}}
-@if(can('view_deposits'))
-    <x-responsive-nav-link :href="route('deposits.index')" :active="request()->routeIs('deposits.index')">
-        {{ __('Deposits') }}
+<x-responsive-nav-link :href="route('deposits.index')" :active="request()->routeIs('deposits.index')">
+    {{ __('Deposits') }}
+</x-responsive-nav-link>
+
+{{-- TRANSSSHIPMENT CARDS --}}
+@if(can('view_transshipment_cards'))
+    <x-responsive-nav-link :href="route('transshipment-cards.index')" :active="request()->routeIs('transshipment-cards.index')">
+        {{ __('Transshipment cards') }}
     </x-responsive-nav-link>
 @endif
 

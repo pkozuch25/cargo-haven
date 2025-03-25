@@ -5,8 +5,8 @@
 @section('content')
 
 <x-layout-component size=8>
-  <div class="row">
-      <div class="col-12">
+    <div class="row">
+        <div class="col-12">
             <div style="display: flex; align-items: center; gap: 10px;">
                 <x-page-title>
                     <i data-feather="box"></i>{{ __('Storage yards') }}
@@ -18,8 +18,8 @@
             <x-panel>
                 @livewire('storage-yards.storage-yards-table')
             </x-panel>
-      </div>
-  </div>
+        </div>
+    </div>
 </x-layout-component>
 @livewire('storage-yards.add-edit-storage-yard-modal')
 @stop

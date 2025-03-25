@@ -50,7 +50,7 @@ class DepositsTable extends TableComponent implements TableComponentInterface
                 $query->archived();
             } else {
                 $query->available();
-            }
+            } // todo zastanowić się czy nie wyciągać tylko depozytów z placów przypisanych do użytkownika
         return $this->tableRefresh($query);
     }
 
@@ -71,8 +71,22 @@ class DepositsTable extends TableComponent implements TableComponentInterface
     {
         $this->validate();
 
+        if (is_numeric($this->relationTo)) {
+            $this->relationTo = OperationRelationEnum::from($this->relationTo);
+        }
+
         if ($this->relationTo == OperationRelationEnum::YARD) {
             $this->sweetAlert('error', __('You cannot create disposition from yard to yard'));
+            return;
+        }
+
+        $deposits = Deposit::whereIn('dep_id', $this->dispositionCreationArray)->get();
+        $yardIds = $deposits->map(function($deposit) {
+            return $deposit->storageCell->sc_yard_id;
+        })->unique();
+        
+        if ($yardIds->count() > 1) {
+            $this->sweetAlert('error', __('All deposits must be from the same storage yard')); // todo stestować
             return;
         }
 
@@ -83,6 +97,7 @@ class DepositsTable extends TableComponent implements TableComponentInterface
         $disposition->dis_created_by_id = Auth::id();
         $disposition->dis_yard_id = Deposit::find($this->dispositionCreationArray[0])->storageCell->sc_yard_id;
         $disposition->dis_suggested_date = now();
+        $disposition->dis_start_date = now();
 
         (new DispositionService())->createDispositionNumber($disposition);
 

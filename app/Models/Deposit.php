@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Deposit extends Model
 {
+    use HasFactory;
+
     public $table = 'deposits';
     public $primaryKey = 'dep_id';
 
@@ -24,6 +27,26 @@ class Deposit extends Model
     public function departureDispositionUnit()
     {
         return $this->belongsTo(DispositionUnit::class, 'dep_departure_disu_id', 'disu_id');
+    }
+
+    public function arrivalTransshipmentCardUnit()
+    {
+        return $this->belongsTo(TransshipmentCardUnit::class, 'dep_arrival_cardunit_id', 'disu_id');
+    }
+
+    public function departureTransshipmentCardUnit()
+    {
+        return $this->belongsTo(TransshipmentCardUnit::class, 'dep_departure_cardunit_id', 'disu_id');
+    }
+
+    public function arrivalTransshipmentCard()
+    {
+        return $this->belongsTo(TransshipmentCard::class, 'dep_arrival_card_id', 'disu_id');
+    }
+
+    public function departureTransshipmentCard()
+    {
+        return $this->belongsTo(TransshipmentCard::class, 'dep_departure_card_id', 'disu_id');
     }
 
     public function scopeAvailable($query)

@@ -155,7 +155,6 @@
     "Please log in to the admin panel to review this request.": "Zaloguj się do panelu administracyjnego, aby przejrzeć to żądanie.",
     "Review Registration Requests": "Przejrzyj żądania rejestracji",
     "New Registration Request - Cargo Haven": "Nowe żądanie rejestracji - Cargo Haven",
-    "Transshipment card": "Karta przeładunkowa",
     "Completed": "Ukończone",
     "Perform operation - ": "Wykonaj operację - ",
     "Perform operation": "Wykonaj operację",
@@ -163,7 +162,10 @@
     "Don't generate disposition from this deposit": "Nie generuj dyspozycji z tego depozytu",
     "Your account status has been changed - Cargo Haven": "Zaktualizowano status Twojego konta - Cargo Haven",
     "Account status change": "Zmiana statusu konta",
-    "Your account status has been updated to ": "Status Twojego konta został zaktualizowany do "
+    "Your account status has been updated to ": "Status Twojego konta został zaktualizowany do ",
+    "Transshipment cards": "Karty przeładunkowe",
+    "Transshipment card": "Karta przeładunkowa",
+    "All deposits must be from the same storage yard.": "Wszystkie depozyty muszą pochodzić z tego samego placu składowego."
 
 
 }
