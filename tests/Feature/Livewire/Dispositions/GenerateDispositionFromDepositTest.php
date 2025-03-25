@@ -93,7 +93,7 @@ test('cannot generate disposition from yard to yard', function () { // todo dobr
     expect($newDisposition)->toBeNull();
 });
 
-test('cannot generate disposition from deposits from different yards', function () {
+test('cannot generate disposition from deposits from different yards', function () { // todo dobrze stestować
     $deposit = Deposit::factory(['dep_sc_id' => $this->storageCell->sc_id])->create();
     $depositId = $deposit->dep_id;
 
