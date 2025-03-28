@@ -71,13 +71,13 @@ test('can generate disposition from selected deposits', function () {
     }
 });
 
-test('cannot generate disposition from yard to yard', function () { // todo dobrze stestować
+test('cannot generate disposition from yard to yard', function () {
     $deposits = Deposit::factory()->count(3)->create();
     $depositIds = $deposits->pluck('dep_id')->toArray();
 
     Livewire::test(DepositsTable::class)
         ->set('dispositionCreationArray', $depositIds)
-        ->set('relationTo', OperationRelationEnum::CARRIAGE->value)
+        ->set('relationTo', OperationRelationEnum::YARD->value)
         ->set('driver', 'Test Driver')
         ->set('carriageNumber', 'CAR-123')
         ->set('carNumber', 'AUTO-456')
@@ -85,7 +85,7 @@ test('cannot generate disposition from yard to yard', function () { // todo dobr
 
     $newDisposition = Disposition::query()
         ->where('dis_relation_from', OperationRelationEnum::YARD->value)
-        ->where('dis_relation_to', OperationRelationEnum::CARRIAGE->value)
+        ->where('dis_relation_to', OperationRelationEnum::YARD->value)
         ->where('dis_suggested_date', today())
         ->latest('dis_id')
         ->first();
@@ -93,26 +93,43 @@ test('cannot generate disposition from yard to yard', function () { // todo dobr
     expect($newDisposition)->toBeNull();
 });
 
-test('cannot generate disposition from deposits from different yards', function () { // todo dobrze stestować
-    $deposit = Deposit::factory(['dep_sc_id' => $this->storageCell->sc_id])->create();
-    $depositId = $deposit->dep_id;
-
+test('cannot generate disposition from deposits from different yards', function () {
+    $firstStorageCell = $this->storageCell;
     
-    $component = Livewire::test(DepositsTable::class)
-        ->set('dispositionCreationArray', [$depositId])
-        ->set('relationTo', OperationRelationEnum::YARD);
+    $secondStorageYard = StorageYard::factory()->create();
+    $secondStorageCell = StorageCell::factory()->create([
+        'sc_yard_id' => $secondStorageYard->sy_id
+    ]);
+    
+    $firstDeposit = Deposit::factory()->create([
+        'dep_sc_id' => $firstStorageCell->sc_id
+    ]);
 
-    $component->call('generateDispositionFromSelectedDeposits');
+    $secondDeposit = Deposit::factory()->create([
+        'dep_sc_id' => $secondStorageCell->sc_id
+    ]);
 
-    $yardId = $this->storageYard->sy_id;
-    $newDisposition = Disposition::where('dis_yard_id', $yardId)
+    $depositIds = [$firstDeposit->dep_id, $secondDeposit->dep_id];
+    
+    Livewire::test(DepositsTable::class)
+        ->set('dispositionCreationArray', $depositIds)
+        ->set('relationTo', OperationRelationEnum::CARRIAGE->value)
+        ->set('driver', 'Test Driver')
+        ->set('carriageNumber', 'CAR-123')
+        ->set('carNumber', 'AUTO-456')
+        ->call('generateDispositionFromSelectedDeposits');
+    
+    $newDisposition = Disposition::query()
         ->where('dis_relation_from', OperationRelationEnum::YARD->value)
-        ->where('dis_relation_to', OperationRelationEnum::YARD->value)
+        ->where('dis_relation_to', OperationRelationEnum::CARRIAGE->value)
+        ->where('dis_created_by_id', $this->user->id)
+        ->where('created_at', '>=', now()->subMinutes(1))
         ->latest('dis_id')
         ->first();
     
     expect($newDisposition)->toBeNull();
 });
+
 
 test('validates required fields before generating disposition', function () {
     $deposits = Deposit::factory(2)->create([
