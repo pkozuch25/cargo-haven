@@ -16,4 +16,5 @@
         </div>
   </div>
 </x-layout-component>
+@livewire('transshipment-cards.show-transshipment-card-details-modal')
 @stop

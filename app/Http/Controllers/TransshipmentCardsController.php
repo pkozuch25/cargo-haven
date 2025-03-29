@@ -11,6 +11,6 @@ class TransshipmentCardsController extends Controller
             return redirect()->route('deposits.index');
         }
 
-        return view('pages.storage-yards.storage-yards-index');
+        return view('pages.transshipment-cards.transshipment-cards-index');
     }
 }
