@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DepositsController;
+use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\OperationsController;
 use App\Http\Controllers\DispositionsController;
 use App\Http\Controllers\StorageYardsController;
@@ -25,8 +26,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/transshipment-cards', [TransshipmentCardsController::class, 'index'])->name('transshipment-cards.index');
     Route::get('/registration-requests', [RegistrationRequestController::class, 'index'])->name('registration-requests.index');
 
-    // SELECT2
+    Route::post('/language', [LanguageController::class, 'changeLanguage'])
+        ->name('language.change');
 
+    // SELECT2
     Route::get('/get-operators-to-select2', [RegisteredUserController::class, 'getOperatorsToSelect2'])->name('get-operators-to-select2');
 });
 

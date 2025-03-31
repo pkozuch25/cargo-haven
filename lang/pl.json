@@ -166,7 +166,21 @@
     "Transshipment cards": "Karty przeładunkowe",
     "Transshipment card": "Karta przeładunkowa",
     "All deposits must be from the same storage yard.": "Wszystkie depozyty muszą pochodzić z tego samego placu składowego.",
-    "View": "Wyświetl"
+    "View": "Wyświetl",
+    "Yard position": "Położenie na placu",
+    "From carriage": "Z wagonu",
+    "To carriage": "Na wagon",
+    "From truck": "Z ciężarówki",
+    "To truck": "Na ciężarówkę",
+    "Created at": "Utworzono o",
+    "Transshipment card units": "Jednostki karty przeładunkowej",
+    "Complete card": "Zakończ kartę",
+    "Reopen card": "Otwórz kartę ponownie",
+    "You do not have permission to complete this card": "Nie masz uprawnień do zakończenia tej karty",
+    "Card has been completed successfully": "Karta została pomyślnie zakończona",
+    "You do not have permission to reopen this card": "Nie masz uprawnień do ponownego otwarcia tej karty",
+    "Card has been reopened successfully": "Karta została pomyślnie otwarta",
+    "Language changed successfully": "Język został pomyślnie zmieniony"
 
 
 }

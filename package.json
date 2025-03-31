@@ -24,6 +24,7 @@
     "dependencies": {
         "bootstrap": "^5.3.3",
         "feather-icons": "^4.29.2",
+        "flag-icons": "^7.3.2",
         "flatpickr": "^4.6.13",
         "jquery": "^3.7.1",
         "laravel-mix": "^6.0.49",

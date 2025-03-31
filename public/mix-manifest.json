@@ -2,5 +2,6 @@
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
     "/css/select2.min.css": "/css/select2.min.css",
+    "/css/flag-icons.css": "/css/flag-icons.css",
     "/png/project-logo.png": "/png/project-logo.png"
 }

@@ -18,11 +18,11 @@
                         </x-th-table>
                         <x-th-table wire:click="sort('tc_relation_from')"
                             class="{{ $sortColumn == 'tc_relation_from' ? ($sortDirection == 'desc' ? 'sorting sorting_desc' : 'sorting sorting_asc') : 'sorting' }}">
-                            {{ __('From') }}
+                            {{ __('Relation from') }}
                         </x-th-table>
                         <x-th-table wire:click="sort('tc_relation_to')"
                             class="{{ $sortColumn == 'tc_relation_to' ? ($sortDirection == 'desc' ? 'sorting sorting_desc' : 'sorting sorting_asc') : 'sorting' }}">
-                            {{ __('To') }}
+                            {{ __('Relation to') }}
                         </x-th-table>
                         <x-th-table wire:click="sort('tc_status')"
                             class="{{ $sortColumn == 'tc_status' ? ($sortDirection == 'desc' ? 'sorting sorting_desc' : 'sorting sorting_asc') : 'sorting' }}">
