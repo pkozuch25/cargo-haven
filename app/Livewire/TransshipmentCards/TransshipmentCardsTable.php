@@ -2,6 +2,7 @@
 
 namespace App\Livewire\TransshipmentCards;
 
+use Livewire\Attributes\On;
 use App\Livewire\TableComponent;
 use App\Models\TransshipmentCard;
 use Livewire\Attributes\Computed;
@@ -19,6 +20,12 @@ class TransshipmentCardsTable extends TableComponent implements TableComponentIn
         $query = TransshipmentCard::query()
             ->with('createdBy', 'storageYard', 'units');
         return $this->tableRefresh($query);
+    }
+
+    #[On('setTcNumberInTransshipmentCardsTable')]
+    public function setCardNumber(string $cardNumber) : void
+    {
+        $this->searchTerm['text']['tc_number'] = $cardNumber;
     }
 
     public function render()

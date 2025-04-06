@@ -2,15 +2,29 @@
 
 namespace App\Livewire\TransshipmentCards;
 
+use Livewire\Attributes\On;
+use Livewire\Attributes\Url;
+use App\Livewire\ModalComponent;
 use App\Models\TransshipmentCard;
 use App\Enums\TransshipmentCardStatusenum;
-use App\Livewire\ModalComponent;
-use Livewire\Attributes\On;
 
 class ShowTransshipmentCardDetailsModal extends ModalComponent
 {
     public $transshipmentCard;
     public $cardId;
+
+    #[Url(nullable: true, keep: false)]
+    public $card;
+
+    public function mount()
+    {
+        if ($this->card != null) {
+            $this->cardId = TransshipmentCard::where('tc_id', $this->card)->first()->tc_id;
+            $this->openModal($this->cardId);
+            $this->dispatch('openTransshipmentCardModalBlade');
+            $this->dispatch('setTcNumberInTransshipmentCardsTable', $this->transshipmentCard->tc_number);
+        }
+    }
 
     #[On('openTransshipmentCardDetailsModal')]
     public function openModal($cardId)

@@ -35,7 +35,7 @@
                             <x-td-table class="text-center">{{ $operation->disu_container_number }}</x-td-table>
                             <x-td-table class="text-center">{{ $operation->disposition?->dis_relation_from->name() }}</x-td-table>
                             <x-td-table class="text-center">{{ $operation->disposition?->dis_relation_to->name() }}</x-td-table>
-                            <x-td-table class="text-center"><a style="color: #8aa9c3" href="/dispositions?disp={{ $operation->disposition?->dis_id }}">{{ $operation->disposition?->dis_number }}</a></x-td-table>
+                            <x-td-table class="text-center"><a class="blue-tint" href="/dispositions?disp={{ $operation->disposition?->dis_id }}">{{ $operation->disposition?->dis_number }}</a></x-td-table>
                             <x-td-table class="text-center">{{ $operation->disu_notes }}</x-td-table>
                             <x-td-table class="float-right">
                                 <x-button icon="ti ti-plus" title="{{ __('Perform operation') }}" class="btn-success px-[6px] py-[3px]" modal="perform-operation-modal" wire:click="dispatch('performOperationModal', {operation: {{ $operation->disu_id }} })"/>

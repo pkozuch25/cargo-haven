@@ -9,9 +9,7 @@
 
 {{-- OPERATIONS --}}
 @if(can('view_operations'))
-    <x-responsive-nav-link :href="route('operations.index')" :active="request()->routeIs('operations.index')" :badge="getOperationsBadgeCount()">
-        {{ __('Operations') }}
-    </x-responsive-nav-link>
+    @livewire('operations.operations-for-authenticated-user-counter', ['responsive' => true])
 @endif
 
 {{-- DEPOSITS --}}
@@ -35,7 +33,5 @@
 
 {{-- REGISTRATION REQUESTS FOR ADMIN --}}
 @if (getAuthenticatedUserModel()->isAdmin())
-    <x-responsive-nav-link :href="route('registration-requests.index')" :active="request()->routeIs('registration-requests.index')">
-        {{ __('Registration requests') }}
-    </x-responsive-nav-link>
+    @livewire('registration-requests.pending-registration-requests-counter', ['responsive' => true])
 @endif

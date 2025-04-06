@@ -22,6 +22,11 @@ class DispositionUnit extends Model
         return $this->belongsTo(Disposition::class, 'disu_dis_id', 'dis_id');
     }
 
+    public function transshipmentCardUnit()
+    {
+        return $this->belongsTo(TransshipmentCardUnit::class, 'disu_cardunit_id', 'tcu_id');
+    }
+
     public function scopeForOperator($query, $operatorId)
     {
         return $query->whereHas('disposition.operators', function ($query) use ($operatorId) {

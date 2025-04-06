@@ -10,7 +10,7 @@ $classes = ($active ?? false)
     <div class="relative">
         {{ $slot }}
         @if($badge)
-            <span class="absolute -top-1 -right-2 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white transform translate-x-1/2 -translate-y-1/2 bg-lime-600 rounded-full">
+            <span class="absolute -top-2 -right-3 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white transform translate-x-1/2 -translate-y-1/2 bg-lime-600 rounded-full">
                 {{ $badge }}
             </span>
         @endif

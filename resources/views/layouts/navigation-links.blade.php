@@ -1,11 +1,5 @@
 <!-- Navigation Links -->
 
-@php
-function getOperationsBadgeCount() {
-    return \App\Models\DispositionUnit::forOperator(getAuthenticatedUserModel()->id)->count();
-}
-@endphp
-
 {{-- DISPOSITIONS --}}
 @if(can('view_dispositions'))
     <x-nav-link-wrapper>
@@ -18,9 +12,7 @@ function getOperationsBadgeCount() {
 {{-- OPERATIONS --}}
 @if(can('view_operations'))
     <x-nav-link-wrapper>
-        <x-nav-link :href="route('operations.index')" :active="request()->routeIs('operations.index')" :badge="getOperationsBadgeCount()">
-            {{ __('Operations') }}
-        </x-nav-link>
+        @livewire('operations.operations-for-authenticated-user-counter')
     </x-nav-link-wrapper>
 @endif
 
@@ -52,8 +44,6 @@ function getOperationsBadgeCount() {
 {{-- REGISTRATION REQUESTS FOR ADMIN --}}
 @if (getAuthenticatedUserModel()->isAdmin())
     <x-nav-link-wrapper>
-        <x-nav-link :href="route('registration-requests.index')" :active="request()->routeIs('registration-requests.index')">
-            {{ __('Registration requests') }}
-        </x-nav-link>
+        @livewire('registration-requests.pending-registration-requests-counter')
     </x-nav-link-wrapper>
 @endif

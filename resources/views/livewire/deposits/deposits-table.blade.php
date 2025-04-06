@@ -96,10 +96,10 @@
                             <x-td-table class="text-center">{{ $deposit->dep_gross_weight }}</x-td-table>
                             <x-td-table class="text-center">{{ $deposit->dep_tare_weight }}</x-td-table>
                             <x-td-table class="text-center">{{ $deposit->dep_net_weight }}</x-td-table>
-                            <x-td-table class="text-center">{{ $deposit->arrivalDispositionUnit?->disposition?->dis_number }}</x-td-table>
-                            <x-td-table class="text-center">{{ $deposit->departureDispositionUnit?->disposition?->dis_number }}</x-td-table>
-                            <x-td-table class="text-center">placeholder</x-td-table>
-                            <x-td-table class="text-center">placeholder</x-td-table>
+                            <x-td-table class="text-center"><a class="blue-tint" href="/dispositions?disp={{ $deposit->arrivalDispositionUnit?->disposition?->dis_id }}">{{ $deposit->arrivalDispositionUnit?->disposition?->dis_number }}</a></x-td-table>
+                            <x-td-table class="text-center"><a class="blue-tint" href="/dispositions?disp={{ $deposit->departureDispositionUnit?->disposition?->dis_id }}">{{ $deposit->departureDispositionUnit?->disposition?->dis_number }}</a></x-td-table>
+                            <x-td-table class="text-center"><a class="blue-tint" href="/transshipment-cards?card={{ $deposit->arrivalTransshipmentCard?->tc_id }}">{{ $deposit->arrivalTransshipmentCard?->tc_number }}</a></x-td-table>
+                            <x-td-table class="text-center"><a class="blue-tint" href="/transshipment-cards?card={{ $deposit->departureTransshipmentCard?->tc_id }}">{{ $deposit->departureTransshipmentCard?->tc_number }}</a></x-td-table>
                             <x-td-table class="text-center">{{ $deposit->storageCell?->cell_text }}</x-td-table>
                             <x-td-table class="float-right">
                                 @if(can('add_dispositions') && !$deposit->dep_departure_disu_id && !$deposit->dep_departure_date && $this->checkIfDepositIsFromTheSameYard($deposit->dep_id))

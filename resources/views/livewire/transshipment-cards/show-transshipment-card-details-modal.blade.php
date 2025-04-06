@@ -1,4 +1,4 @@
-<x-modal id="show-transshipment-card-details-modal" size="fullscreen" title="{{ __('Transshipment Card') }} #{{ $transshipmentCard?->tc_number }}" pillText="{{ $transshipmentCard?->tc_status?->name() }}" pillClass="{{ $transshipmentCard?->tc_status?->color() }}" icon="ti ti-file-text">
+<x-modal id="show-transshipment-card-details-modal" size="fullscreen" title="{{ __('Transshipment card') }} {{ $transshipmentCard?->tc_number }}" pillText="{{ $transshipmentCard?->tc_status?->name() }}" pillClass="{{ $transshipmentCard?->tc_status?->color() }}" icon="ti ti-file-text">
     <x-slot name="modalBody">
         @if ($transshipmentCard)
             <div class="row">
@@ -110,4 +110,11 @@
     </x-slot>
     <x-slot name="modalFooter">
     </x-slot>
+    @push('javascript')
+        <script>
+            window.addEventListener('openTransshipmentCardModalBlade', function() {
+                $('#show-transshipment-card-details-modal').modal('show');
+            })
+        </script>
+    @endpush
 </x-modal>

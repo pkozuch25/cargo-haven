@@ -31,22 +31,22 @@ class Deposit extends Model
 
     public function arrivalTransshipmentCardUnit()
     {
-        return $this->belongsTo(TransshipmentCardUnit::class, 'dep_arrival_cardunit_id', 'disu_id');
+        return $this->belongsTo(TransshipmentCardUnit::class, 'dep_arrival_cardunit_id', 'tcu_id');
     }
 
     public function departureTransshipmentCardUnit()
     {
-        return $this->belongsTo(TransshipmentCardUnit::class, 'dep_departure_cardunit_id', 'disu_id');
+        return $this->belongsTo(TransshipmentCardUnit::class, 'dep_departure_cardunit_id', 'tcu_id');
     }
 
     public function arrivalTransshipmentCard()
     {
-        return $this->belongsTo(TransshipmentCard::class, 'dep_arrival_card_id', 'disu_id');
+        return $this->belongsTo(TransshipmentCard::class, 'dep_arrival_card_id', 'tc_id');
     }
 
     public function departureTransshipmentCard()
     {
-        return $this->belongsTo(TransshipmentCard::class, 'dep_departure_card_id', 'disu_id');
+        return $this->belongsTo(TransshipmentCard::class, 'dep_departure_card_id', 'tc_id');
     }
 
     public function scopeAvailable($query)
