@@ -7,7 +7,7 @@ use App\Livewire\TableComponent;
 use App\Models\TransshipmentCard;
 use Livewire\Attributes\Computed;
 use App\Enums\OperationRelationEnum;
-use App\Enums\TransshipmentCardStatusenum;
+use App\Enums\TransshipmentCardStatusEnum;
 use App\Interfaces\TableComponentInterface;
 
 class TransshipmentCardsTable extends TableComponent implements TableComponentInterface
@@ -32,7 +32,7 @@ class TransshipmentCardsTable extends TableComponent implements TableComponentIn
     {
         return view('livewire.transshipment-cards.transshipment-cards-table', [
             'data' => $this->queryRefresh(),
-            'statusEnum' => TransshipmentCardStatusenum::class,
+            'statusEnum' => TransshipmentCardStatusEnum::class,
             'relationEnum' => OperationRelationEnum::class,
         ]);
     }

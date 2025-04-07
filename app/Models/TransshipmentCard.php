@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Enums\DispositionStatusEnum;
 use App\Enums\OperationRelationEnum;
-use App\Enums\TransshipmentCardStatusenum;
+use App\Enums\TransshipmentCardStatusEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -19,7 +19,7 @@ class TransshipmentCard extends Model
     protected $casts = [
         'tc_relation_from' => OperationRelationEnum::class,
         'tc_relation_to' => OperationRelationEnum::class,
-        'tc_status' => TransshipmentCardStatusenum::class,
+        'tc_status' => TransshipmentCardStatusEnum::class,
     ];
 
     public function createdBy()

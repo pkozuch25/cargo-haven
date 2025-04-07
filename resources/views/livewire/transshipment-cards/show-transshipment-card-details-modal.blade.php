@@ -46,11 +46,11 @@
             @can('edit_transshipment_cards')
                 <div class="row mt-3">
                     <div class="col-sm-12">
-                        @if($transshipmentCard->tc_status == \App\Enums\TransshipmentCardStatusenum::PROCESSING)
+                        @if($transshipmentCard->tc_status == \App\Enums\TransshipmentCardStatusEnum::PROCESSING)
                             <x-button class="btn-success" wire:click='completeCard'>
                                 {{ __('Complete card') }}
                             </x-button>
-                        @elseif($transshipmentCard->tc_status == \App\Enums\TransshipmentCardStatusenum::COMPLETED)
+                        @elseif($transshipmentCard->tc_status == \App\Enums\TransshipmentCardStatusEnum::COMPLETED)
                             <x-button class="btn-warning" wire:click='reopenCard'>
                                 {{ __('Reopen card') }}
                             </x-button>

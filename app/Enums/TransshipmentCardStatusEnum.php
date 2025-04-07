@@ -2,7 +2,7 @@
 
 namespace App\Enums;
 
-enum TransshipmentCardStatusenum: int
+enum TransshipmentCardStatusEnum: int
 {
     case PROCESSING = 0;
     case COMPLETED = 1;

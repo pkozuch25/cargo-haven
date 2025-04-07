@@ -6,7 +6,7 @@ use Livewire\Attributes\On;
 use Livewire\Attributes\Url;
 use App\Livewire\ModalComponent;
 use App\Models\TransshipmentCard;
-use App\Enums\TransshipmentCardStatusenum;
+use App\Enums\TransshipmentCardStatusEnum;
 
 class ShowTransshipmentCardDetailsModal extends ModalComponent
 {
@@ -50,7 +50,7 @@ class ShowTransshipmentCardDetailsModal extends ModalComponent
             return;
         }
 
-        $this->transshipmentCard->tc_status = TransshipmentCardStatusenum::COMPLETED;
+        $this->transshipmentCard->tc_status = TransshipmentCardStatusEnum::COMPLETED;
         $this->transshipmentCard->save();
 
         $this->loadTransshipmentCard();
@@ -68,7 +68,7 @@ class ShowTransshipmentCardDetailsModal extends ModalComponent
             return;
         }
 
-        $this->transshipmentCard->tc_status = TransshipmentCardStatusenum::PROCESSING;
+        $this->transshipmentCard->tc_status = TransshipmentCardStatusEnum::PROCESSING;
         $this->transshipmentCard->save();
 
         $this->loadTransshipmentCard();

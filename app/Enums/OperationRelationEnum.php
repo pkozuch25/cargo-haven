@@ -7,7 +7,7 @@ use App\Traits\ExcludeEnumCasesTrait;
 enum OperationRelationEnum: int
 {
     use ExcludeEnumCasesTrait;
-    
+
     case CARRIAGE = 0;
     case YARD = 1;
     case TRUCK = 2;
@@ -18,6 +18,15 @@ enum OperationRelationEnum: int
             $this::CARRIAGE => __('Carriage'),
             $this::YARD => __('Yard'),
             $this::TRUCK => __('Truck')
+        };
+    }
+
+    public function firstLetter(): string
+    {
+        return match ($this) {
+            $this::CARRIAGE => "C",
+            $this::YARD => "Y",
+            $this::TRUCK => "T"
         };
     }
 

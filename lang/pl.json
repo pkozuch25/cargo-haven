@@ -156,8 +156,8 @@
     "Review Registration Requests": "Przejrzyj żądania rejestracji",
     "New Registration Request - Cargo Haven": "Nowe żądanie rejestracji - Cargo Haven",
     "Completed": "Ukończone",
-    "Perform operation - ": "Wykonaj operację - ",
-    "Perform operation": "Wykonaj operację",
+    "Execute operation - ": "Wykonaj operację - ",
+    "Execute operation": "Wykonaj operację",
     "Generate disposition from this deposit": "Wygeneruj dyspozycję z tego depozytu",
     "Don't generate disposition from this deposit": "Nie generuj dyspozycji z tego depozytu",
     "Your account status has been changed - Cargo Haven": "Zaktualizowano status Twojego konta - Cargo Haven",
@@ -180,7 +180,11 @@
     "Card has been completed successfully": "Karta została pomyślnie zakończona",
     "You do not have permission to reopen this card": "Nie masz uprawnień do ponownego otwarcia tej karty",
     "Card has been reopened successfully": "Karta została pomyślnie otwarta",
-    "Language changed successfully": "Język został pomyślnie zmieniony"
-
-
+    "Language changed successfully": "Język został pomyślnie zmieniony",
+    "New card": "Nowa karta",
+    "Card": "Karta",
+    "Created by": "Utworzone przez",
+    "Execute": "Wykonaj",
+    "Close": "Zamknij",
+    "Cannot create new transshipment card - disposition not found.": "Nie można utworzyć nowej karty przeładunkowej - nie znaleziono dyspozycji"
 }
