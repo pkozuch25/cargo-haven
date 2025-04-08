@@ -54,18 +54,18 @@
                         <x-tr-hover>
                             <x-td-table>{{ $user->name }}</x-td-table>
                             <x-td-table>{{ $user->email }}</x-td-table>
-                            <x-td-table>
+                            <x-td-table style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap;">
                                 @foreach($user->roles as $role)
-                                    <x-pill class="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300">
+                                    <x-pill class="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300 mr-1 mb-1">
                                         {{ $role->name }}
                                     </x-pill>
                                 @endforeach
                             </x-td-table>
                             <x-td-table class="text-center">{{ $user->created_at }}</x-td-table>
                             <x-td-table class="text-center">
-                                <x-button class="btn-success" wire:click="$dispatch('openUserRolesModal', {user: {{ $user }}})" 
+                                <x-button class="btn-success" wire:click="$dispatch('openUserRolesModal', {user: {{ $user }}})"
                                        >
-                                    {{ __('Manage Roles') }}
+                                    {{ __('Roles') }}
                                 </x-button>
                             </x-td-table>
                         </x-tr-hover>
