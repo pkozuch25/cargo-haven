@@ -186,5 +186,7 @@
     "Created by": "Utworzone przez",
     "Execute": "Wykonaj",
     "Close": "Zamknij",
-    "Cannot create new transshipment card - disposition not found.": "Nie można utworzyć nowej karty przeładunkowej - nie znaleziono dyspozycji"
+    "Cannot create new transshipment card - disposition not found.": "Nie można utworzyć nowej karty przeładunkowej - nie znaleziono dyspozycji",
+    "Users": "Użytkownicy",
+    "Manage Roles": "Zarządzaj rolami"
 }

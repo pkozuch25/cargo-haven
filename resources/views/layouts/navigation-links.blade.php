@@ -1,5 +1,12 @@
 <!-- Navigation Links -->
 
+{{-- DEPOSITS --}}
+<x-nav-link-wrapper>
+    <x-nav-link :href="route('deposits.index')" :active="request()->routeIs('deposits.index')">
+        {{ __('Deposits') }}
+    </x-nav-link>
+</x-nav-link-wrapper>
+
 {{-- DISPOSITIONS --}}
 @if(can('view_dispositions'))
     <x-nav-link-wrapper>
@@ -15,13 +22,6 @@
         @livewire('operations.operations-for-authenticated-user-counter')
     </x-nav-link-wrapper>
 @endif
-
-{{-- DEPOSITS --}}
-    <x-nav-link-wrapper>
-        <x-nav-link :href="route('deposits.index')" :active="request()->routeIs('deposits.index')">
-            {{ __('Deposits') }}
-        </x-nav-link>
-    </x-nav-link-wrapper>
 
 {{-- TRANSSSHIPMENT CARDS --}}
 @if(can('view_transshipment_cards'))
@@ -45,5 +45,14 @@
 @if (getAuthenticatedUserModel()->isAdmin())
     <x-nav-link-wrapper>
         @livewire('registration-requests.pending-registration-requests-counter')
+    </x-nav-link-wrapper>
+@endif
+
+{{-- USERS --}}
+@if (getAuthenticatedUserModel()->isAdmin() || can('view_users'))
+    <x-nav-link-wrapper>
+        <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
+            {{ __('Users') }}
+        </x-nav-link>
     </x-nav-link-wrapper>
 @endif

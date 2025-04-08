@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DepositsController;
 use App\Http\Controllers\LanguageController;
@@ -25,6 +26,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/storage-yards', [StorageYardsController::class, 'index'])->name('storage-yards.index');
     Route::get('/transshipment-cards', [TransshipmentCardsController::class, 'index'])->name('transshipment-cards.index');
     Route::get('/registration-requests', [RegistrationRequestController::class, 'index'])->name('registration-requests.index');
+    Route::get('/users', [UsersController::class, 'index'])->name('users.index');
 
     Route::post('/language', [LanguageController::class, 'changeLanguage'])
         ->name('language.change');

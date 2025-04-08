@@ -43,6 +43,8 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'view_transshipment_cards']);
         Permission::create(['name' => 'edit_transshipment_cards']);
 
+        Permission::create(['name' => 'view_users']);
+
         $roleAdmin->givePermissionTo('edit_dispositions');
         $roleAdmin->givePermissionTo('add_dispositions');
         $roleAdmin->givePermissionTo('view_dispositions');
@@ -54,6 +56,8 @@ class RoleSeeder extends Seeder
 
         $roleAdmin->givePermissionTo('view_transshipment_cards');
         $roleAdmin->givePermissionTo('edit_transshipment_cards');
+
+        $roleAdmin->givePermissionTo('view_users');
 
         $roleOperator->givePermissionTo('view_operations');
 

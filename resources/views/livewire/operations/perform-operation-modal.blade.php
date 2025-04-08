@@ -15,6 +15,24 @@
                     <x-input-error :messages="$errors->get('selectedCard')" class="mt-2" />
                 </div>
             </div>
+            @if($this->relationToCarriage())
+                <div class="row">
+                    <div class="col-md-6">
+                        <x-input-full :label="__('Net weight')" wire:model='netWeight'></x-input-full>
+                        <x-input-error :messages="$errors->get('netWeight')" class="mt-2" />
+                    </div>
+                    <div class="col-md-6">
+                        <x-input-full :label="__('Tare weight')" wire:model='netWeight'></x-input-full>
+                        <x-input-error :messages="$errors->get('netWeight')" class="mt-2" />
+                    </div>
+                </div>
+            @elseif($this->relationToTruck())
+                <div class="row">
+                </div>
+            @else
+                <div class="row">
+                </div>
+            @endif
         </div>
     </x-slot>
     <x-slot name="modalFooter">

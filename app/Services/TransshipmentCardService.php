@@ -8,6 +8,7 @@ use App\Models\TransshipmentCard;
 use App\Enums\OperationRelationEnum;
 use Illuminate\Support\Facades\Auth;
 use App\Enums\TransshipmentCardStatusEnum;
+use App\Models\TransshipmentCardUnit;
 
 class TransshipmentCardService
 {
@@ -79,5 +80,11 @@ class TransshipmentCardService
         $transshipmentCard->tc_number = "{$year}/{$month}/{$yardShortName}/{$formattedNumber}/{$relationFromLetter}/{$relationToLetter}";
 
         return $transshipmentCard;
+    }
+
+    public function calcGrossWeight(TransshipmentCardUnit $cardUnit): TransshipmentCardUnit
+    {
+        $cardUnit->tcu_gross_weight = $cardUnit->tcu_net_weight + $cardUnit->tcu_tare_weight;
+        return $cardUnit;
     }
 }
