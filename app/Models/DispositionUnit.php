@@ -27,6 +27,16 @@ class DispositionUnit extends Model
         return $this->belongsTo(TransshipmentCardUnit::class, 'disu_cardunit_id', 'tcu_id');
     }
 
+    public function arrivalDeposit()
+    {
+        return $this->hasOne(Deposit::class, 'dep_arrival_disu_id', 'disu_id');
+    }
+
+    public function departureDeposit()
+    {
+        return $this->hasOne(Deposit::class, 'dep_departure_disu_id', 'disu_id');
+    }
+
     public function scopeForOperator($query, $operatorId)
     {
         return $query->whereHas('disposition.operators', function ($query) use ($operatorId) {

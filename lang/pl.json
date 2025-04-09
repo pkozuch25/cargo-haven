@@ -201,5 +201,8 @@
     "If you have any questions about this change or need further assistance, please contact our support team.": "Jeśli masz jakiekolwiek pytania dotyczące tej zmiany lub potrzebujesz dalszej pomocy, skontaktuj się z naszym zespołem wsparcia.",
     "Thank you for using Cargo Haven!": "Dziękujemy za korzystanie z Cargo Haven!",
     "Account Status Update": "Aktualizacja statusu konta",
-    "User yards:": "Place składowe użytkownika:"
+    "User yards:": "Place składowe użytkownika:",
+    "Could not find suitable deposit for container ": "Nie znaleziono odpowiedniego depozytu dla kontenera ",
+    "Could not find suitable disposition unit for container ": "Nie znaleziono odpowiedniej jednostki dyspozycji dla kontenera ",
+    "Deposit does not have aassigned storage cell": "Depozyt nie ma przypisanego miejsca składowego"
 }

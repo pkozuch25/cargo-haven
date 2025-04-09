@@ -18,12 +18,18 @@
             @if($this->relationToCarriage())
                 <div class="row">
                     <div class="col-md-6">
-                        <x-input-full :label="__('Net weight')" wire:model='netWeight'></x-input-full>
+                        <x-input-full type="number" :label="__('Net weight')" wire:model='netWeight'></x-input-full>
                         <x-input-error :messages="$errors->get('netWeight')" class="mt-2" />
                     </div>
                     <div class="col-md-6">
-                        <x-input-full :label="__('Tare weight')" wire:model='netWeight'></x-input-full>
-                        <x-input-error :messages="$errors->get('netWeight')" class="mt-2" />
+                        <x-input-full type="number" :label="__('Tare weight')" wire:model='tareWeight'></x-input-full>
+                        <x-input-error :messages="$errors->get('tareWeight')" class="mt-2" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <x-input-full :label="__('Carriage number')" wire:model='carriageNumberTo'></x-input-full>
+                        <x-input-error :messages="$errors->get('carriageNumberTo')" class="mt-2" />
                     </div>
                 </div>
             @elseif($this->relationToTruck())
