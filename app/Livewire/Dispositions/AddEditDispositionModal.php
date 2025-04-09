@@ -220,7 +220,7 @@ class AddEditDispositionModal extends ModalComponent
 
     private function loadStorageYards()
     {
-        $this->storageYards = StorageYard::query()->get();
+        $this->storageYards = getAuthenticatedUserModel()->storageYards()->get();
     }
 
     private function checkIfFromAndToRelationsAreTheSame(): bool

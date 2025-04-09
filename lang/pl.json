@@ -188,5 +188,18 @@
     "Close": "Zamknij",
     "Cannot create new transshipment card - disposition not found.": "Nie można utworzyć nowej karty przeładunkowej - nie znaleziono dyspozycji",
     "Users": "Użytkownicy",
-    "Roles": "Role"
+    "Roles": "Role",
+    "Roles:": "Role:",
+    "Manage roles": "Zarządzaj rolami",
+    "Manage user roles": "Zarządzaj rolami użytkownika",
+    "Manage user": "Zarządzaj użytkownikiem",
+    "User": "Użytkownik",
+    "Select roles:": "Wybierz role:",
+    "Roles updated successfully": "Role zaktualizowane pomyślnie",
+    "Hello": "Witaj",
+    "We would like to inform you that your account status at Cargo Haven has been updated to:": "Chcielibyśmy Cię poinformować, że status Twojego konta w Cargo Haven został zaktualizowany na:",
+    "If you have any questions about this change or need further assistance, please contact our support team.": "Jeśli masz jakiekolwiek pytania dotyczące tej zmiany lub potrzebujesz dalszej pomocy, skontaktuj się z naszym zespołem wsparcia.",
+    "Thank you for using Cargo Haven!": "Dziękujemy za korzystanie z Cargo Haven!",
+    "Account Status Update": "Aktualizacja statusu konta",
+    "User yards:": "Place składowe użytkownika:"
 }

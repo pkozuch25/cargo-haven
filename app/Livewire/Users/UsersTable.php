@@ -16,7 +16,7 @@ class UsersTable extends TableComponent implements TableComponentInterface
     #[Computed]
     public function queryRefresh()
     {
-        $users = User::query()
+        $users = User::query()->with('roles')
             ->select('users.*');
         return $this->tableRefresh($users);
     }

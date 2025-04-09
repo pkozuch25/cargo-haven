@@ -88,9 +88,11 @@ class TableComponent extends MainComponent
                         foreach ($value as $relationName => $relation) {
                             foreach ($relation as $field => $fieldValue) {
                                 if ($fieldValue != '') {
-                                    $query->whereRelation($relationName, function ($q) use ($field, $fieldValue) {
-                                        $q->whereIn($field, $fieldValue);
-                                    });
+                                    if (!empty($fieldValue)) {
+                                        $query->whereRelation($relationName, function ($q) use ($field, $fieldValue) {
+                                            $q->whereIn($field, $fieldValue);
+                                        });
+                                    }
                                 }
                             }
                         }

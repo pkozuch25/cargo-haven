@@ -64,6 +64,16 @@ class User extends Authenticatable
         return $this->belongsToMany(StorageYard::class, 'storage_yard_users_relation', 'user_id', 'sy_id');
     }
 
+    public function createdTransshipmentCards()
+    {
+        return $this->hasMany(TransshipmentCard::class, 'tc_created_by_user', 'id');
+    }
+    
+    public function operatedTransshipmentCardUnits()
+    {
+        return $this->hasMany(TransshipmentCardUnit::class, 'tcu_operator_id', 'id');
+    }
+
     public function scopeOperator($query)
     {
         return $query->role('Operator');
@@ -77,15 +87,5 @@ class User extends Authenticatable
     public function scopeActive($query)
     {
         return $query->where('status', UserStatusEnum::ACTIVE);
-    }
-
-    public function createdTransshipmentCards()
-    {
-        return $this->hasMany(TransshipmentCard::class, 'tc_created_by_user', 'id');
-    }
-
-    public function operatedTransshipmentCardUnits()
-    {
-        return $this->hasMany(TransshipmentCardUnit::class, 'tcu_operator_id', 'id');
     }
 }

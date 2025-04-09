@@ -18,4 +18,5 @@
         </div>
     </div>
 </x-layout-component>
+@livewire('users.manage-user-modal')
 @stop

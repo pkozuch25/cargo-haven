@@ -6,21 +6,38 @@ use App\Models\User;
 use Livewire\Attributes\On;
 use App\Enums\UserStatusEnum;
 use App\Livewire\ModalComponent;
+use Spatie\Permission\Models\Role;
 use App\Models\RegistrationRequest;
+use App\Models\StorageYard;
 use Illuminate\Support\Facades\Mail;
-use App\Enums\RegistrationRequestStatusEnum;
-use App\Mail\NewRegistrationRequestNotification;
 use App\Mail\UserChangedStatusNotification;
+use App\Enums\RegistrationRequestStatusEnum;
 
 class ChangeRequestStatusModal extends ModalComponent
 {
-    public $requestStatus, $rr;
-    protected $rules = ['requestStatus' => 'required'];
+    public $requestStatus, $rr, $selectedRoles, $availableRoles, $user;
+    public $availableStorageYards = [];
+    public $selectedStorageYards = [];
+    
+    protected $rules = [
+        'requestStatus' => 'required',
+        'selectedRoles' => 'required|array|min:1',
+        'selectedStorageYards' => 'nullable|array',
+    ];
 
     #[On('openChangeStatusModal')]
     public function openChangeStatusModal(RegistrationRequest $rr)
     {
         $this->rr = $rr;
+        $this->requestStatus = $rr->rr_status;
+        $this->availableRoles = Role::all();
+        $this->user = $this->rr->user()->first();
+        $this->availableStorageYards = StorageYard::all();
+
+        $this->selectedRoles = $this->user->roles->pluck('id')->toArray();
+        $this->selectedStorageYards = $this->user->storageYards->pluck('sy_id')->toArray();
+
+        $this->dispatch('iniYardSelect2');
     }
 
     public function saveStatus()
@@ -30,15 +47,19 @@ class ChangeRequestStatusModal extends ModalComponent
         $this->rr->rr_status = $this->requestStatus;
         $this->rr->save();
         
-        $user = $this->rr->user()->first();
-        $user->status = $this->determineUserStatus($this->requestStatus);
-        $user->save();
+        $this->user->status = $this->determineUserStatus($this->requestStatus);
+        $this->user->save();
         
+        $roleNames = Role::whereIn('id', $this->selectedRoles)->pluck('name')->toArray();
+        $this->user->syncRoles($roleNames);
+        
+        $this->user->storageYards()->sync($this->selectedStorageYards);
+
         $this->closeModal();
         $this->dispatch('refreshRRTable');
         $this->dispatch('refreshSelect2', ['await' => true]);
 
-        $this->notifyUserOfStatusChange($user);
+        $this->notifyUserOfStatusChange($this->user);
     }
 
     private function determineUserStatus($status) : UserStatusEnum
@@ -52,7 +73,6 @@ class ChangeRequestStatusModal extends ModalComponent
         }
     }
 
-    
     private function notifyUserOfStatusChange(User $user): void
     {
         Mail::to($user->email)->send(new UserChangedStatusNotification($this->rr));
