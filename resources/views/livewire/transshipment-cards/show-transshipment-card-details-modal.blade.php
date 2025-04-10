@@ -85,7 +85,7 @@
                                     <x-tr-hover>
                                         <x-td-table>{{ $unit->tcu_container_number ?? '-' }}</x-td-table>
                                         <x-td-table>{{ $unit->operator?->name ?? '-' }}</x-td-table>
-                                        <x-td-table>{{ $unit->disposition?->dis_number ?? '-' }}</x-td-table>
+                                        <x-td-table>{{ $unit->dispositionUnit?->disposition?->dis_number ?? '-' }}</x-td-table>
                                         <x-td-table>{{ $unit->tcu_yard_position ?? '-' }}</x-td-table>
                                         <x-td-table>{{ $unit->tcu_carriage_number_from ?? '-' }}</x-td-table>
                                         <x-td-table>{{ $unit->tcu_carriage_number_to ?? '-' }}</x-td-table>

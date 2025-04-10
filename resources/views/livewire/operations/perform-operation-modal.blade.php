@@ -18,11 +18,11 @@
             @if($this->relationToCarriage())
                 <div class="row">
                     <div class="col-md-6">
-                        <x-input-full type="number" :label="__('Net weight')" wire:model='netWeight'></x-input-full>
+                        <x-input-full type="number" min="1" :label="__('Net weight')" wire:model='netWeight'></x-input-full>
                         <x-input-error :messages="$errors->get('netWeight')" class="mt-2" />
                     </div>
                     <div class="col-md-6">
-                        <x-input-full type="number" :label="__('Tare weight')" wire:model='tareWeight'></x-input-full>
+                        <x-input-full type="number" min="1" :label="__('Tare weight')" wire:model='tareWeight'></x-input-full>
                         <x-input-error :messages="$errors->get('tareWeight')" class="mt-2" />
                     </div>
                 </div>
@@ -38,7 +38,13 @@
             @else
                 <div class="row">
                 </div>
-            @endif
+                @endif
+            <div class="row">
+                <div class="col-md-12">
+                    <x-textarea :label="__('Notes')" wire:model='notes'></x-textarea>
+                    <x-input-error :messages="$errors->get('notes')" class="mt-2" />
+                </div>
+            </div>
         </div>
     </x-slot>
     <x-slot name="modalFooter">

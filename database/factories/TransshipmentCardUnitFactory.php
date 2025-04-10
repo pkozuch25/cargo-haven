@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\TransshipmentCardUnit;
 use App\Models\TransshipmentCard;
 use App\Models\Disposition;
+use App\Models\DispositionUnit;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -17,7 +18,7 @@ class TransshipmentCardUnitFactory extends Factory
         return [
             'tcu_tc_id' => TransshipmentCard::factory(),
             'tcu_operator_id' => User::factory(),
-            'tcu_disp_id' => Disposition::factory(),
+            'tcu_disp_id' => DispositionUnit::factory(),
             'tcu_container_number' => 'CONT-' . $this->faker->unique()->numberBetween(10000, 99999),
             'tcu_yard_position' => $this->faker->randomLetter() . $this->faker->randomLetter() . '-' . $this->faker->numberBetween(1, 100),
             'tcu_carriage_number_from' => $this->faker->boolean(50) ? 'CAR-' . $this->faker->numberBetween(1000, 9999) : null,

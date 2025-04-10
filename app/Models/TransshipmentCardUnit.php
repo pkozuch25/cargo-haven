@@ -24,9 +24,9 @@ class TransshipmentCardUnit extends Model
         return $this->belongsTo(User::class, 'tcu_operator_id', 'id');
     }
 
-    public function disposition()
+    public function dispositionUnit()
     {
-        return $this->belongsTo(Disposition::class, 'tcu_disp_id', 'dis_id');
+        return $this->belongsTo(DispositionUnit::class, 'tcu_disp_id', 'disu_id');
     }
 
     public function arrivalDeposit()

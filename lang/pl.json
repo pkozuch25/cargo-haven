@@ -95,7 +95,7 @@
     "Gross weight": "Waga brutto",
     "Tare weight": "Waga tary",
     "Driver": "Kierowca",
-    "Field must be at least :min.": "Pole musi mieć co najmniej :min.",
+    "Field must be at least :min.": "Wartość pola musi wynosić co najmniej :min.",
     "Field must be at least :min kilobytes.": "Pole musi mieć co najmniej :min kilobajtów.",
     "Field must be at least :min characters.": "Pole musi mieć co najmniej :min znaków.",
     "Disposition has units, some fields cannot be edited": "Operacja dyspozycyjna zawiera już jednostki przeładunkowe, nie można edytować niektórych pól",
@@ -204,5 +204,8 @@
     "User yards:": "Place składowe użytkownika:",
     "Could not find suitable deposit for container ": "Nie znaleziono odpowiedniego depozytu dla kontenera ",
     "Could not find suitable disposition unit for container ": "Nie znaleziono odpowiedniej jednostki dyspozycji dla kontenera ",
-    "Deposit does not have aassigned storage cell": "Depozyt nie ma przypisanego miejsca składowego"
+    "Deposit does not have aassigned storage cell": "Depozyt nie ma przypisanego miejsca składowego",
+    "This field must have a value of at least 1.": "Wartość pola musi wynosić co najmniej 1.",
+    "Field must be an integer.": "Pole musi być liczbą całkowitą.",
+    "Operation executed successfully!": "Operacja została wykonana pomyślnie!"
 }

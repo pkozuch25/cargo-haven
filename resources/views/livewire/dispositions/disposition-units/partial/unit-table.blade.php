@@ -58,7 +58,7 @@
                             <x-td-table class="text-center">{{ $dispositionUnit->disu_carriage_number }}</x-td-table>
                         @endif
                         <x-td-table class="text-center">{{ $dispositionUnit->disu_notes }}</x-td-table>
-                        <x-td-table class="text-center"><a class="blue-tint" href="/transshipment-cards?card={{ $dispositionUnit->disu_cardunit_id }}">{{ $dispositionUnit->transshipmentCardUnit?->transshipmentCard?->tc_number }}</a></x-td-table>
+                        <x-td-table class="text-center"><a class="blue-tint" href="/transshipment-cards?card={{ $dispositionUnit->transshipmentCardUnit?->transshipmentCard?->tc_id }}">{{ $dispositionUnit->transshipmentCardUnit?->transshipmentCard?->tc_number }}</a></x-td-table>
                         <x-td-table class="text-center">
                             @if($dispositionUnit->disu_cardunit_id)
                                 <x-pill class="bg-success">{{ __("Completed") }}</x-pill>

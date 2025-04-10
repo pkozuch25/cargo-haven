@@ -35,7 +35,7 @@ class ShowTransshipmentCardDetailsModal extends ModalComponent
 
     public function loadTransshipmentCard()
     {
-        $this->transshipmentCard = TransshipmentCard::with(['storageYard', 'createdBy', 'units.operator', 'units.disposition'])
+        $this->transshipmentCard = TransshipmentCard::with(['storageYard', 'createdBy', 'units.operator', 'units.dispositionUnit.disposition'])
             ->findOrFail($this->cardId);
     }
 

@@ -2,21 +2,23 @@
 
 namespace App\Livewire\Operations;
 
+use App\Enums\DispositionStatusEnum;
+use Exception;
+use App\Models\Deposit;
 use Livewire\Attributes\On;
 use App\Models\DispositionUnit;
 use App\Livewire\ModalComponent;
 use App\Models\TransshipmentCard;
 use App\Enums\OperationRelationEnum;
-use App\Models\Deposit;
+use App\Services\DispositionService;
+use Illuminate\Support\Facades\Auth;
 use App\Models\TransshipmentCardUnit;
 use App\Services\TransshipmentCardService;
-use Exception;
-use Illuminate\Support\Facades\Auth;
 
 class PerformOperationModal extends ModalComponent
 {
-    public $title, $operation, $availableCards = [], $disposition, $relationFrom, $relationTo;
-    public $selectedCard, $netWeight, $tareWeight, $tcu_notes, $carriageNumberTo, $truckNumberTo;
+    public $title, $operation, $availableCards = [], $disposition, $relationFrom, $relationTo, $deposit;
+    public $selectedCard, $netWeight, $tareWeight, $notes, $carriageNumberTo, $truckNumberTo;
     private $transshipmentCardService;
 
     protected function rules() { 
@@ -24,16 +26,19 @@ class PerformOperationModal extends ModalComponent
             'selectedCard' => 'required',
             'truckNumberTo' => [
                 'nullable',
+                'required_if:disposition.dis_relation_to,' . OperationRelationEnum::TRUCK->value,
                 'string',
-                'required_if:relationTo,' . OperationRelationEnum::TRUCK->value,
             ],
             'netWeight' => [
-                'nullable',
-                'integer', 
-                'min:1',
                 function ($attribute, $value, $fail) {
-                    if (in_array($this->relationTo, [OperationRelationEnum::TRUCK->value, OperationRelationEnum::CARRIAGE->value]) && ($value === null || $value === '')) {
-                        $fail(__('The net weight field is required when relation is truck or carriage.'));
+                    if (in_array($this->relationTo, [OperationRelationEnum::TRUCK, OperationRelationEnum::CARRIAGE])) {
+                        if ($value === null || $value === '') {
+                            $fail(__('The net weight field is required when relation is truck or carriage.'));
+                        } else if (!is_numeric($value)) {
+                            $fail(__('This field must be a number.'));
+                        } else if ((int)$value < 1) {
+                            $fail(__('This field must have a value of at least 1.'));
+                        }
                     }
                 }
             ],
@@ -41,19 +46,14 @@ class PerformOperationModal extends ModalComponent
                 'nullable',
                 'min:1',
                 'integer',
-                'required_if:relationTo,' . OperationRelationEnum::CARRIAGE->value
+                'required_if:disposition.dis_relation_to,' . OperationRelationEnum::CARRIAGE->value
             ],
             'carriageNumberTo' => [
                 'nullable',
                 'string',
-                'required_if:relationTo,' . OperationRelationEnum::CARRIAGE->value
+                'required_if:disposition.dis_relation_to,' . OperationRelationEnum::CARRIAGE->value
             ],
-            'truckNumberTo' => [
-                'nullable',
-                'string',
-                'required_if:relationTo,' . OperationRelationEnum::TRUCK->value
-            ],
-            'tcu_notes' => ['nullable', 'string'],
+            'notes' => ['nullable', 'string'],
         ];
     }
 
@@ -78,13 +78,7 @@ class PerformOperationModal extends ModalComponent
     {
         $this->validate();
 
-        $cardUnit = new TransshipmentCardUnit();
-        $cardUnit->tcu_notes = $this->tcu_notes;
-        $cardUnit->tcu_operator_id = Auth::id();
-        $cardUnit->tcu_disp_id = $this->disposition->dis_id;
-        $cardUnit->tcu_carriage_number_from = $this->operation->disu_carriage_number;
-
-        $cardUnit = $this->determineRelationAndSetAttributes($cardUnit);
+        $cardUnit = $this->createNewCardUnit();
 
         $card = null;
 
@@ -96,14 +90,53 @@ class PerformOperationModal extends ModalComponent
 
         $cardUnit->tcu_tc_id = $card->tc_id;
         $cardUnit->save();
+
+        $this->operation->disu_cardunit_id = $cardUnit->tcu_id;
+        $this->operation->save();
+
+        $this->manageDeposit($card, $cardUnit);
+        $this->checkIfDispositionShouldBeMarkedAsCompleted();
+
         // todo do dyspozycji operacji trzeba dodać cardUnitId, gdy wszystkie jednostki z dyspozycji zostaną zrealizowane należy zmienić status i ustawić datę zakończenia
         // (dis_completion_date). dodatkowo z każdej jednostki trzeba wygenerować jednostki transshipment card albo cały nagłówek gdy użytkownik wybrał w selectcie "nowa karta".
         // gdy jest to przeładunek na plac należy wybrać miejsce składowania do którego ma być przypisane(dostępne na placu wybranym w dyspozycji)
         // i dodać do depozytów z odpowiednim id karty przeładunkowej i dyspozycji.
         // pamiętaj o depozycie - dep_departure_date
         $this->dispatch('refreshOperationsCounter');
+        $this->dispatch('refreshOperations');
+        $this->closeModal();
+        $this->sweetAlert('success', __('Operation executed successfully!'));
     }
 
+    private function manageDeposit(TransshipmentCard $card, TransshipmentCardUnit $cardUnit) : void
+    {
+        if (!$this->relationToYard()) {
+            $this->deposit->dep_departure_date = now();
+            $this->deposit->dep_departure_disu_id = $this->operation->disu_id;
+            $this->deposit->dep_departure_card_id = $card->tc_id;
+            $this->deposit->dep_departure_cardunit_id = $cardUnit->tcu_id;
+            $this->deposit->save();
+        } else {
+            $this->deposit->dep_arrival_date = now();
+            $this->deposit->dep_arrival_disu_id = $this->operation->disu_id;
+            $this->deposit->dep_arrival_card_id = $card->tc_id;
+            $this->deposit->dep_arrival_cardunit_id = $cardUnit->tcu_id;
+            $this->deposit->save();
+        }
+    }
+
+    private function createNewCardUnit() : TransshipmentCardUnit
+    {
+        $cardUnit = new TransshipmentCardUnit();
+        $cardUnit->tcu_notes = $this->notes;
+        $cardUnit->tcu_operator_id = Auth::id();
+        $cardUnit->tcu_disp_id = $this->operation->disu_id;
+        $cardUnit->tcu_carriage_number_from = $this->operation->disu_carriage_number;
+
+        $cardUnit = $this->determineRelationAndSetAttributes($cardUnit);
+
+        return $cardUnit;
+    }
 
     private function determineRelationAndSetAttributes(TransshipmentCardUnit $cardUnit) : TransshipmentCardUnit
     {
@@ -133,6 +166,8 @@ class PerformOperationModal extends ModalComponent
             throw new Exception(__('Could not find suitable deposit for container ') . $this->operation->disu_container_number);
         }
 
+        $this->deposit = $arrivalDeposit;
+
         $arrivalDispositionUnit = $arrivalDeposit->arrivalDispositionUnit;
 
         if (!$arrivalDispositionUnit) {
@@ -150,7 +185,7 @@ class PerformOperationModal extends ModalComponent
             throw new Exception(__('Deposit does not have aassigned storage cell'));
         }
 
-        $cardUnit->tcu_yard_position = $cell->sc_yard_name_short . '/' . $cell->sc_cell. '/' . $cell->sc_row . '/' . $cell->sc_height;
+        $cardUnit = $this->transshipmentCardService->createYardPosistion($cardUnit, $cell);
 
         return $cardUnit;
     }
@@ -169,6 +204,15 @@ class PerformOperationModal extends ModalComponent
         $cardUnit->tcu_truck_number_to = $this->truckNumberTo;
 
         return $cardUnit;
+    }
+
+    private function checkIfDispositionShouldBeMarkedAsCompleted() : void
+    {
+        if ((new DispositionService())->checkIfDispositionHasAnyUnits($this->disposition)) {
+            $this->disposition->dis_completion_date = now();
+            $this->disposition->dis_status = DispositionStatusEnum::FINALIZED;
+            $this->disposition->save();
+        }
     }
 
     public function relationToYard() : bool

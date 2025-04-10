@@ -8,6 +8,7 @@ use App\Models\TransshipmentCard;
 use App\Enums\OperationRelationEnum;
 use Illuminate\Support\Facades\Auth;
 use App\Enums\TransshipmentCardStatusEnum;
+use App\Models\StorageCell;
 use App\Models\TransshipmentCardUnit;
 
 class TransshipmentCardService
@@ -85,6 +86,12 @@ class TransshipmentCardService
     public function calcGrossWeight(TransshipmentCardUnit $cardUnit): TransshipmentCardUnit
     {
         $cardUnit->tcu_gross_weight = $cardUnit->tcu_net_weight + $cardUnit->tcu_tare_weight;
+        return $cardUnit;
+    }
+
+    public function createYardPosistion(TransshipmentCardUnit $cardUnit, StorageCell $cell): TransshipmentCardUnit
+    {
+        $cardUnit->tcu_yard_position = $cell->sc_yard_name_short . '/' . $cell->sc_cell. '/' . $cell->sc_row . '/' . $cell->sc_height;
         return $cardUnit;
     }
 }
