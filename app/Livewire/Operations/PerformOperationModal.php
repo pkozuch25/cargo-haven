@@ -21,7 +21,7 @@ class PerformOperationModal extends ModalComponent
     public $selectedCard, $netWeight, $tareWeight, $notes, $carriageNumberTo, $truckNumberTo;
     private $transshipmentCardService;
 
-    protected function rules() { 
+    protected function rules() {
         return [
             'selectedCard' => 'required',
             'truckNumberTo' => [
@@ -95,7 +95,7 @@ class PerformOperationModal extends ModalComponent
         $this->operation->save();
 
         $this->manageDeposit($card, $cardUnit);
-        $this->checkIfDispositionShouldBeMarkedAsCompleted();
+        $this->markDispositionAsCompletedIfNecessary();
 
         // todo do dyspozycji operacji trzeba dodać cardUnitId, gdy wszystkie jednostki z dyspozycji zostaną zrealizowane należy zmienić status i ustawić datę zakończenia
         // (dis_completion_date). dodatkowo z każdej jednostki trzeba wygenerować jednostki transshipment card albo cały nagłówek gdy użytkownik wybrał w selectcie "nowa karta".
@@ -149,18 +149,24 @@ class PerformOperationModal extends ModalComponent
 
         return $cardUnit;
     }
-    
-    private function performOperationToCarriage(TransshipmentCardUnit $cardUnit) : TransshipmentCardUnit
+
+    private function performOperationToTransport(TransshipmentCardUnit $cardUnit, OperationRelationEnum $transportType) : TransshipmentCardUnit
     {
         $cardUnit->tcu_net_weight = $this->netWeight;
-        $cardUnit->tcu_tare_weight = $this->tareWeight;
-        $cardUnit->tcu_carriage_number_to = $this->carriageNumberTo;
-        
+
+        if ($transportType == OperationRelationEnum::CARRIAGE) {
+            $cardUnit->tcu_tare_weight = $this->tareWeight;
+            $cardUnit->tcu_carriage_number_to = $this->carriageNumberTo;
+            $cardUnit = $this->transshipmentCardService->calcGrossWeight($cardUnit);
+        } else if ($transportType == OperationRelationEnum::TRUCK) {
+            $cardUnit->tcu_truck_number_to = $this->truckNumberTo;
+        }
+
         $arrivalDeposit = Deposit::with(['arrivalDispositionUnit', 'storageCell'])
             ->available()
             ->where('dep_number', $this->operation->disu_container_number)
             ->first();
-        
+
         if (!$arrivalDeposit) {
             throw new Exception(__('Could not find suitable deposit for container ') . $this->operation->disu_container_number);
         }
@@ -176,12 +182,10 @@ class PerformOperationModal extends ModalComponent
         $cardUnit->tcu_carriage_number_from = $arrivalDispositionUnit->disu_carriage_number;
         $cardUnit->tcu_truck_number_from = $arrivalDispositionUnit->disu_car_number;
 
-        $cardUnit = $this->transshipmentCardService->calcGrossWeight($cardUnit);
-
         $cell = $arrivalDeposit->storageCell;
 
         if (!$cell) {
-            throw new Exception(__('Deposit does not have aassigned storage cell'));
+            throw new Exception(__('Deposit does not have assigned storage cell'));
         }
 
         $cardUnit = $this->transshipmentCardService->createYardPosistion($cardUnit, $cell);
@@ -189,44 +193,17 @@ class PerformOperationModal extends ModalComponent
         return $cardUnit;
     }
 
+    private function performOperationToCarriage(TransshipmentCardUnit $cardUnit) : TransshipmentCardUnit
+    {
+        return $this->performOperationToTransport($cardUnit, OperationRelationEnum::CARRIAGE);
+    }
 
     private function performOperationToTruck(TransshipmentCardUnit $cardUnit) : TransshipmentCardUnit
     {
-        $cardUnit->tcu_net_weight = $this->netWeight;
-        $cardUnit->tcu_truck_number_to = $this->truckNumberTo;
-        
-        $arrivalDeposit = Deposit::with(['arrivalDispositionUnit', 'storageCell'])
-            ->available()
-            ->where('dep_number', $this->operation->disu_container_number)
-            ->first();
-        
-        if (!$arrivalDeposit) {
-            throw new Exception(__('Could not find suitable deposit for container ') . $this->operation->disu_container_number);
-        }
-
-        $this->deposit = $arrivalDeposit;
-
-        $arrivalDispositionUnit = $arrivalDeposit->arrivalDispositionUnit;
-
-        if (!$arrivalDispositionUnit) {
-            throw new Exception(__('Could not find suitable disposition unit for container ') . $this->operation->disu_container_number);
-        }
-
-        $cardUnit->tcu_carriage_number_from = $arrivalDispositionUnit->disu_carriage_number;
-        $cardUnit->tcu_truck_number_from = $arrivalDispositionUnit->disu_car_number;
-
-        $cell = $arrivalDeposit->storageCell;
-
-        if (!$cell) {
-            throw new Exception(__('Deposit does not have aassigned storage cell'));
-        }
-
-        $cardUnit = $this->transshipmentCardService->createYardPosistion($cardUnit, $cell);
-
-        return $cardUnit;
+        return $this->performOperationToTransport($cardUnit, OperationRelationEnum::TRUCK);
     }
 
-    private function checkIfDispositionShouldBeMarkedAsCompleted() : void
+    private function markDispositionAsCompletedIfNecessary() : void
     {
         if ((new DispositionService())->checkIfDispositionHasAnyUnits($this->disposition)) {
             $this->disposition->dis_completion_date = now();
