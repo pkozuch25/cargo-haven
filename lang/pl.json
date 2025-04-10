@@ -207,5 +207,7 @@
     "Deposit does not have aassigned storage cell": "Depozyt nie ma przypisanego miejsca składowego",
     "This field must have a value of at least 1.": "Wartość pola musi wynosić co najmniej 1.",
     "Field must be an integer.": "Pole musi być liczbą całkowitą.",
-    "Operation executed successfully!": "Operacja została wykonana pomyślnie!"
+    "Operation executed successfully!": "Operacja została wykonana pomyślnie!",
+    "Field is required when relation is truck or carriage.": "Pole jest wymagane, gdy relacja to ciężarówka lub wagon.",
+    "This field must be a number.": "To pole musi być liczbą."
 }

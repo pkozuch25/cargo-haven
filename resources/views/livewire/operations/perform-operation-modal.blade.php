@@ -34,6 +34,14 @@
                 </div>
             @elseif($this->relationToTruck())
                 <div class="row">
+                    <div class="col-md-6">
+                        <x-input-full type="number" min="1" :label="__('Net weight')" wire:model='netWeight'></x-input-full>
+                        <x-input-error :messages="$errors->get('netWeight')" class="mt-2" />
+                    </div>
+                    <div class="col-md-6">
+                        <x-input-full :label="__('Truck number')" wire:model='truckNumberTo'></x-input-full>
+                        <x-input-error :messages="$errors->get('truckNumberTo')" class="mt-2" />
+                    </div>
                 </div>
             @else
                 <div class="row">
