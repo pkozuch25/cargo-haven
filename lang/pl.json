@@ -211,5 +211,8 @@
     "Field is required when relation is truck or carriage.": "Pole jest wymagane, gdy relacja to ciężarówka lub wagon.",
     "This field must be a number.": "To pole musi być liczbą.",
     "Row": "Rząd",
-    "Column": "Kolumna"
+    "Column": "Kolumna",
+    "Container cannot be placed on this level right now": "Obecnie nie można postawić kontenera na tej wysokości",
+    "Storage cell not found": "Komórka składowa nie znaleziona",
+    "An error occurred: ": "Wystąpił błąd: "
 }

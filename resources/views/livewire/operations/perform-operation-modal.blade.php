@@ -52,6 +52,7 @@
                             </x-input-label>
                             <x-input-full type="number" wire:model.live='checkIfColumnIsValid'>
                             </x-input-full>
+                            <x-input-error :messages="$errors->get('selectedColumn')" class="mt-2" />
                         </div>
                         <div class="col-md-4">
                             <div class="row mb-1">
@@ -60,12 +61,13 @@
                                         {{ __('Row') }}
                                     </x-input-label>
                                     @foreach ($availableStorageCells[$selectedColumn] as $key => $row)
-                                    <div class="row mb-1">
-                                        <div class="col-md-12">
-                                            <x-button wire:key='{{ "perform-operation-row-" . $key }}' :class="$this->getRowClass($key)" style="width: 100%; padding: 3px" :title="$key" wire:click="selectRow('{{ $key }}')">{{ $key }}</x-button>
+                                        <div class="row mb-1">
+                                            <div class="col-md-12">
+                                                <x-button wire:key='{{ "perform-operation-row-" . $key }}' :class="$this->getRowClass($key)" style="width: 100%; padding: 3px" :title="$key" wire:click="selectRow('{{ $key }}')">{{ $key }}</x-button>
+                                            </div>
                                         </div>
-                                    </div>
                                     @endforeach
+                                    <x-input-error :messages="$errors->get('selectedRow')" class="mt-2" />
                                 @endif
                             </div>
                         </div>
@@ -75,14 +77,27 @@
                                     <x-input-label>
                                         {{ __('Height') }}
                                     </x-input-label>
-                                    @foreach ($availableStorageCells[$selectedColumn][$selectedRow] as $key => $height)
-                                        <div class="row mb-1">
-                                            <div class="col-md-12">
-                                                <x-button wire:key='{{ "perform-operation-height-" . $key }}' :class="$this->getHeightClass($key)" style="width: 100%; padding: 3px" :title="$key" wire:click="selectHeight('{{ $key }}')">{{ $key }}</x-button>
+                                    @if($disposition->storageYard)
+                                        @for($i = $disposition->storageYard->sy_height; $i > 0; $i--)
+                                            <div class="row mb-1">
+                                                <div class="col-md-12">
+                                                    @php
+                                                        $containerCanBePlacedOnThisLevel = $this->checkIfContainerCanBePlacedOnThisLevel($i);
+                                                    @endphp
+                                                    <x-button wire:key='{{ "perform-operation-height-" . $i }}' :disabled="!$containerCanBePlacedOnThisLevel"
+                                                        :class="$this->getHeightClass($i)" style="width: 100%; padding: 3px"
+                                                        :title="$i" wire:click="selectHeight('{{ $i }}')">
+                                                        @if($containerCanBePlacedOnThisLevel)
+                                                            {{ $i }}
+                                                        @else
+                                                            {{ $this->getPhraseToDisplayInsideHeightButton($i)}}
+                                                        @endif
+                                                        </x-button>
+                                                </div>
                                             </div>
-                                        </div>
-                                        {{-- todo przy wyborze wysokości pokazywać przeładowane kontenery, nie pozwalać stawiać w powietrzu --}}
-                                    @endforeach
+                                        @endfor
+                                        <x-input-error :messages="$errors->get('selectedHeight')" class="mt-2" />
+                                    @endif
                                 @endif
                             </div>
                         </div>

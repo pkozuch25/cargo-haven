@@ -4,7 +4,6 @@ namespace App\Services;
 
 use App\Models\StorageCell;
 use App\Models\StorageYard;
-use Illuminate\Support\Collection;
 
 class StorageYardService
 {
@@ -52,6 +51,7 @@ class StorageYardService
             }])
             ->get();
 
+
         $groupedColumns = $storageCells->groupBy(['sc_cell', 'sc_row', 'sc_height']);
 
         foreach ($groupedColumns as $columnNumber => $column) {
@@ -86,6 +86,16 @@ class StorageYardService
         }
 
         return $groupedColumns->toArray();
+    }
+
+    public function searchForStorageCell(int $yardId, int $column, string $row, int $height) : ?StorageCell
+    {
+        return StorageCell::query()
+            ->where('sc_yard_id', $yardId)
+            ->where('sc_cell', $column)
+            ->where('sc_row', $row)
+            ->where('sc_height', $height)
+            ->first();
     }
 
 }
