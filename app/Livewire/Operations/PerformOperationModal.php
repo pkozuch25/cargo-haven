@@ -2,15 +2,16 @@
 
 namespace App\Livewire\Operations;
 
-use App\Enums\DispositionStatusEnum;
 use Exception;
 use App\Models\Deposit;
 use Livewire\Attributes\On;
 use App\Models\DispositionUnit;
 use App\Livewire\ModalComponent;
 use App\Models\TransshipmentCard;
+use App\Enums\DispositionStatusEnum;
 use App\Enums\OperationRelationEnum;
 use App\Services\DispositionService;
+use App\Services\StorageYardService;
 use Illuminate\Support\Facades\Auth;
 use App\Models\TransshipmentCardUnit;
 use App\Services\TransshipmentCardService;
@@ -18,7 +19,7 @@ use App\Services\TransshipmentCardService;
 class PerformOperationModal extends ModalComponent
 {
     public $title, $operation, $availableCards = [], $disposition, $relationFrom, $relationTo, $deposit;
-    public $selectedCard, $netWeight, $tareWeight, $notes, $carriageNumberTo, $truckNumberTo;
+    public $selectedCard, $netWeight, $tareWeight, $notes, $carriageNumberTo, $truckNumberTo, $availableStorageCells, $selectedRow, $selectedColumn, $selectedHeight, $checkIfColumnIsValid;
     private $transshipmentCardService;
 
     protected function rules() {
@@ -70,8 +71,47 @@ class PerformOperationModal extends ModalComponent
         $this->relationFrom = $this->disposition->dis_relation_from;
         $this->relationTo = $this->disposition->dis_relation_to;
 
+        if ($this->relationTo == OperationRelationEnum::YARD) {
+           $this->availableStorageCells = (new StorageYardService())->getAvailableStorageCells($this->disposition->dis_yard_id);
+        }
+
         $this->availableCards = $this->transshipmentCardService->getAvailableCards($this->operation);
         $this->title = __('Execute operation - ') . $operation->disu_container_number;
+    }
+
+    public function selectRow(string $row)
+    {
+        $this->selectedRow = $row;
+    }
+
+    public function selectHeight(string $height)
+    {
+        $this->selectedHeight = $height;
+    }
+
+    public function updatedCheckIfColumnIsValid(int $column)
+    {
+        if (array_key_exists($column, $this->availableStorageCells)) {
+            $this->selectedColumn = $column;
+        }
+    }
+
+    public function getRowClass($row)
+    {
+        if ($this->selectedRow == $row) {
+            return "btn-success";
+        } else {
+            return "btn-secondary";
+        }
+    }
+
+    public function getHeightClass($height)
+    {
+        if ($this->selectedHeight == $height) {
+            return "btn-success";
+        } else {
+            return "btn-secondary";
+        }
     }
 
     public function performOperation() : void

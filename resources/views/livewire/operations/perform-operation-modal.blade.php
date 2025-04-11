@@ -44,9 +44,51 @@
                     </div>
                 </div>
             @else
-                <div class="row">
-                </div>
+                @if ($availableStorageCells)
+                    <div class="row">
+                        <div class="col-md-4">
+                            <x-input-label>
+                                {{ __('Column') }}
+                            </x-input-label>
+                            <x-input-full type="number" wire:model.live='checkIfColumnIsValid'>
+                            </x-input-full>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="row mb-1">
+                                @if ($selectedColumn)
+                                    <x-input-label>
+                                        {{ __('Row') }}
+                                    </x-input-label>
+                                    @foreach ($availableStorageCells[$selectedColumn] as $key => $row)
+                                    <div class="row mb-1">
+                                        <div class="col-md-12">
+                                            <x-button wire:key='{{ "perform-operation-row-" . $key }}' :class="$this->getRowClass($key)" style="width: 100%; padding: 3px" :title="$key" wire:click="selectRow('{{ $key }}')">{{ $key }}</x-button>
+                                        </div>
+                                    </div>
+                                    @endforeach
+                                @endif
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="row mb-1">
+                                @if ($selectedRow)
+                                    <x-input-label>
+                                        {{ __('Height') }}
+                                    </x-input-label>
+                                    @foreach ($availableStorageCells[$selectedColumn][$selectedRow] as $key => $height)
+                                        <div class="row mb-1">
+                                            <div class="col-md-12">
+                                                <x-button wire:key='{{ "perform-operation-height-" . $key }}' :class="$this->getHeightClass($key)" style="width: 100%; padding: 3px" :title="$key" wire:click="selectHeight('{{ $key }}')">{{ $key }}</x-button>
+                                            </div>
+                                        </div>
+                                        {{-- todo przy wyborze wysokości pokazywać przeładowane kontenery, nie pozwalać stawiać w powietrzu --}}
+                                    @endforeach
+                                @endif
+                            </div>
+                        </div>
+                    </div>
                 @endif
+            @endif
             <div class="row">
                 <div class="col-md-12">
                     <x-textarea :label="__('Notes')" wire:model='notes'></x-textarea>

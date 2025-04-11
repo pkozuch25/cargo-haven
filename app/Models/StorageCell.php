@@ -23,4 +23,9 @@ class StorageCell extends Model
     {
         return $this->sc_yard_name_short . '/' . $this->sc_cell . '/' . $this->sc_row . '/' . $this->sc_height;
     }
+
+    public function deposit()
+    {
+        return $this->hasOne(Deposit::class, 'dep_sc_id', 'sc_id')->whereNull('dep_departure_date');
+    }
 }
