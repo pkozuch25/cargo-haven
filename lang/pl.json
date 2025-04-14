@@ -214,5 +214,7 @@
     "Column": "Kolumna",
     "Container cannot be placed on this level right now": "Obecnie nie można postawić kontenera na tej wysokości",
     "Storage cell not found": "Komórka składowa nie znaleziona",
-    "An error occurred: ": "Wystąpił błąd: "
+    "An error occurred: ": "Wystąpił błąd: ",
+    "Transshipment card export": "Eksport karty przeładunkowej",
+    "Generated: ": "Wygenerowano: "
 }

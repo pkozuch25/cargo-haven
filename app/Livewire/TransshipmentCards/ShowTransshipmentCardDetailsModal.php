@@ -6,7 +6,10 @@ use Livewire\Attributes\On;
 use Livewire\Attributes\Url;
 use App\Livewire\ModalComponent;
 use App\Models\TransshipmentCard;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Enums\TransshipmentCardStatusEnum;
+use App\Exports\TransshipmentCardExport;
+use Carbon\Carbon;
 
 class ShowTransshipmentCardDetailsModal extends ModalComponent
 {
@@ -37,6 +40,11 @@ class ShowTransshipmentCardDetailsModal extends ModalComponent
     {
         $this->transshipmentCard = TransshipmentCard::with(['storageYard', 'createdBy', 'units.operator', 'units.dispositionUnit.disposition'])
             ->findOrFail($this->cardId);
+    }
+
+    public function exportToXls()
+    {
+        return Excel::download(new TransshipmentCardExport($this->transshipmentCard), __("transshipment-card-") . Carbon::now()->format('y-m-d-H:i') . '.xlsx'); //todo
     }
 
     public function completeCard()
