@@ -25,7 +25,8 @@ class TransshipmentCardExport extends TableComponent implements FromView, Should
     public function view(): View
     {
         return view('excel.transshipment-card-export', [
-            'data' => $this->transshipmentCard->units
+            'data' => $this->transshipmentCard->units,
+            'transshipmentCard' => $this->transshipmentCard
         ]);
     }
 }
