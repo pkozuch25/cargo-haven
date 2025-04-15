@@ -43,9 +43,9 @@
                 </div>
             </div>
 
-            @can('edit_transshipment_cards')
-                <div class="row mt-3">
-                    <div class="col-sm-12">
+            <div class="row mt-3">
+                <div class="col-md-12">
+                    @can('edit_transshipment_cards')
                         @if($transshipmentCard->tc_status == \App\Enums\TransshipmentCardStatusEnum::PROCESSING)
                             <x-button class="btn-success" wire:click='completeCard'>
                                 {{ __('Complete card') }}
@@ -55,9 +55,12 @@
                                 {{ __('Reopen card') }}
                             </x-button>
                         @endif
-                    </div>
+                    @endcan
+                    <x-button class="btn-primary" wire:click='exportToXls'>
+                        {{ __('Export to xls') }}
+                    </x-button>
                 </div>
-            @endcan
+            </div>
 
             <div class="row mt-4">
                 <div class="col-lg-12">

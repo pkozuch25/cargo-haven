@@ -216,5 +216,6 @@
     "Storage cell not found": "Komórka składowa nie znaleziona",
     "An error occurred: ": "Wystąpił błąd: ",
     "Transshipment card export": "Eksport karty przeładunkowej",
-    "Generated: ": "Wygenerowano: "
+    "Generated: ": "Wygenerowano: ",
+    "Export to xls": "Eksportuj do xls"
 }
