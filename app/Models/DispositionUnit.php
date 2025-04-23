@@ -5,10 +5,12 @@ namespace App\Models;
 use App\Enums\DispositionStatusEnum;
 use Illuminate\Database\Eloquent\Model;
 use App\Enums\DispositionUnitStatusEnum;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class DispositionUnit extends Model
 {
-
+    use HasFactory;
+    
     public $table = 'disposition_units';
     public $primaryKey = 'disu_id';
 
