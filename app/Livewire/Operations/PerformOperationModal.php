@@ -17,10 +17,11 @@ use App\Services\StorageYardService;
 use Illuminate\Support\Facades\Auth;
 use App\Models\TransshipmentCardUnit;
 use App\Services\TransshipmentCardService;
+use App\DataTypes\StorageCellsAvailabilityDataType;
 
 class PerformOperationModal extends ModalComponent
 {
-    public $title, $operation, $availableCards = [], $disposition, $relationFrom, $relationTo, $deposit;
+    public $title, $operation, $availableCards = [], $disposition, $relationFrom, $relationTo, $deposit, $hasUnitsAbove = false, $cellsAboveString;
     public $selectedCard, $netWeight, $tareWeight, $notes, $carriageNumberTo, $truckNumberTo, $availableStorageCells, $selectedRow, $selectedColumn, $selectedHeight, $checkIfColumnIsValid;
     private $transshipmentCardService, $selectedStorageCell, $dispositionService, $storageYardService;
 
@@ -91,12 +92,27 @@ class PerformOperationModal extends ModalComponent
         $this->relationFrom = $this->disposition->dis_relation_from;
         $this->relationTo = $this->disposition->dis_relation_to;
 
+        $this->availableCards = $this->transshipmentCardService->getAvailableCards($this->operation);
+        $this->title = __('Execute operation - ') . $operation->disu_container_number;
+
         if ($this->relationTo == OperationRelationEnum::YARD) {
             $this->availableStorageCells = $this->storageYardService->getAvailableStorageCells($this->disposition->dis_yard_id);
         }
 
-        $this->availableCards = $this->transshipmentCardService->getAvailableCards($this->operation);
-        $this->title = __('Execute operation - ') . $operation->disu_container_number;
+        if ($this->relationFrom == OperationRelationEnum::YARD) {
+            $this->operation->loadMissing('departureDeposit.storageCell');
+
+            if (!$this->operation->departureDeposit?->storageCell) {
+                return;
+            }
+
+            $storageCellsAboveObject = $this->storageYardService->checkIfStorageCellsAboveAreAvailable($this->operation->departureDeposit->storageCell);
+            $this->cellsAboveString = $storageCellsAboveObject->occupiedCellsText;
+
+            if (!$storageCellsAboveObject->areAvailable) {
+                $this->hasUnitsAbove = true;
+            }
+        }
     }
 
     public function selectRow(string $row)
@@ -184,6 +200,11 @@ class PerformOperationModal extends ModalComponent
 
     public function performOperation(): void
     {
+        if ($this->hasUnitsAbove) {
+            $this->sweetAlert('error', __("Cannot execute operation, system found existing deposits placed above current storage cell: ") . $this->cellsAboveString);
+            return;
+        }
+
         $this->validate();
 
         try {

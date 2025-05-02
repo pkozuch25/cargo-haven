@@ -4,10 +4,11 @@ namespace App\Services;
 
 use App\Models\StorageCell;
 use App\Models\StorageYard;
+use App\DataTypes\StorageCellsAvailabilityDataType;
 
 class StorageYardService
 {
-    public function alphabeticalRows(StorageYard $yard) : array
+    public function alphabeticalRows(StorageYard $yard): array
     {
         $alphabet = range('a', 'z');
         $rows = [];
@@ -19,7 +20,7 @@ class StorageYardService
         return $rows;
     }
 
-    public function generateStorageCells(StorageYard $yard) : void
+    public function generateStorageCells(StorageYard $yard): void
     {
         $rows = $this->alphabeticalRows($yard);
 
@@ -43,7 +44,7 @@ class StorageYardService
     }
 
 
-    public function getAvailableStorageCells(int $yardId, ?int $depositId = null) : array
+    public function getAvailableStorageCells(int $yardId, ?int $depositId = null): array
     {
         $storageCells = StorageCell::where('sc_yard_id', $yardId)
             ->with(['deposit' => function ($query) {
@@ -88,7 +89,7 @@ class StorageYardService
         return $groupedColumns->toArray();
     }
 
-    public function searchForStorageCell(int $yardId, int $column, string $row, int $height) : ?StorageCell
+    public function searchForStorageCell(int $yardId, int $column, string $row, int $height): ?StorageCell
     {
         return StorageCell::query()
             ->where('sc_yard_id', $yardId)
@@ -98,4 +99,24 @@ class StorageYardService
             ->first();
     }
 
+
+    public function checkIfStorageCellsAboveAreAvailable(StorageCell $storageCell): StorageCellsAvailabilityDataType
+    {
+        $storageCellsAbove = StorageCell::query()
+            ->where('sc_yard_id', $storageCell->sc_yard_id)
+            ->where('sc_cell', $storageCell->sc_cell)
+            ->where('sc_row', $storageCell->sc_row)
+            ->where('sc_height', '>', $storageCell->sc_height)
+            ->whereHas('deposit')
+            ->get();
+
+        if ($storageCellsAbove->isEmpty()) {
+            return (new StorageCellsAvailabilityDataType(true, ""));
+        }
+
+        $cells = $storageCellsAbove->pluck('cell_text')->toArray();
+        $cellString = implode(', ', $cells);
+
+        return (new StorageCellsAvailabilityDataType(false, $cellString));
+    }
 }

@@ -77,7 +77,7 @@ return [
     'graph' => [
         'style' => 'filled',
         'bgcolor' => '#F7F7F7',
-        'fontsize' => 12,
+        'fontsize' => 24,
         'labelloc' => 't',
         'concentrate' => true,
         'splines' => 'polyline',
@@ -93,13 +93,15 @@ return [
     'node' => [
         'margin' => 0,
         'shape' => 'rectangle',
-        'fontname' => 'Helvetica Neue'
+        'fontname' => 'Helvetica Neue',
+        'fontsize' => 24,
     ],
 
     'edge' => [
         'color' => '#003049',
         'penwidth' => 1.8,
-        'fontname' => 'Helvetica Neue'
+        'fontname' => 'Helvetica Neue',
+        'fontsize' => 24,
     ],
 
     'relations' => [

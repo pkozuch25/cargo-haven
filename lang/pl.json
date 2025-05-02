@@ -217,5 +217,6 @@
     "An error occurred: ": "Wystąpił błąd: ",
     "Transshipment card export": "Eksport karty przeładunkowej",
     "Generated: ": "Wygenerowano: ",
-    "Export to xls": "Eksportuj do xls"
+    "Export to xls": "Eksportuj do xls",
+    "Cannot execute operation, system found existing deposits placed above current storage cell: ": "Nie można wykonać operacji, system znalazł istniejące depozyty powyżej obecnego miejsca składowania: "
 }
