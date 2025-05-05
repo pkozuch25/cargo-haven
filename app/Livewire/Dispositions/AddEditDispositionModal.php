@@ -135,6 +135,7 @@ class AddEditDispositionModal extends ModalComponent
             }
 
             $this->dispatch('refreshDispositionTable');
+            $this->dispatch('refreshOperationsCounter');
         } catch (\Exception $e) {
             $this->sweetAlert('error', __('Something went wrong'));
             return;
@@ -173,6 +174,7 @@ class AddEditDispositionModal extends ModalComponent
 
         $this->disposition->save();
         $this->dispatch('refreshDispositionTable');
+        $this->dispatch('refreshOperationsCounter');
     }
 
     public function cancelDispositionConfirm() : void
@@ -201,6 +203,7 @@ class AddEditDispositionModal extends ModalComponent
         $this->sweetAlert('success', __('Disposition has been successfully cancelled'));
         $this->closeModal(true);
         $this->dispatch('refreshDispositionTable');
+        $this->dispatch('refreshOperationsCounter');
     }
 
     private function loadRelationsFromForm()
