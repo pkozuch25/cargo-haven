@@ -103,6 +103,7 @@ class DispositionUnitsFormTable extends TableComponent implements TableComponent
 
         $this->queryRefresh();
         $this->dispatch('openAddEditDispositionModal', $this->disposition->dis_id);
+        $this->dispatch('refreshOperationsCounter');
         $this->dispositionUnit = new DispositionUnit();
     }
 
@@ -130,6 +131,7 @@ class DispositionUnitsFormTable extends TableComponent implements TableComponent
             $this->sweetAlert('success', __('The container has been successfully deleted'));
             $this->queryRefresh();
             $this->dispatch('openAddEditDispositionModal', $this->disposition->dis_id);
+            $this->dispatch('refreshOperationsCounter');
             return;
         }
 
