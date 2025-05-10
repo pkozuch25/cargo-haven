@@ -1,6 +1,6 @@
 <x-modal id="perform-operation-modal" size="md" title="{{ $title }}" icon="ti ti-file-text">
     <x-slot name="modalBody">
-        <div class="min-h-[200px] d-flex align-items-center justify-content-center">
+        <div class="min-h-[200px]">
             @if($hasUnitsAbove)
                 <div class="row h-100 d-flex align-items-center justify-content-center">
                     <div class="col-md-12">

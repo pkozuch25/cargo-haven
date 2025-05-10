@@ -19,14 +19,14 @@ class RegistrationRequestsTable extends TableComponent implements TableComponent
         $this->selectedStatus = [RegistrationRequestStatusEnum::PENDING->value];
     }
 
-    #[On('refreshRRTable')]
+    #[On('refreshRegistrationRequestTable')]
     #[Computed]
     public function queryRefresh()
     {
         $registrationRequests = RegistrationRequest::query()
             ->leftJoin('users', 'users.id', '=', 'registration_requests.rr_user_id')
             ->select('registration_requests.*', 'users.name', 'users.email');
-        
+
         return $this->tableRefresh($registrationRequests);
     }
 

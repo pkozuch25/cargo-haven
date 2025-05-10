@@ -32,8 +32,8 @@ class AddEditDispositionModal extends ModalComponent
             'dispositionOperators' => ['required', 'array'],
         ];
     }
-    
-    public function mount() 
+
+    public function mount()
     {
         if ($this->disp != null) {
             $this->disposition = Disposition::where('dis_id', $this->disp)->first();

@@ -15,10 +15,10 @@ use App\Enums\RegistrationRequestStatusEnum;
 
 class ChangeRequestStatusModal extends ModalComponent
 {
-    public $requestStatus, $rr, $selectedRoles, $availableRoles, $user;
+    public $requestStatus, $registrationRequest, $selectedRoles, $availableRoles, $user;
     public $availableStorageYards = [];
     public $selectedStorageYards = [];
-    
+
     protected $rules = [
         'requestStatus' => 'required',
         'selectedRoles' => 'required|array|min:1',
@@ -26,12 +26,12 @@ class ChangeRequestStatusModal extends ModalComponent
     ];
 
     #[On('openChangeStatusModal')]
-    public function openChangeStatusModal(RegistrationRequest $rr)
+    public function openChangeStatusModal(RegistrationRequest $registrationRequest)
     {
-        $this->rr = $rr;
-        $this->requestStatus = $rr->rr_status;
+        $this->registrationRequest = $registrationRequest;
+        $this->requestStatus = $registrationRequest->rr_status;
         $this->availableRoles = Role::all();
-        $this->user = $this->rr->user()->first();
+        $this->user = $this->registrationRequest->user()->first();
         $this->availableStorageYards = StorageYard::all();
 
         $this->selectedRoles = $this->user->roles->pluck('id')->toArray();
@@ -44,19 +44,19 @@ class ChangeRequestStatusModal extends ModalComponent
     {
         $this->validate();
 
-        $this->rr->rr_status = $this->requestStatus;
-        $this->rr->save();
-        
+        $this->registrationRequest->rr_status = $this->requestStatus;
+        $this->registrationRequest->save();
+
         $this->user->status = $this->determineUserStatus($this->requestStatus);
         $this->user->save();
-        
+
         $roleNames = Role::whereIn('id', $this->selectedRoles)->pluck('name')->toArray();
         $this->user->syncRoles($roleNames);
-        
+
         $this->user->storageYards()->sync($this->selectedStorageYards);
 
         $this->closeModal();
-        $this->dispatch('refreshRRTable');
+        $this->dispatch('refreshRegistrationRequestTable');
         $this->dispatch('refreshSelect2', ['await' => true]);
 
         $this->notifyUserOfStatusChange($this->user);
@@ -75,7 +75,7 @@ class ChangeRequestStatusModal extends ModalComponent
 
     private function notifyUserOfStatusChange(User $user): void
     {
-        Mail::to($user->email)->send(new UserChangedStatusNotification($this->rr));
+        Mail::to($user->email)->send(new UserChangedStatusNotification($this->registrationRequest));
     }
 
     public function render()
