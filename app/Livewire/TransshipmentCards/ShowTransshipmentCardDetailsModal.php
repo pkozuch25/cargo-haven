@@ -44,7 +44,7 @@ class ShowTransshipmentCardDetailsModal extends ModalComponent
 
     public function exportToXls()
     {
-        return Excel::download(new TransshipmentCardExport($this->transshipmentCard), __("transshipment-card-") . Carbon::now()->format('y-m-d-H:i') . '.xlsx'); //todo
+        return Excel::download(new TransshipmentCardExport($this->transshipmentCard), __("transshipment-card-") . Carbon::now()->format('y-m-d-H:i') . '.xlsx');
     }
 
     public function completeCard()

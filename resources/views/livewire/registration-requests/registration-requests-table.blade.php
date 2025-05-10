@@ -53,7 +53,7 @@
                             <x-td-table class="text-center">{{ $request->name }}</x-td-table>
                             <x-td-table class="text-center">{{ $request->created_at }}</x-td-table>
                             <x-td-table class="text-center">
-                                <x-pill wire:click="$dispatch('openChangeStatusModal', {rr: {{ $request }}})" data-bs-toggle="modal" data-bs-target="#change-request-status-modal"
+                                <x-pill wire:click="$dispatch('openChangeStatusModal', {registrationRequest: {{ $request }}})" data-bs-toggle="modal" data-bs-target="#change-request-status-modal"
                                     class="{{ $request->rr_status->color() }} cursor-pointer">
                                     {{ $request->rr_status->name() }}
                                 </x-pill>
