@@ -65,7 +65,7 @@ class DispositionUnitFactory extends Factory
         });
     }
 
-    public function withWeights(int $netWeight, int $tareWeight = null)
+    public function withWeights(int $netWeight, int | null $tareWeight)
     {
         return $this->state(function (array $attributes) use ($netWeight, $tareWeight) {
             $tareWeight = $tareWeight ?? $this->faker->numberBetween(500, 2000);

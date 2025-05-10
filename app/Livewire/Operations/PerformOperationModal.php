@@ -17,7 +17,6 @@ use App\Services\StorageYardService;
 use Illuminate\Support\Facades\Auth;
 use App\Models\TransshipmentCardUnit;
 use App\Services\TransshipmentCardService;
-use App\DataTypes\StorageCellsAvailabilityDataType;
 
 class PerformOperationModal extends ModalComponent
 {
